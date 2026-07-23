@@ -24,6 +24,8 @@ requires one explicit website update:
 `src/download.ts` is the single runtime source for both Apple Silicon and Intel
 DMG URLs. `scripts/check-release-contract.mjs` prevents the page metadata,
 download buttons, license, canonical domain, and package version from drifting.
+`scripts/check-public-links.mjs` owns the documentation link, fragment, metadata,
+favicon, and sitemap checks that previously lived in the desktop repository.
 
 The files under `public/docs/` are a publication snapshot. They may be refreshed
 from the desktop repository for a release, but the website build never depends

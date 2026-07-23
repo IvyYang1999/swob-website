@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "check": "node scripts/check-release-contract.mjs && tsc -b --pretty false",
+    "check": "node scripts/check-release-contract.mjs && node scripts/check-public-links.mjs && tsc -b --pretty false",
     "build": "tsc -b && vite build",
     "preview": "vite preview"
   },
