@@ -2,6 +2,7 @@ import { Starfield } from './Starfield'
 import { useI18n } from '../i18n-context'
 import { CollectDemo } from '../demos/CollectDemo'
 import { RELEASE_VERSION, useMacDownload } from '../download'
+import { trackDownload } from '../analytics'
 
 export function Hero() {
   const { locale, strings } = useI18n()
@@ -24,7 +25,11 @@ export function Hero() {
         </h1>
         <p style={styles.sub}>{h.sub}</p>
         <div style={styles.actions}>
-          <a href={download.url} style={styles.primaryBtn}>
+          <a
+            href={download.url}
+            style={styles.primaryBtn}
+            onClick={() => trackDownload(download.architecture, 'hero-primary', RELEASE_VERSION)}
+          >
             {locale === 'zh'
               ? `下载 v${RELEASE_VERSION} · ${architecture}`
               : `Download v${RELEASE_VERSION} · ${architecture}`}
@@ -33,7 +38,13 @@ export function Hero() {
         </div>
         <p style={styles.architectureHint}>
           {locale === 'zh' ? '架构不对？' : 'Wrong architecture?'}{' '}
-          <a href={download.alternateUrl} style={styles.alternateLink}>{alternate}</a>
+          <a
+            href={download.alternateUrl}
+            style={styles.alternateLink}
+            onClick={() => trackDownload(download.alternateArchitecture, 'hero-alternate', RELEASE_VERSION)}
+          >
+            {alternate}
+          </a>
         </p>
         <div style={styles.productDemo}>
           <CollectDemo />

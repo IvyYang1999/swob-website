@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useI18n } from '../i18n-context'
-import { useMacDownload } from '../download'
+import { RELEASE_VERSION, useMacDownload } from '../download'
+import { trackDownload } from '../analytics'
 
 const GITHUB_URL = 'https://github.com/IvyYang1999/swob'
 const FEEDBACK_URL = 'https://github.com/IvyYang1999/swob/issues'
@@ -51,7 +52,11 @@ export function Navbar() {
           {locale === 'zh' ? 'EN' : '中'}
         </button>
 
-        <a href={download.url} className="navbar-cta">
+        <a
+          href={download.url}
+          className="navbar-cta"
+          onClick={() => trackDownload(download.architecture, 'navbar-desktop', RELEASE_VERSION)}
+        >
           {nav.download}
         </a>
 
@@ -88,7 +93,14 @@ export function Navbar() {
           >
             {locale === 'zh' ? 'English' : '中文'}
           </button>
-          <a href={download.url} className="navbar-mobile-cta" onClick={() => setMenuOpen(false)}>
+          <a
+            href={download.url}
+            className="navbar-mobile-cta"
+            onClick={() => {
+              trackDownload(download.architecture, 'navbar-mobile', RELEASE_VERSION)
+              setMenuOpen(false)
+            }}
+          >
             {nav.download}
           </a>
         </div>
