@@ -79,6 +79,9 @@ function verifyHtml(file) {
   }
   if (!/<meta\s+name=["']viewport["']/i.test(html)) report(file, 'missing viewport metadata')
   if (!/<link\s+rel=["'][^"']*icon[^"']*["']/i.test(html)) report(file, 'missing favicon')
+  if (!/<script\s+defer\s+data-domain=["']swob\.app["']\s+src=["']https:\/\/plausible\.io\/js\/script\.js["']><\/script>/i.test(html)) {
+    report(file, 'missing Plausible pageview tracking for swob.app')
+  }
 
   const relative = path.relative(publicRoot, file).split(path.sep).join('/')
   if (relative.startsWith('docs/en/') && !/<meta\s+name=["']robots["']\s+content=["'][^"']*noindex/i.test(html)) {

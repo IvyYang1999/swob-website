@@ -1,5 +1,6 @@
 import { useI18n } from '../i18n-context'
 import { RELEASE_PAGE_URL, RELEASE_VERSION, useMacDownload } from '../download'
+import { trackDownload } from '../analytics'
 
 const GITHUB_URL = 'https://github.com/IvyYang1999/swob'
 const FEEDBACK_URL = 'https://github.com/IvyYang1999/swob/issues'
@@ -28,13 +29,20 @@ export function Footer() {
           <a
             href={download.url}
             style={{ display: 'inline-block', fontSize: 16, fontWeight: 600, color: '#fff', background: 'var(--color-accent)', padding: '14px 32px', borderRadius: 'var(--radius-sm)', textDecoration: 'none' }}
+            onClick={() => trackDownload(download.architecture, 'footer-primary', RELEASE_VERSION)}
           >
             {locale === 'zh'
               ? `下载 v${RELEASE_VERSION} · ${architecture}`
               : `Download v${RELEASE_VERSION} · ${architecture}`}
           </a>
           <div style={{ marginTop: 14, fontSize: 13, color: 'var(--color-muted)' }}>
-            <a href={download.alternateUrl} style={linkStyle}>{alternate}</a>
+            <a
+              href={download.alternateUrl}
+              style={linkStyle}
+              onClick={() => trackDownload(download.alternateArchitecture, 'footer-alternate', RELEASE_VERSION)}
+            >
+              {alternate}
+            </a>
             <span aria-hidden="true"> · </span>
             <a href={RELEASE_PAGE_URL} style={linkStyle}>
               {locale === 'zh' ? '全部安装包与校验信息' : 'All installers and verification'}

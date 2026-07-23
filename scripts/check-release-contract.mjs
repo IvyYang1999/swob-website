@@ -2,6 +2,12 @@ import fs from 'node:fs'
 
 const packageJson = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'))
 const downloadSource = fs.readFileSync(new URL('../src/download.ts', import.meta.url), 'utf8')
+const analyticsSource = fs.readFileSync(new URL('../src/analytics.ts', import.meta.url), 'utf8')
+const downloadSurfaces = [
+  fs.readFileSync(new URL('../src/components/Hero.tsx', import.meta.url), 'utf8'),
+  fs.readFileSync(new URL('../src/components/Navbar.tsx', import.meta.url), 'utf8'),
+  fs.readFileSync(new URL('../src/components/Footer.tsx', import.meta.url), 'utf8'),
+].join('\n')
 const indexHtml = fs.readFileSync(new URL('../index.html', import.meta.url), 'utf8')
 const robots = fs.readFileSync(new URL('../public/robots.txt', import.meta.url), 'utf8')
 const sitemap = fs.readFileSync(new URL('../public/sitemap.xml', import.meta.url), 'utf8')
@@ -18,6 +24,22 @@ requireText(indexHtml, `"softwareVersion": "${version}"`, 'index.html')
 requireText(indexHtml, `/releases/download/v${version}/swob-${version}-arm64.dmg`, 'index.html')
 requireText(indexHtml, '"url": "https://swob.app/"', 'index.html')
 requireText(indexHtml, '"license": "https://www.apache.org/licenses/LICENSE-2.0"', 'index.html')
+requireText(indexHtml, 'data-domain="swob.app"', 'index.html')
+requireText(indexHtml, 'src="https://plausible.io/js/script.js"', 'index.html')
+requireText(analyticsSource, "window.plausible?.('Download'", 'src/analytics.ts')
+for (const property of ['architecture', 'placement', 'version']) {
+  requireText(analyticsSource, property, 'src/analytics.ts')
+}
+for (const placement of [
+  'hero-primary',
+  'hero-alternate',
+  'navbar-desktop',
+  'navbar-mobile',
+  'footer-primary',
+  'footer-alternate',
+]) {
+  requireText(downloadSurfaces, `'${placement}'`, 'download surfaces')
+}
 requireText(robots, 'Sitemap: https://swob.app/sitemap.xml', 'public/robots.txt')
 requireText(sitemap, '<loc>https://swob.app/</loc>', 'public/sitemap.xml')
 

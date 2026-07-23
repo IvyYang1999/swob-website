@@ -31,6 +31,20 @@ The files under `public/docs/` are a publication snapshot. They may be refreshed
 from the desktop repository for a release, but the website build never depends
 on a sibling checkout.
 
+## Analytics
+
+The homepage and every published documentation page load Plausible for the
+canonical `swob.app` domain. Direct DMG links emit a custom `Download` event
+before navigation with three properties:
+
+- `version`: the value of `RELEASE_VERSION`
+- `architecture`: `arm64` or `x64`
+- `placement`: the download surface that was clicked
+
+The Plausible site must have a custom-event goal named exactly `Download`.
+GitHub Release asset counts remain the independent check for completed file
+requests; Plausible measures website-originated download intent and attribution.
+
 ## License
 
 [Apache License 2.0](LICENSE). See [NOTICE](NOTICE).
