@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
+import path from "node:path";
 const nextConfig: NextConfig = {
+  outputFileTracingRoot: path.join(__dirname),
   // The docs snapshot under public/docs is plain HTML; keep /docs/ and folder URLs working.
   skipTrailingSlashRedirect: true,
   async rewrites() {

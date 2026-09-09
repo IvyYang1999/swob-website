@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import Fx from "@/components/Fx";
-import { COPY, DIARY, DL, VERSION, hue, type Lang } from "@/data/site";
+import HeroMock from "@/components/HeroMock";
+import { COPY, DIARY, DL, VERSION, type Lang } from "@/data/site";
 
 const v = (vars: Record<string, string | number>) => vars as CSSProperties;
 
@@ -16,7 +17,7 @@ function DiaryViz({ lang }: { lang: Lang }) {
       <div className="d-axis">{t.cols.map((c) => <span key={c}>{c}</span>)}</div>
       <ul className="d-rows">
         {DIARY.map((r, i) => (
-          <li key={i} style={v({ "--c": hue(r.hue), "--l": `${(r.start / 1440) * 100}%`, "--w": `${((r.end - r.start) / 1440) * 100}%`, "--d": `${0.15 + i * 0.12}s` })}>
+          <li key={i} className="hued" style={v({ "--h": r.hue, "--l": `${(r.start / 1440) * 100}%`, "--w": `${((r.end - r.start) / 1440) * 100}%`, "--d": `${0.15 + i * 0.12}s` })}>
             <div className="d-track"><i className="d-bar" /></div>
             <div className="d-meta">
               <span className="d-tool">{r.tool}</span>
@@ -86,7 +87,7 @@ export default function Site({ lang }: { lang: Lang }) {
           <p className="eyebrow">{t.hero.eyebrow}</p>
           <h1><span className="premise">{t.hero.pre}</span><em>{t.hero.h1}</em></h1>
           <p className="verbs" aria-hidden="true">
-            {t.hero.verbs.map((w, i) => <span key={w} style={v({ "--c": hue([330, 200, 110][i]), "--d": `${0.4 + i * 0.18}s` })}>{w}</span>)}
+            {t.hero.verbs.map((w, i) => <span key={w} className="hued" style={v({ "--h": [330, 200, 110][i], "--d": `${0.4 + i * 0.18}s` })}>{w}</span>)}
           </p>
           <p className="lede">{t.hero.lede}</p>
           <div className="cta">
@@ -94,9 +95,7 @@ export default function Site({ lang }: { lang: Lang }) {
             <a className="btn" href={DL.github} target="_blank" rel="noopener">{t.hero.cta2}</a>
           </div>
           <p className="note">{t.hero.note}</p>
-          <figure className="stage pre">
-            <div className="frame"><img src="/shots/main.jpg" alt="Swob main window: session library, reader with compact boundaries, session info" /></div>
-          </figure>
+          <HeroMock lang={lang} />
         </div>
       </header>
 
@@ -123,7 +122,7 @@ export default function Site({ lang }: { lang: Lang }) {
               </div>
               <div className="door-grid">
                 {t.doors.items.filter((d) => d.line === line.id).map((d, di) => (
-                  <article className="door pre" id={`d-${d.id}`} key={d.id} style={v({ "--c": hue(d.hue), "--d": `${0.1 + di * 0.12}s` })}>
+                  <article className="door hued pre" id={`d-${d.id}`} key={d.id} style={v({ "--h": d.hue, "--d": `${0.1 + di * 0.12}s` })}>
                     <div className="plabel">
                       <span className="dot" /><b>{d.name}</b>
                       <span className={`st ${d.status === "Building" ? "wip" : "live"}`}>{t.status[d.status]}</span>

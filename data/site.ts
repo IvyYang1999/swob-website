@@ -180,3 +180,49 @@ export const COPY = {
     sources: { eyebrow: "来源能力矩阵", h2: "不做 logo 墙。", p: "每个来源到底支持什么。由产品自身的能力注册表生成；公开安装包可能落后于当前源码。", legend: { available: "可用", experimental: "实验性", unavailable: "不可用" }, back: "← 返回" },
   },
 } as const;
+
+/** Hero mock content. Sessions are plausible, not real; the hit ones contain the search query. */
+export const MOCK = {
+  en: {
+    aria: "Animated demo of the Swob window: sessions arrive from several tools, a search narrows them, one is resumed.",
+    placeholder: "Search all conversations…", query: "oauth callback", sessions: "Sessions", info: "Session info",
+    tabs: ["Compact", "Full", "MD"], compact: "Compact #2 · 147 turns before this point", user: "User · 10:03", assistant: "Assistant · 10:04",
+    u1a: "Rotate the OAuth client secret and update the ", u1b: "callback", u1c: " URL for the new domain.",
+    a1a: "Done. New secret stored in Keychain as OAUTH_CLIENT_SECRET; the ", a1b: "callback", a1c: " now points at app.example.com/oauth/cb. Old secret revoked, tests green.",
+    term: "claude --resume a6771e74 --cwd ~/projects/swob-website",
+    rows: [["Source", "Claude Code", ""], ["Created", "Sep 9, 10:03", ""], ["Turns", "41", ""], ["Tokens", "212K", "reported"], ["Cost", "$1.84", "estimated"]],
+    tree: ["root · Sep 2", "fork · Sep 6", "resume · Sep 9 (this)"],
+    resume: "Resume", share: "Share",
+    steps: { collect: "Collected from 4 tools", search: "One search, every tool", resume: "Resume where it left off" },
+    items: [
+      { hue: 300, tool: "Claude Code", project: "swob-website", when: "2h ago", title: "Migrate OAuth callback to the new domain", hit: true, sel: true },
+      { hue: 150, tool: "Codex", project: "swob", when: "5h ago", title: "Writer lock stuck after sleep" },
+      { hue: 200, tool: "Cursor", project: "darkconstant", when: "yesterday", title: "Hero spacing pass" },
+      { hue: 300, tool: "Claude Code", project: "keykeeper", when: "3d ago", title: "Why does the OAuth token expire early?", hit: true },
+      { hue: 150, tool: "Codex", project: "yytyyf.com", when: "3d ago", title: "Deploy it to Vercel" },
+      { hue: 40, tool: "OpenCode", project: "swob", when: "1w ago", title: "Parse Gemini session JSON" },
+      { hue: 300, tool: "Claude Code", project: "feisou", when: "2w ago", title: "Callback URL 404 after deploy", hit: true },
+    ],
+  },
+  zh: {
+    aria: "Swob 窗口的动态演示：会话从多个工具汇入，一次搜索缩小范围，然后恢复其中一场。",
+    placeholder: "搜索所有会话…", query: "oauth 回调", sessions: "会话", info: "会话信息",
+    tabs: ["精简", "完整", "MD"], compact: "Compact #2 · 此前 147 轮", user: "你 · 10:03", assistant: "助手 · 10:04",
+    u1a: "把 OAuth client secret 轮换掉，并把", u1b: "回调", u1c: "地址改成新域名。",
+    a1a: "完成。新密钥以 OAUTH_CLIENT_SECRET 存进钥匙串；", a1b: "回调", a1c: "现在指向 app.example.com/oauth/cb。旧密钥已吊销，测试全绿。",
+    term: "claude --resume a6771e74 --cwd ~/projects/swob-website",
+    rows: [["来源", "Claude Code", ""], ["创建", "9 月 9 日 10:03", ""], ["轮数", "41", ""], ["Token", "212K", "reported"], ["费用", "$1.84", "estimated"]],
+    tree: ["root · 9 月 2 日", "fork · 9 月 6 日", "resume · 9 月 9 日（当前）"],
+    resume: "恢复", share: "分享",
+    steps: { collect: "从 4 个工具汇入", search: "一次搜索，跨所有工具", resume: "在上次停下的地方继续" },
+    items: [
+      { hue: 300, tool: "Claude Code", project: "swob-website", when: "2 小时前", title: "把 OAuth 回调迁到新域名", hit: true, sel: true },
+      { hue: 150, tool: "Codex", project: "swob", when: "5 小时前", title: "休眠后 writer 锁卡住" },
+      { hue: 200, tool: "Cursor", project: "darkconstant", when: "昨天", title: "首屏间距打磨" },
+      { hue: 300, tool: "Claude Code", project: "keykeeper", when: "3 天前", title: "OAuth token 为什么提前过期？", hit: true },
+      { hue: 150, tool: "Codex", project: "yytyyf.com", when: "3 天前", title: "帮我部署到 Vercel" },
+      { hue: 40, tool: "OpenCode", project: "swob", when: "1 周前", title: "解析 Gemini 会话 JSON" },
+      { hue: 300, tool: "Claude Code", project: "feisou", when: "2 周前", title: "部署后回调地址 404", hit: true },
+    ],
+  },
+} as const;
