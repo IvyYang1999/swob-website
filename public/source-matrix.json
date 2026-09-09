@@ -1,0 +1,315 @@
+{
+  "generated": "2026-08-08",
+  "capabilities": [
+    "discover",
+    "summary",
+    "transcript",
+    "tools",
+    "thinking",
+    "usage",
+    "relationships",
+    "subagents",
+    "live-watch",
+    "search",
+    "archive",
+    "terminal-resume",
+    "native-resume",
+    "format-provenance"
+  ],
+  "sources": [
+    {
+      "sourceId": "claude-code",
+      "displayName": "Claude Code",
+      "tier": "native",
+      "capabilities": {
+        "discover": "available",
+        "summary": "available",
+        "transcript": "available",
+        "tools": "available",
+        "thinking": "available",
+        "usage": "available",
+        "relationships": "available",
+        "subagents": "available",
+        "live-watch": "available",
+        "search": "available",
+        "archive": "available",
+        "terminal-resume": "available",
+        "native-resume": "experimental",
+        "format-provenance": "unavailable"
+      }
+    },
+    {
+      "sourceId": "codex",
+      "displayName": "Codex",
+      "tier": "native",
+      "capabilities": {
+        "discover": "available",
+        "summary": "available",
+        "transcript": "available",
+        "tools": "available",
+        "thinking": "available",
+        "usage": "available",
+        "relationships": "available",
+        "subagents": "available",
+        "live-watch": "available",
+        "search": "available",
+        "archive": "available",
+        "terminal-resume": "available",
+        "native-resume": "available",
+        "format-provenance": "unavailable"
+      }
+    },
+    {
+      "sourceId": "cursor",
+      "displayName": "Cursor",
+      "tier": "native",
+      "capabilities": {
+        "discover": "available",
+        "summary": "available",
+        "transcript": "available",
+        "tools": "available",
+        "thinking": "available",
+        "usage": "unavailable",
+        "relationships": "unavailable",
+        "subagents": "unavailable",
+        "live-watch": "available",
+        "search": "experimental",
+        "archive": "available",
+        "terminal-resume": "available",
+        "native-resume": "unavailable",
+        "format-provenance": "unavailable"
+      }
+    },
+    {
+      "sourceId": "opencode",
+      "displayName": "OpenCode",
+      "tier": "native",
+      "capabilities": {
+        "discover": "available",
+        "summary": "available",
+        "transcript": "available",
+        "tools": "available",
+        "thinking": "available",
+        "usage": "available",
+        "relationships": "available",
+        "subagents": "unavailable",
+        "live-watch": "unavailable",
+        "search": "experimental",
+        "archive": "available",
+        "terminal-resume": "available",
+        "native-resume": "unavailable",
+        "format-provenance": "unavailable"
+      }
+    },
+    {
+      "sourceId": "zcode",
+      "displayName": "ZCode",
+      "tier": "native",
+      "capabilities": {
+        "discover": "available",
+        "summary": "available",
+        "transcript": "available",
+        "tools": "available",
+        "thinking": "available",
+        "usage": "available",
+        "relationships": "available",
+        "subagents": "unavailable",
+        "live-watch": "unavailable",
+        "search": "experimental",
+        "archive": "available",
+        "terminal-resume": "unavailable",
+        "native-resume": "experimental",
+        "format-provenance": "unavailable"
+      }
+    },
+    {
+      "sourceId": "cc-mirror",
+      "displayName": "CC-Mirror",
+      "tier": "compatible",
+      "capabilities": {
+        "discover": "available",
+        "summary": "available",
+        "transcript": "available",
+        "tools": "available",
+        "thinking": "available",
+        "usage": "available",
+        "relationships": "experimental",
+        "subagents": "experimental",
+        "live-watch": "unavailable",
+        "search": "available",
+        "archive": "unavailable",
+        "terminal-resume": "experimental",
+        "native-resume": "not-applicable",
+        "format-provenance": "unavailable"
+      }
+    },
+    {
+      "sourceId": "antigravity",
+      "displayName": "Antigravity",
+      "tier": "native",
+      "capabilities": {
+        "discover": "available",
+        "summary": "available",
+        "transcript": "available",
+        "tools": "available",
+        "thinking": "available",
+        "usage": "available",
+        "relationships": "available",
+        "subagents": "available",
+        "live-watch": "available",
+        "search": "available",
+        "archive": "available",
+        "terminal-resume": "available",
+        "native-resume": "available",
+        "format-provenance": "unavailable"
+      }
+    },
+    {
+      "sourceId": "grok",
+      "displayName": "Grok Build",
+      "tier": "native",
+      "capabilities": {
+        "discover": "available",
+        "summary": "available",
+        "transcript": "available",
+        "tools": "available",
+        "thinking": "available",
+        "usage": "available",
+        "relationships": "available",
+        "subagents": "available",
+        "live-watch": "available",
+        "search": "available",
+        "archive": "available",
+        "terminal-resume": "available",
+        "native-resume": "available",
+        "format-provenance": "unavailable"
+      }
+    },
+    {
+      "sourceId": "pi",
+      "displayName": "Pi",
+      "tier": "native",
+      "capabilities": {
+        "discover": "available",
+        "summary": "available",
+        "transcript": "available",
+        "tools": "available",
+        "thinking": "available",
+        "usage": "available",
+        "relationships": "available",
+        "subagents": "available",
+        "live-watch": "available",
+        "search": "available",
+        "archive": "available",
+        "terminal-resume": "available",
+        "native-resume": "available",
+        "format-provenance": "unavailable"
+      }
+    },
+    {
+      "sourceId": "kimi",
+      "displayName": "Kimi Code",
+      "tier": "native",
+      "capabilities": {
+        "discover": "available",
+        "summary": "available",
+        "transcript": "available",
+        "tools": "available",
+        "thinking": "available",
+        "usage": "available",
+        "relationships": "available",
+        "subagents": "available",
+        "live-watch": "available",
+        "search": "available",
+        "archive": "available",
+        "terminal-resume": "available",
+        "native-resume": "available",
+        "format-provenance": "unavailable"
+      }
+    },
+    {
+      "sourceId": "hermes",
+      "displayName": "Hermes",
+      "tier": "native",
+      "capabilities": {
+        "discover": "available",
+        "summary": "available",
+        "transcript": "available",
+        "tools": "available",
+        "thinking": "available",
+        "usage": "available",
+        "relationships": "available",
+        "subagents": "available",
+        "live-watch": "available",
+        "search": "available",
+        "archive": "available",
+        "terminal-resume": "available",
+        "native-resume": "available",
+        "format-provenance": "unavailable"
+      }
+    },
+    {
+      "sourceId": "qoder",
+      "displayName": "Qoder",
+      "tier": "native",
+      "capabilities": {
+        "discover": "available",
+        "summary": "available",
+        "transcript": "available",
+        "tools": "available",
+        "thinking": "available",
+        "usage": "available",
+        "relationships": "available",
+        "subagents": "available",
+        "live-watch": "available",
+        "search": "available",
+        "archive": "available",
+        "terminal-resume": "available",
+        "native-resume": "available",
+        "format-provenance": "unavailable"
+      }
+    },
+    {
+      "sourceId": "trae",
+      "displayName": "Trae",
+      "tier": "native",
+      "capabilities": {
+        "discover": "available",
+        "summary": "available",
+        "transcript": "available",
+        "tools": "available",
+        "thinking": "available",
+        "usage": "available",
+        "relationships": "available",
+        "subagents": "available",
+        "live-watch": "available",
+        "search": "available",
+        "archive": "available",
+        "terminal-resume": "available",
+        "native-resume": "available",
+        "format-provenance": "unavailable"
+      }
+    },
+    {
+      "sourceId": "gemini",
+      "displayName": "Gemini CLI",
+      "tier": "native",
+      "capabilities": {
+        "discover": "available",
+        "summary": "available",
+        "transcript": "available",
+        "tools": "available",
+        "thinking": "available",
+        "usage": "available",
+        "relationships": "available",
+        "subagents": "available",
+        "live-watch": "available",
+        "search": "available",
+        "archive": "available",
+        "terminal-resume": "available",
+        "native-resume": "available",
+        "format-provenance": "unavailable"
+      }
+    }
+  ]
+}
