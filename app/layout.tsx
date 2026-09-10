@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Onest, Geist_Mono } from "next/font/google";
 import "./swob.css";
 
@@ -19,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script defer data-domain="swob.app" src="https://plausible.io/js/script.js" />
       </head>
-      <body>{children}</body>
+      <body>{children}<Script src="/dc-analytics.js" strategy="afterInteractive" data-ga-id="G-JFFHLKQTKX" data-site="swob" data-hosts="swob.app,www.swob.app" /></body>
     </html>
   );
 }
