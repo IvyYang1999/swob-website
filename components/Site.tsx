@@ -212,6 +212,7 @@ export default function Site({ lang }: { lang: Lang }) {
             <a href={p("/sources")}>{t.footer.sources}</a>
             <a href="https://github.com/IvyYang1999/swob/blob/master/PRIVACY.md" target="_blank" rel="noopener">{t.footer.privacy}</a>
             <a href={DL.github} target="_blank" rel="noopener">{t.footer.github}</a>
+            <a href="mailto:support@swob.app">{t.footer.support}</a>
             <a href="https://darkconstant.com" target="_blank" rel="noopener">Dark Constant</a>
           </div>
         </div>
