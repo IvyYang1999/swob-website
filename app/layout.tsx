@@ -18,6 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${onest.variable} ${geistMono.variable}`}>
       <head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({'@context':'https://schema.org','@type':'SoftwareApplication',name:'Swob',url:'https://swob.app/',operatingSystem:'macOS',applicationCategory:'ProductivityApplication'})}} />
         <script defer data-domain="swob.app" src="https://plausible.io/js/script.js" />
       </head>
       <body>{children}<Script src="/dc-analytics.js" strategy="afterInteractive" data-ga-id="G-JFFHLKQTKX" data-site="swob" data-hosts="swob.app,www.swob.app" /></body>
