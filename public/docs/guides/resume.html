@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>多客户端 Resume · Swob Docs</title>
-  <meta name="description" content="Resume 的承诺只到目标客户端公开支持的边界。Swob 不把“打开 App”包装成“恢复成功”。">
+  <title>继续一条历史会话 · Swob Docs</title>
+  <meta name="description" content="按来源选择终端或 App，Resume 一条历史会话并核对是否进入目标内容。">
   <meta name="theme-color" content="#efebe2">
-  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../assets/docs.css">
+  <link rel="icon" href="/icons/swob-512.png" type="image/png">
+  <link rel="stylesheet" href="/docs/assets/docs.css">
+  <script defer src="/docs/assets/docs.js"></script>
 <!-- docs-seo:start -->
 <link rel="canonical" href="https://swob.app/docs/guides/resume.html">
 <link rel="alternate" hreflang="zh-CN" href="https://swob.app/docs/guides/resume.html">
@@ -16,10 +17,7 @@
 </head>
 <body data-section="guides">
   <a class="skip-link" href="#content">跳到正文</a>
-  <header class="docs-header">
-    <a class="docs-brand" href="../../zh/"><img src="../../assets/favicon.svg" width="28" height="28" alt=""><span>swob</span><em>docs</em></a>
-    <nav aria-label="文档工具"><a href="../../zh/">官网</a><a href="../en/index.html" lang="en">English guides</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav>
-  </header>
+  <header class="docs-header"><a class="docs-brand" href="/zh/"><img src="/icons/swob-512.png" width="28" height="28" alt=""><span>swob</span><em>docs</em></a><nav aria-label="文档工具"><a href="/zh/">官网</a><a href="/docs/en/" lang="en">English guides</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav></header>
   <details class="mobile-chapters"><summary>浏览五章</summary><nav class="chapter-nav" aria-label="文档章节">
     <a href="../index.html"><span>01</span>快速上手</a>
     <a href="../concepts/vault.html"><span>02</span>核心概念</a>
@@ -38,7 +36,242 @@
       <div class="side-group"><strong>核心概念</strong><a href="../concepts/vault.html">Vault</a><a href="../concepts/lenses-folders.html">镜头 vs 文件夹</a><a href="../concepts/recovery.html">复活与备份</a><a href="../concepts/lineage.html">血统图谱</a></div>
       <div class="side-group"><strong>功能手册</strong><a href="../guides/resume.html">多客户端 Resume</a><a href="../guides/organize.html">整理与撤销</a><a href="../guides/profiles.html">Profile 与智能重命名</a><a href="../guides/cli.html">CLI 全命令</a><a href="../guides/ssh.html">SSH 远程</a></div>
     </aside>
-    <main class="docs-content" id="content"><header class="doc-hero"><p class="doc-kicker">04 · FEATURE GUIDE</p><h1>多客户端 Resume</h1><p class="doc-lead">Resume 的承诺只到目标客户端公开支持的边界。Swob 不把“打开 App”包装成“恢复成功”。</p></header><div class="callout"><strong>版本边界</strong><p>本页保留开发版说明。官网公开安装包仍为 v1.3.1，较新的来源和客户端支持不一定包含在安装包中。针对 v1.3.1 的查找与续接步骤见 <a href="/docs/en/guides/resume.html" lang="en">English Resume guide</a>；能阅读、能打开 App 都不等于能恢复指定会话。</p></div><section><h2>当前行为矩阵</h2><div class="table-scroll"><table><thead><tr><th>来源</th><th>终端</th><th>桌面入口</th><th>诚实降级</th></tr></thead><tbody><tr><td>Claude Code</td><td><code>claude --resume</code></td><td>Claude Desktop 导入（实验开关）；Remote Control</td><td>桌面入口关闭时不生成假动作</td></tr><tr><td>Codex</td><td><code>codex resume</code></td><td><code>codex://threads/&lt;id&gt;</code></td><td>只允许 Codex 同源会话</td></tr><tr><td>Cursor</td><td><code>cursor agent --resume</code></td><td>无</td><td>保留来源能力边界</td></tr><tr><td>OpenCode</td><td><code>opencode --session</code></td><td>无</td><td>保留来源能力边界</td></tr><tr><td>ZCode</td><td>无公开 CLI</td><td>打开 <code>zcode://</code> 或工作区</td><td>明确提示不能跳到指定历史会话</td></tr><tr><td>CC-Mirror / 其他公开 CLI 来源</td><td>按各自 launcher 续接</td><td>无</td><td>缺 launcher 时不可伪造支持</td></tr></tbody></table></div></section><section><h2>源文件缺失时</h2><p>点击 Resume 会先做可恢复性检查；确需写回时进入受控复活流程。复制 Resume 命令和 Resume Audit 不允许触发写回。</p><div class="callout warning"><strong>Claude Desktop 仍是实验能力</strong><p>必须先在设置开启“实验：导入到 Claude Desktop”；来源不是 Claude Code 或 session ID 格式不合法时会拒绝。</p></div></section><nav class="next-links"><a href="../guides/cli.html">CLI 全命令 →</a><a href="../troubleshooting.html">遇到问题？看排障 →</a></nav></main>
+    <main class="docs-content" id="content"><header class="doc-hero">
+<p>RESUME</p>
+<h1>继续一条历史会话。</h1>
+<p>从 Swob 选择会话和打开方式。目标工具出现这条会话的上一轮内容，才算 Resume 成功。</p>
+</header><div class="callout"><strong>版本边界</strong><p>本页保留开发版说明。官网公开安装包仍为 v1.3.1，较新的来源和客户端支持不一定包含在安装包中。针对 v1.3.1 的查找与续接步骤见 <a href="/docs/en/guides/resume.html" lang="en">English Resume guide</a>；能阅读、能打开 App 都不等于能恢复指定会话。</p></div>
+<section>
+<h2>一分钟完成 Resume</h2>
+<ol type="1" class="steps">
+<li><strong>打开一条内容熟悉的历史会话。</strong> 先核对来源、项目和上一轮内容。</li>
+<li><strong>点击 Resume，选择推荐入口。</strong> 有稳定 App 入口时可直接打开；否则使用终端。</li>
+<li><strong>在目标工具中核对上一轮内容。</strong> 只打开 App、工作区或新会话不算成功。</li>
+</ol>
+<p>Resume 不可用时，先在下表核对来源，不要反复切换终端碰运气。</p>
+</section>
+<figure class="doc-shot">
+<p><img src="/docs/assets/media/resume-settings.png" loading="lazy" alt="Swob 继续设置：为 Claude Code、Codex、Cursor 等来源选择已验证入口"></p>
+<figcaption>
+<p>E2E 模拟数据 · 每个来源只显示经过验证或明确标为实验的入口</p>
+</figcaption>
+</figure>
+<section>
+<h2>你的来源应该怎么打开</h2>
+<div class="table-scroll">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">来源</th>
+<th style="text-align: left;">推荐入口</th>
+<th style="text-align: left;">结果要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Claude Code</td>
+<td style="text-align: left;">终端 <code>claude --resume</code></td>
+<td style="text-align: left;">Claude Code 显示目标会话上一轮内容</td>
+</tr>
+<tr>
+<td style="text-align: left;">Codex</td>
+<td style="text-align: left;">Codex App 或终端</td>
+<td style="text-align: left;">App 打开同一 thread，而不是新建任务</td>
+</tr>
+<tr>
+<td style="text-align: left;">Cursor Agent</td>
+<td style="text-align: left;">终端</td>
+<td style="text-align: left;">Agent 进入目标历史和工作目录</td>
+</tr>
+<tr>
+<td style="text-align: left;">OpenCode</td>
+<td style="text-align: left;">终端</td>
+<td style="text-align: left;">OpenCode 进入指定 session</td>
+</tr>
+<tr>
+<td style="text-align: left;">ZCode</td>
+<td style="text-align: left;">App（实验）</td>
+<td style="text-align: left;">当前只保证打开工作区，不保证历史会话</td>
+</tr>
+<tr>
+<td style="text-align: left;">其他来源</td>
+<td style="text-align: left;">先看完整支持表</td>
+<td style="text-align: left;">“实验”入口执行后必须人工核对目标</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section>
+<h2>完整 Harness 支持表</h2>
+<div class="table-scroll resume-matrix">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Harness</th>
+<th style="text-align: left;">会话级 Resume</th>
+<th style="text-align: left;">终端命令 / 入口</th>
+<th style="text-align: left;">App 或其他入口</th>
+<th style="text-align: right;">跨设备 SSH</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Claude Code</td>
+<td style="text-align: left;"><strong>稳定</strong></td>
+<td style="text-align: left;"><code>claude --resume</code></td>
+<td style="text-align: left;">Claude Desktop（实验）；Remote Control</td>
+<td style="text-align: right;"><strong>支持</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">CC-Mirror</td>
+<td style="text-align: left;">实验</td>
+<td style="text-align: left;"><code>claude --resume</code></td>
+<td style="text-align: left;">无已验证 App 入口</td>
+<td style="text-align: right;">否</td>
+</tr>
+<tr>
+<td style="text-align: left;">Codex</td>
+<td style="text-align: left;"><strong>稳定</strong></td>
+<td style="text-align: left;"><code>codex resume</code></td>
+<td style="text-align: left;">Codex App（稳定）</td>
+<td style="text-align: right;">否</td>
+</tr>
+<tr>
+<td style="text-align: left;">Cursor Agent</td>
+<td style="text-align: left;"><strong>稳定</strong></td>
+<td style="text-align: left;"><code>cursor agent --resume</code></td>
+<td style="text-align: left;">无已验证 App 入口</td>
+<td style="text-align: right;">否</td>
+</tr>
+<tr>
+<td style="text-align: left;">OpenCode</td>
+<td style="text-align: left;"><strong>稳定</strong></td>
+<td style="text-align: left;"><code>opencode --session</code></td>
+<td style="text-align: left;">无已验证 App 入口</td>
+<td style="text-align: right;">否</td>
+</tr>
+<tr>
+<td style="text-align: left;">ZCode</td>
+<td style="text-align: left;">实验</td>
+<td style="text-align: left;">无公开 CLI</td>
+<td style="text-align: left;">ZCode App（仅打开工作区）</td>
+<td style="text-align: right;">否</td>
+</tr>
+<tr>
+<td style="text-align: left;">Antigravity</td>
+<td style="text-align: left;">实验</td>
+<td style="text-align: left;"><code>agy --conversation</code></td>
+<td style="text-align: left;">无已验证 App 入口</td>
+<td style="text-align: right;">否</td>
+</tr>
+<tr>
+<td style="text-align: left;">Grok Build</td>
+<td style="text-align: left;"><strong>暂不可用</strong></td>
+<td style="text-align: left;">无已验证启动入口</td>
+<td style="text-align: left;">无已验证 App 入口</td>
+<td style="text-align: right;">否</td>
+</tr>
+<tr>
+<td style="text-align: left;">Hermes</td>
+<td style="text-align: left;">实验</td>
+<td style="text-align: left;"><code>hermes --resume</code></td>
+<td style="text-align: left;">无已验证 App 入口</td>
+<td style="text-align: right;">否</td>
+</tr>
+<tr>
+<td style="text-align: left;">Pi</td>
+<td style="text-align: left;">实验</td>
+<td style="text-align: left;"><code>pi --resume</code></td>
+<td style="text-align: left;">无已验证 App 入口</td>
+<td style="text-align: right;">否</td>
+</tr>
+<tr>
+<td style="text-align: left;">Kimi Code</td>
+<td style="text-align: left;">实验</td>
+<td style="text-align: left;"><code>kimi --session</code></td>
+<td style="text-align: left;">无已验证 App 入口</td>
+<td style="text-align: right;">否</td>
+</tr>
+<tr>
+<td style="text-align: left;">Qoder</td>
+<td style="text-align: left;">实验</td>
+<td style="text-align: left;"><code>qodercli -r</code></td>
+<td style="text-align: left;">无已验证 App 入口</td>
+<td style="text-align: right;">否</td>
+</tr>
+<tr>
+<td style="text-align: left;">Gemini CLI</td>
+<td style="text-align: left;">实验</td>
+<td style="text-align: left;"><code>gemini --resume</code></td>
+<td style="text-align: left;">无已验证 App 入口</td>
+<td style="text-align: right;">否</td>
+</tr>
+<tr>
+<td style="text-align: left;">Trae</td>
+<td style="text-align: left;"><strong>暂不可用</strong></td>
+<td style="text-align: left;">无已验证 CLI</td>
+<td style="text-align: left;">无已验证会话级深链</td>
+<td style="text-align: right;">否</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>稳定</strong>可以作为正常路径；<strong>实验</strong>表示入口存在，但结果仍需人工核对；<strong>暂不可用</strong>表示 Swob 不会暴露猜测命令。</p>
+</section>
+<section>
+<h2>可以用哪些终端或软件</h2>
+<p>只要上表的“终端命令”是稳定或实验能力，就共用同一套终端设置，也支持自定义终端；ZCode、Grok Build 和 Trae 当前不适用。</p>
+<div class="table-scroll">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">平台 / 类型</th>
+<th style="text-align: left;">当前支持</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">macOS</td>
+<td style="text-align: left;">Terminal.app、iTerm2、Ghostty、WezTerm、kitty、Alacritty</td>
+</tr>
+<tr>
+<td style="text-align: left;">Linux</td>
+<td style="text-align: left;">Ghostty、WezTerm、kitty、Alacritty、GNOME Terminal、Konsole、foot、Xfce Terminal</td>
+</tr>
+<tr>
+<td style="text-align: left;">Windows Beta</td>
+<td style="text-align: left;">Windows Terminal、PowerShell、cmd；当前 Resume 设置只显示 Claude Code 与 Codex</td>
+</tr>
+<tr>
+<td style="text-align: left;">自定义终端</td>
+<td style="text-align: left;">macOS / Linux 可填写包含 <code>{{command}}</code> 的命令模板，例如 <code>otty {{command}}</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">不可直接执行</td>
+<td style="text-align: left;">Warp 需要预配 Launch Configuration；Hyper、Tabby 没有稳定的外部命令入口</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>自定义模板缺少 <code>{{command}}</code> 时，Swob 会降级到系统终端，不会直接执行不完整模板。</p>
+</section>
+<section>
+<h2>失败时先判断是哪一层</h2>
+<ul>
+<li>ZCode App 只保证打开 App 或工作区，不保证跳到指定历史会话。</li>
+<li>点击 Resume 会先检查源文件。需要恢复时进入受控复活流程；“复制 Resume 命令”和 Resume Audit 不会写回源目录。</li>
+<li>终端没有打开：检查默认终端或自定义模板。</li>
+<li>工具打开但不是目标会话：检查来源、session ID、工作目录和入口能力。</li>
+</ul>
+<div class="callout warning">
+<p><strong>Claude Desktop 仍是实验能力</strong></p>
+<p>必须先在设置开启“实验：导入到 Claude Desktop”；来源不是 Claude Code 或 session ID 格式不合法时会拒绝。</p>
+</div>
+</section>
+<nav class="next-links">
+<p><a href="./ssh.html">SSH 远程继续 →</a><a href="./cli.html#cli-find-resume">用 CLI Resume →</a><a href="../troubleshooting.html#resume-wrong-target">Resume 排障 →</a></p>
+</nav></main>
   </div>
   <footer><span>Swob Docs · 口径先于结论</span><span>本地优先 · 证据可追溯 · 局限明示</span></footer>
 </body>

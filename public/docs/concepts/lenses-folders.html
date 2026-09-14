@@ -6,18 +6,16 @@
   <title>镜头 vs 文件夹 · Swob Docs</title>
   <meta name="description" content="镜头改变“怎么看”，文件夹改变“放在哪”。只有后者会移动 Vault 内的会话包。">
   <meta name="theme-color" content="#efebe2">
-  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../assets/docs.css">
+  <link rel="icon" href="/icons/swob-512.png" type="image/png">
+  <link rel="stylesheet" href="/docs/assets/docs.css">
+  <script defer src="/docs/assets/docs.js"></script>
 <!-- docs-seo:start -->
 <link rel="canonical" href="https://swob.app/docs/concepts/lenses-folders.html">
 <!-- docs-seo:end -->
 </head>
 <body data-section="concepts">
   <a class="skip-link" href="#content">跳到正文</a>
-  <header class="docs-header">
-    <a class="docs-brand" href="../../zh/"><img src="../../assets/favicon.svg" width="28" height="28" alt=""><span>swob</span><em>docs</em></a>
-    <nav aria-label="文档工具"><a href="../../zh/">官网</a><a href="../en/index.html" lang="en">EN structure</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav>
-  </header>
+  <header class="docs-header"><a class="docs-brand" href="/zh/"><img src="/icons/swob-512.png" width="28" height="28" alt=""><span>swob</span><em>docs</em></a><nav aria-label="文档工具"><a href="/zh/">官网</a><a href="/docs/en/" lang="en">English guides</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav></header>
   <details class="mobile-chapters"><summary>浏览五章</summary><nav class="chapter-nav" aria-label="文档章节">
     <a href="../index.html"><span>01</span>快速上手</a>
     <a href="../concepts/vault.html"><span>02</span>核心概念</a>
@@ -36,7 +34,53 @@
       <div class="side-group"><strong>核心概念</strong><a href="../concepts/vault.html">Vault</a><a href="../concepts/lenses-folders.html">镜头 vs 文件夹</a><a href="../concepts/recovery.html">复活与备份</a><a href="../concepts/lineage.html">血统图谱</a></div>
       <div class="side-group"><strong>功能手册</strong><a href="../guides/resume.html">多客户端 Resume</a><a href="../guides/organize.html">整理与撤销</a><a href="../guides/profiles.html">Profile 与智能重命名</a><a href="../guides/cli.html">CLI 全命令</a><a href="../guides/ssh.html">SSH 远程</a></div>
     </aside>
-    <main class="docs-content" id="content"><header class="doc-hero"><p class="doc-kicker">02 · CORE CONCEPT</p><h1>镜头 vs 文件夹</h1><p class="doc-lead">镜头改变“怎么看”，文件夹改变“放在哪”。只有后者会移动 Vault 内的会话包。</p></header><figure class="doc-shot"><img src="../../assets/sidebar.png" alt="Swob 镜头和文件夹导航合成界面" loading="lazy"><figcaption>当前 UI 示意 · 合成数据 / 隐私清洗重建</figcaption></figure><section><h2>两层导航，不混为一谈</h2><div class="table-scroll"><table><thead><tr><th>对象</th><th>本质</th><th>是否移动文件</th><th>适合</th></tr></thead><tbody><tr><td>镜头</td><td>按来源、项目、活跃度等形成的动态视图</td><td>否</td><td>临时观察与筛选</td></tr><tr><td>文件夹</td><td>Vault 中的持久组织结构</td><td>是，走事务</td><td>长期归档与团队约定</td></tr></tbody></table></div></section><section><h2>为什么要分开</h2><p>如果筛选被伪装成文件夹，用户会误以为数据已移动或已归档。Swob 让镜头保持可逆的观察层，把真正的磁盘变更交给带操作日志的整理事务。</p></section><nav class="concept-index"><a href="../concepts/vault.html">Vault</a><a href="../concepts/lenses-folders.html">镜头 vs 文件夹</a><a href="../concepts/recovery.html">复活与备份</a><a href="../concepts/lineage.html">血统图谱</a></nav></main>
+    <main class="docs-content" id="content"><header class="doc-hero">
+<p>02 · CORE CONCEPT</p>
+<h1>镜头 vs 文件夹</h1>
+<p>镜头改变“怎么看”，文件夹改变“放在哪”。只有后者会移动 Vault 内的会话包。</p>
+</header>
+<figure class="doc-shot">
+<p><img src="/docs/assets/media/sidebar.png" loading="lazy" alt="Swob 镜头和文件夹导航合成界面"></p>
+<figcaption>
+<p>当前 UI 示意 · 合成数据 / 隐私清洗重建</p>
+</figcaption>
+</figure>
+<section>
+<h2>两层导航，不混为一谈</h2>
+<div class="table-scroll">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">对象</th>
+<th style="text-align: left;">本质</th>
+<th style="text-align: left;">是否移动文件</th>
+<th style="text-align: left;">适合</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">镜头</td>
+<td style="text-align: left;">按来源、项目、活跃度等形成的动态视图</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">临时观察与筛选</td>
+</tr>
+<tr>
+<td style="text-align: left;">文件夹</td>
+<td style="text-align: left;">Vault 中的持久组织结构</td>
+<td style="text-align: left;">是，走事务</td>
+<td style="text-align: left;">长期归档与团队约定</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section>
+<h2>为什么要分开</h2>
+<p>如果筛选被伪装成文件夹，用户会误以为数据已移动或已归档。Swob 让镜头保持可逆的观察层，把真正的磁盘变更交给带操作日志的整理事务。</p>
+</section>
+<nav class="concept-index">
+<p><a href="../concepts/vault.html">Vault</a><a href="../concepts/lenses-folders.html">镜头 vs 文件夹</a><a href="../concepts/recovery.html">复活与备份</a><a href="../concepts/lineage.html">血统图谱</a></p>
+</nav></main>
   </div>
   <footer><span>Swob Docs · 口径先于结论</span><span>本地优先 · 证据可追溯 · 局限明示</span></footer>
 </body>

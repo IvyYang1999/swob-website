@@ -3,21 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Profile 与智能重命名 · Swob Docs</title>
-  <meta name="description" content="智能功能先绑定 Profile，再明确调用模型。凭据只进系统 Keychain，不写回普通配置。">
+  <title>AI 与全局 Agent · Swob Docs</title>
+  <meta name="description" content="了解 Swob 的智能重命名、AI 报告和全局 Agent，并按需完成最短配置。">
   <meta name="theme-color" content="#efebe2">
-  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../assets/docs.css">
+  <link rel="icon" href="/icons/swob-512.png" type="image/png">
+  <link rel="stylesheet" href="/docs/assets/docs.css">
+  <script defer src="/docs/assets/docs.js"></script>
 <!-- docs-seo:start -->
 <link rel="canonical" href="https://swob.app/docs/guides/profiles.html">
 <!-- docs-seo:end -->
 </head>
 <body data-section="guides">
   <a class="skip-link" href="#content">跳到正文</a>
-  <header class="docs-header">
-    <a class="docs-brand" href="../../zh/"><img src="../../assets/favicon.svg" width="28" height="28" alt=""><span>swob</span><em>docs</em></a>
-    <nav aria-label="文档工具"><a href="../../zh/">官网</a><a href="../en/index.html" lang="en">EN structure</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav>
-  </header>
+  <header class="docs-header"><a class="docs-brand" href="/zh/"><img src="/icons/swob-512.png" width="28" height="28" alt=""><span>swob</span><em>docs</em></a><nav aria-label="文档工具"><a href="/zh/">官网</a><a href="/docs/en/" lang="en">English guides</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav></header>
   <details class="mobile-chapters"><summary>浏览五章</summary><nav class="chapter-nav" aria-label="文档章节">
     <a href="../index.html"><span>01</span>快速上手</a>
     <a href="../concepts/vault.html"><span>02</span>核心概念</a>
@@ -36,8 +34,136 @@
       <div class="side-group"><strong>核心概念</strong><a href="../concepts/vault.html">Vault</a><a href="../concepts/lenses-folders.html">镜头 vs 文件夹</a><a href="../concepts/recovery.html">复活与备份</a><a href="../concepts/lineage.html">血统图谱</a></div>
       <div class="side-group"><strong>功能手册</strong><a href="../guides/resume.html">多客户端 Resume</a><a href="../guides/organize.html">整理与撤销</a><a href="../guides/profiles.html">Profile 与智能重命名</a><a href="../guides/cli.html">CLI 全命令</a><a href="../guides/ssh.html">SSH 远程</a></div>
     </aside>
-    <main class="docs-content" id="content"><header class="doc-hero"><p class="doc-kicker">04 · FEATURE GUIDE</p><h1>Profile 与智能重命名</h1><p class="doc-lead">智能功能先绑定 Profile，再明确调用模型。凭据只进系统 Keychain，不写回普通配置。</p></header><section><h2>配置顺序</h2><ol class="steps"><li><strong>创建 Profile</strong><p>选择 Anthropic、OpenAI 或兼容自定义服务，填写模型和可选 Base URL。</p></li><li><strong>保存凭据</strong><p>凭据写入本机 Keychain；列表只显示末四位 hint。Base URL 不允许内嵌账号、密码、查询或片段。</p></li><li><strong>绑定智能重命名</strong><p>不同智能功能可绑定不同 Profile。未绑定、Profile 不存在或凭据缺失都会给出明确错误。</p></li></ol></section><section><h2>批量智能重命名</h2><p>每次 1–50 个会话；模型只接收经过秘密脱敏、每段最多 3,000 字符的标题/首条用户消息/摘要。先预览，再把确认后的标题写入 Swob 自定义元数据。</p><div class="callout"><strong>标题约束</strong><p>最多 30 个字符、无句末标点、返回必须是严格 JSON 且完整覆盖所选 session ID；格式错误只重试一次。</p></div></section><nav class="next-links"><a href="../guides/cli.html">CLI 全命令 →</a><a href="../troubleshooting.html">遇到问题？看排障 →</a></nav></main>
+    <main class="docs-content" id="content"><header class="doc-hero">
+<p>AI &amp; AGENT</p>
+<h1>需要 AI 时再启用。</h1>
+<p>AI 是可选能力。搜索、阅读、手动整理和 Resume 不需要模型、API Key 或 AI Profile。</p>
+</header>
+<figure class="doc-shot">
+<p><img src="/docs/assets/media/ai-settings.png" loading="eager" alt="Swob AI 设置：创建 Profile，并分别绑定报告、整理、重命名和全局助手"></p>
+<figcaption>
+<p>E2E 空配置状态 · 未绑定时不影响核心功能</p>
+</figcaption>
+</figure>
+<section>
+<h2>你想完成什么？</h2>
+<div class="table-scroll">
+<table class="compact">
+<thead>
+<tr>
+<th style="text-align: left;">目标</th>
+<th style="text-align: left;">使用的功能</th>
+<th style="text-align: left;">还需要什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">给会话建议更清楚的标题</td>
+<td style="text-align: left;">智能重命名</td>
+<td style="text-align: left;">已绑定且可用的 AI Profile</td>
+</tr>
+<tr>
+<td style="text-align: left;">总结一组会话或生成报告</td>
+<td style="text-align: left;">AI 报告</td>
+<td style="text-align: left;">AI Profile；发送前主动确认样本</td>
+</tr>
+<tr>
+<td style="text-align: left;">用自然语言查找或整理 Library</td>
+<td style="text-align: left;">全局 Agent</td>
+<td style="text-align: left;">本机 Claude Code CLI；必要时再绑定 Profile</td>
+</tr>
+<tr>
+<td style="text-align: left;">只搜索、阅读、整理或 Resume</td>
+<td style="text-align: left;">不需要 AI</td>
+<td style="text-align: left;">无</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout">
+<p><strong>先确认数据边界</strong></p>
+<p>保存 Profile 本身不会上传会话。只有你主动触发 AI 功能时，选中的内容才会发送到对应提供商；第一次请使用一条不含敏感信息的会话验证。</p>
+</div>
+</section>
+<section>
+<h2>全局 Agent 能做什么</h2>
+<p>按 <code>⌘⇧A</code>（Windows 为 <code>Ctrl+Shift+A</code>）或工具栏机器人图标打开小窗。它复用本机 Claude Code CLI，通过 <code>swob</code> CLI 查询或整理 Library。</p>
+<p>适合：</p>
+<ul class="checks">
+<li>“找到上周讨论认证失败的会话。”</li>
+<li>“汇总这个项目最近的会话。”</li>
+<li>“给这些会话建议更清楚的标题。”</li>
+</ul>
+<p>涉及移动或重命名时，仍应先核对目标再确认写入。</p>
+<figure class="doc-shot compact-shot">
+<p><img src="/docs/assets/media/agent-window.png" loading="lazy" alt="Swob 全局助手窗口：查询 AI 会话历史并通过 swob 命令执行"></p>
+<figcaption>
+<p>E2E 模拟数据 · 全局 Agent 是独立小窗</p>
+</figcaption>
+</figure>
+</section>
+<section>
+<h2>AI Profile 最短配置</h2>
+<ol type="1" class="steps">
+<li>在“设置 → AI Profile”创建 Profile，选择提供商和模型。</li>
+<li>将凭据保存到系统安全存储；不要写进文档或问题报告。</li>
+<li>把需要的功能绑定到该 Profile。</li>
+<li>先用一条非敏感会话验证，再扩大范围。</li>
+</ol>
+<p>如果只使用全局 Agent 查询本地 Library，先确认“设置 → Assistant”中的引擎状态；需要调用外部模型的功能，再绑定 AI Profile。</p>
+</section>
+<section>
+<h2>看不到入口时</h2>
+<ul class="checks">
+<li>确认本机版本为 v1.3.1 或更高。</li>
+<li>全局 Agent：在“设置 → Assistant”检查 Claude Code CLI 是否被检测到。</li>
+<li>智能重命名或 AI 报告：确认对应功能已经绑定一个可用 Profile。</li>
+<li>未满足条件时，Swob 的核心功能仍可正常使用。</li>
+</ul>
+</section>
+<section>
+<h2>常用设置入口</h2>
+<div class="table-scroll">
+<table class="compact">
+<thead>
+<tr>
+<th style="text-align: left;">想改变什么</th>
+<th style="text-align: left;">去哪里</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">外观、语言、Spotligh</td>
+<td style="text-align: left;">t 通用</td>
+</tr>
+<tr>
+<td style="text-align: left;">默认终端与续接方式</td>
+<td style="text-align: left;">终端 / Resume</td>
+</tr>
+<tr>
+<td style="text-align: left;">远程续接</td>
+<td style="text-align: left;">SSH</td>
+</tr>
+<tr>
+<td style="text-align: left;">全局 Agent</td>
+<td style="text-align: left;">Assistant</td>
+</tr>
+<tr>
+<td style="text-align: left;">CLI 安装状态</td>
+<td style="text-align: left;">CLI &amp; Agent</td>
+</tr>
+<tr>
+<td style="text-align: left;">版本与更新频道</td>
+<td style="text-align: left;">更新</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<nav class="next-links">
+<p><a href="./cli.html">全局 Agent 使用的 CLI →</a><a href="./organize.html">整理与撤销 →</a><a href="../privacy.html">隐私与网络边界 →</a></p>
+</nav></main>
   </div>
-  <footer><span>Swob Docs · 口径先于结论</span><span>本地优先 · 证据可追溯 · 局限明示</span></footer>
+  <footer><span>Swob Docs · AI 是可选能力</span><span>未配置 AI 也能使用核心功能</span></footer>
 </body>
 </html>

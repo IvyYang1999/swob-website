@@ -4,20 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SSH 远程 Resume · Swob Docs</title>
-  <meta name="description" content="Swob 只编排你已经能安全登录的 SSH 主机；它不接管私钥，也不替你绕过远端权限。">
+  <meta name="description" content="从已有 SSH 登录能力出发，配置、验证并安全续接远端 Claude Code 会话。">
   <meta name="theme-color" content="#efebe2">
-  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../assets/docs.css">
+  <link rel="icon" href="/icons/swob-512.png" type="image/png">
+  <link rel="stylesheet" href="/docs/assets/docs.css">
+  <script defer src="/docs/assets/docs.js"></script>
 <!-- docs-seo:start -->
 <link rel="canonical" href="https://swob.app/docs/guides/ssh.html">
 <!-- docs-seo:end -->
 </head>
 <body data-section="guides">
   <a class="skip-link" href="#content">跳到正文</a>
-  <header class="docs-header">
-    <a class="docs-brand" href="../../zh/"><img src="../../assets/favicon.svg" width="28" height="28" alt=""><span>swob</span><em>docs</em></a>
-    <nav aria-label="文档工具"><a href="../../zh/">官网</a><a href="../en/index.html" lang="en">EN structure</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav>
-  </header>
+  <header class="docs-header"><a class="docs-brand" href="/zh/"><img src="/icons/swob-512.png" width="28" height="28" alt=""><span>swob</span><em>docs</em></a><nav aria-label="文档工具"><a href="/zh/">官网</a><a href="/docs/en/" lang="en">English guides</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav></header>
   <details class="mobile-chapters"><summary>浏览五章</summary><nav class="chapter-nav" aria-label="文档章节">
     <a href="../index.html"><span>01</span>快速上手</a>
     <a href="../concepts/vault.html"><span>02</span>核心概念</a>
@@ -36,7 +34,141 @@
       <div class="side-group"><strong>核心概念</strong><a href="../concepts/vault.html">Vault</a><a href="../concepts/lenses-folders.html">镜头 vs 文件夹</a><a href="../concepts/recovery.html">复活与备份</a><a href="../concepts/lineage.html">血统图谱</a></div>
       <div class="side-group"><strong>功能手册</strong><a href="../guides/resume.html">多客户端 Resume</a><a href="../guides/organize.html">整理与撤销</a><a href="../guides/profiles.html">Profile 与智能重命名</a><a href="../guides/cli.html">CLI 全命令</a><a href="../guides/ssh.html">SSH 远程</a></div>
     </aside>
-    <main class="docs-content" id="content"><header class="doc-hero"><p class="doc-kicker">04 · FEATURE GUIDE</p><h1>SSH 远程 Resume</h1><p class="doc-lead">Swob 只编排你已经能安全登录的 SSH 主机；它不接管私钥，也不替你绕过远端权限。</p></header><section><h2>准备</h2><ol class="steps"><li><strong>配置 SSH 密钥</strong><p>本机运行 <code>ssh-keygen</code>，用 <code>ssh-copy-id user@host</code> 安装公钥；私钥只留本机。</p></li><li><strong>先在终端验证</strong><p>确认 <code>ssh user@host</code> 无需交互密码，并且远端工作目录和 claude launcher 存在。</p></li><li><strong>填入设置</strong><p>设置 → SSH 填 host、user；只有 launcher 不在 PATH 时才填“远程路径”。</p></li></ol></section><section><h2>Swob 实际执行什么</h2><pre><code>ssh -t user@host 'zsh -li -c "cd &lt;remote-cwd&gt; &amp;&amp; claude --resume &lt;id&gt;"'</code></pre><p>交互登录 shell 同时加载远端 <code>~/.zprofile</code> 与 <code>~/.zshrc</code>。路径和 session ID 都经过 shell quote。</p><div class="callout warning"><strong>范围</strong><p>SSH Resume 当前面向远端 Claude Code 会话。Windows Native Alpha 不开放 SSH 设置入口。</p></div></section><nav class="next-links"><a href="../guides/cli.html">CLI 全命令 →</a><a href="../troubleshooting.html">遇到问题？看排障 →</a></nav></main>
+    <main class="docs-content" id="content"><header class="doc-hero">
+<p>CONTINUE REMOTELY</p>
+<h1>SSH 远程 Resume</h1>
+<p>Swob 只编排你已经能安全登录的 SSH 主机；它不接管私钥，也不替你绕过远端权限。</p>
+</header>
+<div class="docs-figure">
+<p><img src="/docs/assets/media/ssh-resume-flow.svg" loading="eager" alt="Swob 使用已有 SSH 配置在远端工作目录恢复 Claude Code 会话"></p>
+</div>
+<section>
+<h2>先判断它是否适合你的场景</h2>
+<p>SSH Resume 适用于：会话已经出现在当前 Library 中，并且它的真实工作目录和 Claude Code CLI 位于一台你已经可以安全登录的远程主机。</p>
+<p>它不负责：</p>
+<ul class="checks">
+<li>扫描远端硬盘或把远端历史自动同步到本机；</li>
+<li>创建账号、分发私钥、绕过密码或 host key 检查；</li>
+<li>把本机会话“迁移”为远端会话；</li>
+<li>为非 Claude Code 来源承诺远程 Resume；</li>
+<li>在 Windows x64 Beta 中开放 SSH 设置。</li>
+</ul>
+</section>
+<section>
+<h2>第一步：在 Swob 之外验证 SSH</h2>
+<p>先使用已有的 <code>~/.ssh/config</code>、SSH agent 或系统密钥能力完成登录。Swob 不应成为第一次测试 SSH 凭据的地方。</p>
+<ol type="1" class="steps">
+<li><p><strong>验证主机别名</strong></p>
+<pre><code>ssh &lt;host-alias&gt;</code></pre>
+<p>如果仍要求输入密码、确认未知 host key 或报告 <code>Permission denied</code>，先在系统 SSH 配置中解决。不要把密码或私钥粘贴进 Swob。</p></li>
+<li><p><strong>验证远端 CLI</strong></p>
+<pre><code>command -v claude
+claude --version</code></pre>
+<p>找不到命令时，记录经过核对的 launcher 绝对路径；不要猜测路径。</p></li>
+<li><p><strong>验证远端工作目录</strong></p>
+<pre><code>cd &lt;remote-cwd&gt;
+pwd</code></pre>
+<p>路径必须属于目标会话真实项目。进入相似名称的另一个 checkout 也不算成功。</p></li>
+</ol>
+</section>
+<section>
+<h2>第二步：在 Swob 中保存连接设置</h2>
+<p>进入“设置 → SSH”，填写你刚刚验证过的 host、user 和可选远程 launcher 路径。</p>
+<figure class="doc-shot">
+<p><img src="/docs/assets/media/ssh-settings.png" loading="lazy" alt="Swob SSH 设置：保存远程主机，并区分 Tailscale、局域网与公网连接信息"></p>
+<figcaption>
+<p>E2E 模拟数据 · 图中地址使用文档保留网段</p>
+</figcaption>
+</figure>
+<ul class="checks">
+<li><code>host</code> 优先使用 <code>~/.ssh/config</code> 中已经验证的别名，复用端口、跳板机和密钥选择。</li>
+<li><code>user</code> 必须与终端成功登录时一致。</li>
+<li>Claude launcher 已在远端登录 shell 的 PATH 中时，不要额外填写路径。</li>
+<li>Swob 保存连接配置，不保存 SSH 密码或私钥正文。</li>
+</ul>
+</section>
+<section>
+<h2>第三步：选择一条已经存在的远端会话</h2>
+<p>SSH 设置不会主动抓取远端会话。目标会话必须已经出现在当前 Library 中，并带有可核对的远端主机、session ID 和工作目录。</p>
+<p>打开会话后先检查：</p>
+<ol type="1">
+<li>来源是 Claude Code；</li>
+<li>会话被标记为远端，而不是只有文件位于同步盘；</li>
+<li>工作目录与第一步在远端验证的目录一致；</li>
+<li>详情不是 unavailable，且 session ID 可解析。</li>
+</ol>
+</section>
+<section>
+<h2>第四步：执行 Resume</h2>
+<p>从会话顶部的 Resume 菜单选择 SSH/远端续接。Swob 会打开配置的本地终端，并在远端交互登录 shell 中进入工作目录、启动 Claude Code：</p>
+<pre><code>ssh -t user@host 'zsh -li -c "cd &lt;remote-cwd&gt; &amp;&amp; claude --resume &lt;id&gt;"'</code></pre>
+<p>交互登录 shell 同时加载远端 <code>~/.zprofile</code> 与 <code>~/.zshrc</code>。路径和 session ID 都经过 shell quote。</p>
+<div class="callout">
+<p><strong>命令生成成功不等于恢复成功</strong></p>
+<p>终端打开后，仍要在 Claude Code 中核对上一轮消息、项目目录或会话标题。只登录到远端、只进入项目目录、或只启动一个新 Claude 会话，都不算进入了目标历史。</p>
+</div>
+</section>
+<section>
+<h2>常见失败与下一步</h2>
+<table class="compact">
+<thead>
+<tr>
+<th style="text-align: left;">现象</th>
+<th style="text-align: left;">先检查什么</th>
+<th style="text-align: left;">不要做什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>Could not resolve hostname</code></td>
+<td style="text-align: left;"><code>~/.ssh/config</code> 的 host alias 是否能在终端使用</td>
+<td style="text-align: left;">不要在 Swob 中反复改随机地址</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Permission denied</code></td>
+<td style="text-align: left;">SSH agent、用户名、密钥选择和远端授权</td>
+<td style="text-align: left;">不要粘贴密码或私钥到会话/日志</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>claude: command not found</code></td>
+<td style="text-align: left;">登录 shell PATH 与已验证 launcher 路径</td>
+<td style="text-align: left;">不要猜测 <code>/usr/local/bin</code> 等路径</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>cd: no such file or directory</code></td>
+<td style="text-align: left;">会话记录的 remote cwd 是否已移动或删除</td>
+<td style="text-align: left;">不要改成另一个同名项目碰碰运气</td>
+</tr>
+<tr>
+<td style="text-align: left;">启动了 Claude 但不是目标会话</td>
+<td style="text-align: left;">session ID、来源和 <code>--resume</code> 是否仍被上游接受</td>
+<td style="text-align: left;">不要把“打开客户端”记为成功</td>
+</tr>
+<tr>
+<td style="text-align: left;">终端立即关闭</td>
+<td style="text-align: left;">SSH/远端 CLI 的 stderr 与退出码</td>
+<td style="text-align: left;">不要无限重试隐藏稳定失败</td>
+</tr>
+</tbody>
+</table>
+<p>需要报告问题时，只提供错误类型、Swob/Claude 版本和脱敏后的路径结构；不要提交 hostname、IP、用户名、私钥、cookie 或完整终端日志。</p>
+</section>
+<section>
+<h2>安全边界</h2>
+<div class="callout warning">
+<p><strong>范围</strong></p>
+<p>SSH Resume 当前面向远端 Claude Code 会话。Windows x64 Beta 不开放 SSH 设置入口。</p>
+</div>
+<ul class="checks">
+<li>主机身份和权限由系统 SSH 负责，Swob 不降低这些检查。</li>
+<li>远端命令只应针对用户明确选择的会话和工作目录。</li>
+<li>Library 位于同步盘不等于 SSH 已配置，也不等于远端主机可信。</li>
+<li>失败时保留证据并停止；不要用关闭 host key 检查等方式换取“能连上”。</li>
+</ul>
+</section>
+<nav class="next-links">
+<p><a href="./resume.html">理解本地 Resume →</a><a href="./cli.html">CLI 工作流 →</a><a href="../troubleshooting.html">遇到问题？看排障 →</a></p>
+</nav></main>
   </div>
   <footer><span>Swob Docs · 口径先于结论</span><span>本地优先 · 证据可追溯 · 局限明示</span></footer>
 </body>

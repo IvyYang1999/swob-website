@@ -3,21 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>整理与撤销 · Swob Docs</title>
-  <meta name="description" content="移动和重命名不是散落的文件操作，而是一笔先记反向计划、再执行的 Vault 事务。">
+  <title>整理、重命名与撤销 · Swob Docs</title>
+  <meta name="description" content="用文件夹和标题整理 Library，并在批量修改前预览、完成后撤销。">
   <meta name="theme-color" content="#efebe2">
-  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../assets/docs.css">
+  <link rel="icon" href="/icons/swob-512.png" type="image/png">
+  <link rel="stylesheet" href="/docs/assets/docs.css">
+  <script defer src="/docs/assets/docs.js"></script>
 <!-- docs-seo:start -->
 <link rel="canonical" href="https://swob.app/docs/guides/organize.html">
 <!-- docs-seo:end -->
 </head>
 <body data-section="guides">
   <a class="skip-link" href="#content">跳到正文</a>
-  <header class="docs-header">
-    <a class="docs-brand" href="../../zh/"><img src="../../assets/favicon.svg" width="28" height="28" alt=""><span>swob</span><em>docs</em></a>
-    <nav aria-label="文档工具"><a href="../../zh/">官网</a><a href="../en/index.html" lang="en">EN structure</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav>
-  </header>
+  <header class="docs-header"><a class="docs-brand" href="/zh/"><img src="/icons/swob-512.png" width="28" height="28" alt=""><span>swob</span><em>docs</em></a><nav aria-label="文档工具"><a href="/zh/">官网</a><a href="/docs/en/" lang="en">English guides</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav></header>
   <details class="mobile-chapters"><summary>浏览五章</summary><nav class="chapter-nav" aria-label="文档章节">
     <a href="../index.html"><span>01</span>快速上手</a>
     <a href="../concepts/vault.html"><span>02</span>核心概念</a>
@@ -36,8 +34,83 @@
       <div class="side-group"><strong>核心概念</strong><a href="../concepts/vault.html">Vault</a><a href="../concepts/lenses-folders.html">镜头 vs 文件夹</a><a href="../concepts/recovery.html">复活与备份</a><a href="../concepts/lineage.html">血统图谱</a></div>
       <div class="side-group"><strong>功能手册</strong><a href="../guides/resume.html">多客户端 Resume</a><a href="../guides/organize.html">整理与撤销</a><a href="../guides/profiles.html">Profile 与智能重命名</a><a href="../guides/cli.html">CLI 全命令</a><a href="../guides/ssh.html">SSH 远程</a></div>
     </aside>
-    <main class="docs-content" id="content"><header class="doc-hero"><p class="doc-kicker">04 · FEATURE GUIDE</p><h1>整理与撤销</h1><p class="doc-lead">移动和重命名不是散落的文件操作，而是一笔先记反向计划、再执行的 Vault 事务。</p></header><section><h2>安全整理</h2><ol class="steps"><li><strong>先预览</strong><p>项目整理与智能整理先给出目标文件夹和元数据变化。</p></li><li><strong>整批提交</strong><p>每个会话包必须有正确标记，目标必须在当前 Vault 内；重名会生成安全后缀。</p></li><li><strong>需要时撤销</strong><p>“撤销最近整理”只处理最近一笔 applied/partial 事务，先完整预检再反向移动。</p></li></ol></section><section><h2>撤销不会做什么</h2><ul class="checks"><li>不会覆盖后来占据原位置的内容。</li><li>不会删除整理后新增的非空文件夹。</li><li>不会猜测损坏日志的反向路径。</li><li>每次只撤销最近一笔组织事务。</li></ul></section><nav class="next-links"><a href="../guides/cli.html">CLI 全命令 →</a><a href="../troubleshooting.html">遇到问题？看排障 →</a></nav></main>
+    <main class="docs-content" id="content"><header class="doc-hero">
+<p>ORGANIZE</p>
+<h1>先预览，再改变 Library。</h1>
+<p>大多数情况只需要文件夹和手动重命名。AI 建议是可选项，不是整理的前提。</p>
+</header>
+<div class="docs-figure">
+<p><img src="/docs/assets/media/organize-flow.svg" loading="eager" alt="Swob 安全整理流程：选择方式、检查预览、提交事务和撤销"></p>
+</div>
+<figure class="doc-shot">
+<p><img src="/docs/assets/media/project-organize.png" loading="lazy" alt="Swob 按项目整理预览：逐条确认会话将进入哪个项目"></p>
+<figcaption>
+<p>E2E 模拟数据 · 确认前不会移动文件</p>
+</figcaption>
+</figure>
+<section>
+<h2>选一种方式</h2>
+<div class="table-scroll">
+<table class="compact">
+<thead>
+<tr>
+<th style="text-align: left;">目标</th>
+<th style="text-align: left;">首选方式</th>
+<th>是否需要 AI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">移动一条会话</td>
+<td style="text-align: left;">拖放或会话菜单</td>
+<td>否</td>
+</tr>
+<tr>
+<td style="text-align: left;">按项目批量归档</td>
+<td style="text-align: left;">项目整理</td>
+<td>否</td>
+</tr>
+<tr>
+<td style="text-align: left;">修改显示标题</td>
+<td style="text-align: left;">手动重命名</td>
+<td>否</td>
+</tr>
+<tr>
+<td style="text-align: left;">让模型建议标题或文件夹</td>
+<td style="text-align: left;">智能重命名 / 智能整理</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout">
+<p><strong>Lens 不是文件夹</strong></p>
+<p>Lens 只改变显示方式，不移动会话。只是想减少侧栏噪音时，先调整 Lens。</p>
+</div>
+</section>
+<section>
+<h2>安全整理的四步</h2>
+<ol type="1" class="steps">
+<li><strong>选择会话和目标文件夹。</strong> 标题相似时，用来源、项目和时间核对身份。</li>
+<li><strong>检查预览。</strong> 取消不想改的项目，修正错误目标。</li>
+<li><strong>提交一次。</strong> 完成后检查数量、位置和标题。</li>
+<li><strong>有问题立即撤销。</strong> 不要在错误结果上继续叠加第二次整理。</li>
+</ol>
+</section>
+<section>
+<h2>使用 AI 建议前</h2>
+<p>智能整理和智能重命名需要可用的 AI Profile，并会把最小化、脱敏后的会话片段发送给所选模型。敏感项目优先使用完全本地的手动或项目整理。</p>
+<p>模型只提供建议；预览确认后才写入 Library。未配置 Profile 时，手动整理仍可正常使用。</p>
+<p><a href="./profiles.html">查看 AI 启用条件 →</a></p>
+</section>
+<section>
+<h2>撤销边界</h2>
+<p>“撤销最近整理”只撤销最近一笔批量移动或重命名。它不会覆盖后来出现的内容，不会删除非空文件夹，也不能代替备份。</p>
+</section>
+<nav class="next-links">
+<p><a href="../concepts/lenses-folders.html">理解 Lens 与文件夹 →</a><a href="./cli.html">CLI 批量整理 →</a><a href="../troubleshooting.html">遇到问题？看排障 →</a></p>
+</nav></main>
   </div>
-  <footer><span>Swob Docs · 口径先于结论</span><span>本地优先 · 证据可追溯 · 局限明示</span></footer>
+  <footer><span>Swob Docs · 先预览，再写入</span><span>AI 建议是可选能力</span></footer>
 </body>
 </html>

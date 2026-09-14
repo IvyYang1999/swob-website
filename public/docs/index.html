@@ -3,49 +3,84 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>快速上手 · Swob Docs</title>
-  <meta name="description" content="从安装、首启动三步引导到第一次 Resume。">
+  <title>开始使用 Swob · Swob Docs</title>
+  <meta name="description" content="安装 Swob，找到一条历史 AI 会话，并在需要时继续工作。">
   <meta name="theme-color" content="#efebe2">
-  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./assets/docs.css">
+  <link rel="icon" href="/icons/swob-512.png" type="image/png">
+  <link rel="stylesheet" href="/docs/assets/docs.css">
+  <script defer src="/docs/assets/docs.js"></script>
 <!-- docs-seo:start -->
 <link rel="canonical" href="https://swob.app/docs/">
 <link rel="alternate" hreflang="zh-CN" href="https://swob.app/docs/">
 <link rel="alternate" hreflang="en" href="https://swob.app/docs/en/">
 <!-- docs-seo:end -->
 </head>
-<body data-section="quickstart">
+<body data-section="start">
   <a class="skip-link" href="#content">跳到正文</a>
-  <header class="docs-header">
-    <a class="docs-brand" href="../zh/"><img src="../assets/favicon.svg" width="28" height="28" alt=""><span>swob</span><em>docs</em></a>
-    <nav aria-label="文档工具"><a href="../zh/">官网</a><a href="./en/index.html" lang="en">English guides</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav>
-  </header>
-  <details class="mobile-chapters"><summary>浏览五章</summary><nav class="chapter-nav" aria-label="文档章节">
-    <a href="./index.html"><span>01</span>快速上手</a>
-    <a href="./concepts/vault.html"><span>02</span>核心概念</a>
-    <a href="./metrics.html"><span>03</span>统计口径</a>
-    <a href="./guides/resume.html"><span>04</span>功能手册</a>
-    <a href="./troubleshooting.html"><span>05</span>FAQ 与排障</a>
-  </nav></details>
+  <header class="docs-header"><a class="docs-brand" href="/zh/"><img src="/icons/swob-512.png" width="28" height="28" alt=""><span>swob</span><em>docs</em></a><nav aria-label="文档工具"><a href="/zh/">官网</a><a href="/docs/en/" lang="en">English guides</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav></header>
+  <details class="mobile-chapters"><summary>文档目录</summary></details>
   <div class="docs-layout">
-    <aside class="docs-sidebar"><nav class="chapter-nav" aria-label="文档章节">
-    <a href="./index.html"><span>01</span>快速上手</a>
-    <a href="./concepts/vault.html"><span>02</span>核心概念</a>
-    <a href="./metrics.html"><span>03</span>统计口径</a>
-    <a href="./guides/resume.html"><span>04</span>功能手册</a>
-    <a href="./troubleshooting.html"><span>05</span>FAQ 与排障</a>
-  </nav>
-      <div class="side-group"><strong>核心概念</strong><a href="./concepts/vault.html">Vault</a><a href="./concepts/lenses-folders.html">镜头 vs 文件夹</a><a href="./concepts/recovery.html">复活与备份</a><a href="./concepts/lineage.html">血统图谱</a></div>
-      <div class="side-group"><strong>功能手册</strong><a href="./guides/resume.html">多客户端 Resume</a><a href="./guides/organize.html">整理与撤销</a><a href="./guides/profiles.html">Profile 与智能重命名</a><a href="./guides/cli.html">CLI 全命令</a><a href="./guides/ssh.html">SSH 远程</a></div>
-    </aside>
-    <main class="docs-content" id="content"><header class="doc-hero"><p class="doc-kicker">01 · QUICK START</p><h1>先保住历史，再继续工作。</h1><p class="doc-lead">Swob 把各家 AI 编程客户端的本地会话汇到一个由你控制的 Vault。下面是从零到第一次续接的最短路径。</p><div class="hero-badges"><span>macOS current main</span><span>本地优先</span><span>约 3 分钟</span></div></header>
-      <section><h2>1. 下载与安装</h2><ol class="steps"><li><strong>下载当前稳定版</strong><p>从官网或 GitHub Releases 下载与你 Mac 芯片对应的 DMG。稳定版和 current main 的功能边界以官网标注为准。</p></li><li><strong>核对公开安装包</strong><p>当前官网提供 v1.3.1。安装包与发布说明以官方 GitHub Releases 为准；不要从不明镜像下载。本文部分说明面向开发版，界面和功能可能与稳定版不同。</p></li></ol></section>
-      <section><h2>2. 首启动三步</h2><div class="card-grid three"><article><span class="card-index">01</span><h3>选择 Vault</h3><p>选一个你掌控、会备份的位置。Vault 保存 Swob 会话包、索引和组织元数据；改变位置不是改变原客户端目录。</p></article><article><span class="card-index">02</span><h3>排除来源</h3><p>取消勾选的 harness 将不显示、也不备份。以后可在设置里调整；排除不是“隐藏筛选”，而是数据边界。</p></article><article><span class="card-index">03</span><h3>延长保留期</h3><p>发现 Claude Code 时，建议把本地会话保留期从默认值延长。它降低源文件被自动清理的风险，但不能替代 Vault 备份。</p></article></div></section>
-      <section><h2>先找到要继续的会话</h2><p>在主窗口按 ⌘K 聚焦搜索框，输入消息中出现过的独特词语，再核对匹配片段、来源、项目与时间。主窗口搜索已建立索引的消息正文；无法解析正文的来源不代表可以全文搜索。</p><p>例如在虚构的 sample-shop 项目中讨论过 redirect，可以先搜 redirect，再打开结果确认上下文。独立 Spotlight 窗口还支持按项目和来源寻找候选；⌘Enter 在 Swob 中打开阅读，Enter 或点击结果会尝试 Resume。完整步骤见 <a href="/docs/en/" lang="en">English quick start</a>。</p></section>
-      <section><h2>3. 第一次 Resume</h2><ol class="steps"><li><strong>在左侧选择会话</strong><p>先核对来源、项目和最后更新时间。旧 ID 会尽量解析到最新的物理续接会话。</p></li><li><strong>点击 Resume</strong><p>默认走该来源可验证的终端命令；下拉菜单里只展示支持的桌面入口。</p></li><li><strong>看清降级提示</strong><p>“打开客户端”不等于“跳到指定会话”。尤其 ZCode 目前只能打开 App/工作区，Swob 会明确提示不能直达历史会话。</p></li></ol><div class="callout"><strong>恢复前的安全边界</strong><p>源文件缺失时，只有实际点击 Resume 才允许进入受控复活流程；复制命令和审计保持只读。</p></div></section>
-      <figure class="doc-shot"><img src="../assets/main.png" alt="Swob 会话浏览器合成界面" loading="lazy"><figcaption>当前主界面示意 · 合成数据 / 隐私清洗重建</figcaption></figure>
-      <nav class="next-links"><a href="./concepts/vault.html">下一章：理解 Vault →</a><a href="./guides/resume.html">直接看多客户端 Resume →</a></nav></main>
+    <aside class="docs-sidebar"></aside>
+    <main class="docs-content" id="content"><header class="doc-hero">
+<p>OVERVIEW</p>
+<h1>找回一段 AI 会话，然后继续工作。</h1>
+<p>Swob 把 Claude Code、Codex、Cursor 等工具留在你电脑上的会话集中到本地 Library，方便搜索、阅读、整理和 Resume。</p>
+<div class="hero-badges">
+<p><span>本地优先</span><span>跨工具搜索</span><span>可继续工作</span></p>
+</div>
+</header>
+<section>
+<h2>你现在想做什么？</h2>
+<div class="card-grid three">
+<article>
+<p><span class="card-index">NEW</span></p>
+<h3>第一次使用</h3>
+<p>安装 Swob，完成第一次扫描，并确认能搜到一条真实会话。</p>
+<p><a href="./getting-started/install.html">5 分钟快速入门 →</a></p>
+</article>
+<article>
+<p><span class="card-index">FIND</span></p>
+<h3>找回一条会话</h3>
+<p>只记得一句原文、项目名或错误信息？先搜索，再回到完整上下文。</p>
+<p><a href="./guides/search.html">搜索与阅读 →</a></p>
+</article>
+<article>
+<p><span class="card-index">CONTINUE</span></p>
+<h3>继续历史工作</h3>
+<p>先确认来源支持，再选择终端或 App，并核对是否进入了目标历史。</p>
+<p><a href="./guides/resume.html">继续一条会话 →</a></p>
+</article>
+</div>
+</section>
+<section>
+<h2>第一次成功只需要四步</h2>
+<ol type="1" class="steps">
+<li><strong>安装 Swob，选择一个由你控制的 Library。</strong></li>
+<li><strong>只启用你实际使用的会话来源。</strong></li>
+<li><strong>打开一条内容熟悉的历史会话。</strong></li>
+<li><strong>用一句原文再次找到它。</strong></li>
+</ol>
+<div class="callout">
+<p><strong>完成标准</strong></p>
+<p>你能打开一条真实会话，并用一句原文再次找到它。做到这一点，Swob 的核心价值已经可用；Resume、AI、CLI 和 Insights 都可以稍后再学。</p>
+</div>
+</section>
+<section>
+<h2>使用前只需确认两件事</h2>
+<ul class="checks">
+<li><strong>你的工具支持什么：</strong> 能读取会话，不一定也支持正文搜索、用量或 Resume。<a href="./sources.html">查看来源支持 →</a></li>
+<li><strong>数据会去哪里：</strong> 核心 Library 在本地；只有更新检查、SSH 和你主动触发的 AI 调用会使用网络。<a href="./privacy.html">查看隐私边界 →</a></li>
+</ul>
+</section>
+<section>
+<h2>用熟以后再扩展</h2>
+<p>整理会话、Insights、Swob CLI、SSH 和全局 Agent 都是后续能力，不是首次使用的前置条件。</p>
+<p><a href="./guides/organize.html">整理会话 →</a> · <a href="./guides/insights.html">查看 Insights →</a> · <a href="./guides/cli.html">使用 CLI →</a> · <a href="./guides/profiles.html">启用 AI / Agent →</a></p>
+</section>
+<section><h2>先找到要继续的会话</h2><p>在主窗口按 ⌘K 聚焦搜索框，输入消息中出现过的独特词语，再核对匹配片段、来源、项目与时间。主窗口搜索已建立索引的消息正文；无法解析正文的来源不代表可以全文搜索。</p><p>例如在虚构的 sample-shop 项目中讨论过 redirect，可以先搜 redirect，再打开结果确认上下文。独立 Spotlight 窗口还支持按项目和来源寻找候选；⌘Enter 在 Swob 中打开阅读，Enter 或点击结果会尝试 Resume。完整步骤见 <a href="/docs/en/" lang="en">English quick start</a>。</p></section><section><h2>1. 下载与安装</h2><ol class="steps"><li><strong>下载当前稳定版</strong><p>从官网或 GitHub Releases 下载与你 Mac 芯片对应的 DMG。稳定版和 current main 的功能边界以官网标注为准。</p></li><li><strong>核对公开安装包</strong><p>当前官网提供 v1.3.1。安装包与发布说明以官方 GitHub Releases 为准；不要从不明镜像下载。本文部分说明面向开发版，界面和功能可能与稳定版不同。</p></li></ol></section><nav class="next-links">
+<p><a href="./getting-started/install.html">开始 5 分钟快速入门 →</a><a href="./sources.html">我的工具支持什么 →</a></p>
+</nav></main>
   </div>
-  <footer><span>Swob Docs · 口径先于结论</span><span>本地优先 · 证据可追溯 · 局限明示</span></footer>
+  <footer><span>Swob Docs · 先完成一次真实任务</span><span>本地优先 · 能力边界明确</span></footer>
 </body>
 </html>

@@ -3,21 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CLI 全命令 · Swob Docs</title>
-  <meta name="description" content="Swob CLI 1.2.0 的完整命令参考，由 command-registry 自动生成。">
+  <title>用 Swob CLI 自动化常用任务 · Swob Docs</title>
+  <meta name="description" content="用 Swob CLI 查找、读取、继续和整理本地 AI 会话；需要时再查完整命令参考。">
   <meta name="theme-color" content="#efebe2">
-  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../assets/docs.css">
+  <link rel="icon" href="/icons/swob-512.png" type="image/png">
+  <link rel="stylesheet" href="/docs/assets/docs.css">
+  <script defer src="/docs/assets/docs.js"></script>
 <!-- docs-seo:start -->
 <link rel="canonical" href="https://swob.app/docs/guides/cli.html">
 <!-- docs-seo:end -->
 </head>
 <body data-section="guides">
   <a class="skip-link" href="#content">跳到正文</a>
-  <header class="docs-header">
-    <a class="docs-brand" href="../../zh/"><img src="../../assets/favicon.svg" width="28" height="28" alt=""><span>swob</span><em>docs</em></a>
-    <nav aria-label="文档工具"><a href="../../zh/">官网</a><a href="../en/index.html" lang="en">EN structure</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav>
-  </header>
+  <header class="docs-header"><a class="docs-brand" href="/zh/"><img src="/icons/swob-512.png" width="28" height="28" alt=""><span>swob</span><em>docs</em></a><nav aria-label="文档工具"><a href="/zh/">官网</a><a href="/docs/en/" lang="en">English guides</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav></header>
   <details class="mobile-chapters"><summary>浏览五章</summary><nav class="chapter-nav" aria-label="文档章节">
     <a href="../index.html"><span>01</span>快速上手</a>
     <a href="../concepts/vault.html"><span>02</span>核心概念</a>
@@ -36,30 +34,578 @@
       <div class="side-group"><strong>核心概念</strong><a href="../concepts/vault.html">Vault</a><a href="../concepts/lenses-folders.html">镜头 vs 文件夹</a><a href="../concepts/recovery.html">复活与备份</a><a href="../concepts/lineage.html">血统图谱</a></div>
       <div class="side-group"><strong>功能手册</strong><a href="../guides/resume.html">多客户端 Resume</a><a href="../guides/organize.html">整理与撤销</a><a href="../guides/profiles.html">Profile 与智能重命名</a><a href="../guides/cli.html">CLI 全命令</a><a href="../guides/ssh.html">SSH 远程</a></div>
     </aside>
-    <main class="docs-content" id="content"><!-- generated from src/cli/command-registry.ts --><header class="doc-hero"><p class="doc-kicker">04 · GENERATED CLI</p><h1>CLI 1.2.0 全命令</h1><p class="doc-lead">本页命令、摘要、输出和示例与 /swob skill 使用同一个 command registry。改代码不重新生成，测试会失败。</p><div class="hero-badges"><span>24 条命令</span><span>机器输出优先 JSON</span></div></header><section><h2>机器接口约定</h2><ul class="checks"><li><code>--json</code> 时 stdout 只包含合法 JSON，诊断写 stderr。</li><li><code>show --format=jsonl</code> 每行一个独立 JSON 事件。</li><li>批量 move/rename 整批先校验再提交；<code>undo</code> 只撤销最近一次组织事务。</li><li>token 汇总的 <code>input_plus_output</code> 不包含 cache creation/read。</li></ul><table class="compact"><thead><tr><th>退出码</th><th>含义</th></tr></thead><tbody><tr><td><code>0</code></td><td>成功</td></tr><tr><td><code>1</code></td><td>参数、输入或执行错误</td></tr><tr><td><code>2</code></td><td>标识符歧义</td></tr><tr><td><code>3</code></td><td>目标不存在</td></tr></tbody></table></section><section><h2>命令参考</h2><div class="command-list"><article class="command" id="search-571779753"><h3><code>swob search &lt;query&gt; [--limit N]</code></h3><p>按标题、项目、文件夹等元数据搜索会话</p><dl><dt>输出</dt><dd>JSON 会话数组</dd><dt>示例</dt><dd><code>swob search &quot;认证失败&quot; --limit 10</code></dd></dl></article>
-<article class="command" id="list-167067685"><h3><code>swob list [--folder ID|NAME] [--source SOURCE] [--project TEXT] [--limit N]</code></h3><p>列出并筛选会话</p><dl><dt>输出</dt><dd>JSON 会话数组</dd><dt>示例</dt><dd><code>swob list --project swob --source codex</code></dd></dl></article>
-<article class="command" id="show-43525079"><h3><code>swob show &lt;sessionId&gt; [--full] [--format=jsonl]</code></h3><p>查看会话；--full 保留全文、thinking、工具参数和结果</p><dl><dt>输出</dt><dd>JSON 对象；jsonl 模式每行一个 session/message 事件</dd><dt>示例</dt><dd><code>swob show &lt;id&gt; --full</code><br><code>swob show &lt;id&gt; --full --format=jsonl</code></dd></dl></article>
-<article class="command" id="grep-1486152364"><h3><code>swob grep &lt;query&gt; [--source SOURCE] [--folder ID|NAME] [--after DATE] [--before DATE] [--project TEXT] [--limit N]</code></h3><p>用 SQLite FTS 搜索完整 transcript，并返回命中消息上下文 ±1</p><dl><dt>输出</dt><dd>JSON 搜索结果</dd><dt>示例</dt><dd><code>swob grep &quot;permission denied&quot; --project swob --after 2026-07-01</code></dd></dl></article>
-<article class="command" id="resume-395086901"><h3><code>swob resume &lt;sessionId&gt; [--cwd PATH] [--skip-permissions]</code></h3><p>生成恢复会话的命令</p><dl><dt>输出</dt><dd>JSON { command }</dd><dt>示例</dt><dd><code>swob resume &lt;id&gt;</code></dd></dl></article>
-<article class="command" id="resume-audit-873827745"><h3><code>swob resume-audit [--json]</code></h3><p>只读审计全部会话的恢复可信度</p><dl><dt>输出</dt><dd>文本报告；--json 时为 JSON</dd><dt>示例</dt><dd><code>swob resume-audit --json</code></dd></dl></article>
-<article class="command" id="resolve-720843579"><h3><code>swob resolve &lt;sessionId&gt; [--json]</code></h3><p>把旧 ID 或短 ID 解析为最新完整 ID</p><dl><dt>输出</dt><dd>默认一行 ID；--json 时为 JSON</dd><dt>示例</dt><dd><code>swob resolve &lt;short-id&gt; --json</code></dd></dl></article>
-<article class="command" id="lineage-379027910"><h3><code>swob lineage [--dry-run]</code></h3><p>重建会话血统注册表</p><dl><dt>输出</dt><dd>JSON 注册表</dd><dt>示例</dt><dd><code>swob lineage --dry-run</code></dd></dl></article>
-<article class="command" id="folders-683249211"><h3><code>swob folders</code></h3><p>列出 Vault 文件夹树</p><dl><dt>输出</dt><dd>JSON 文件夹树</dd><dt>示例</dt><dd><code>swob folders</code></dd></dl></article>
-<article class="command" id="folder-303300720"><h3><code>swob folder create &lt;name&gt; [--parent ID]</code></h3><p>创建文件夹</p><dl><dt>输出</dt><dd>JSON 结果</dd><dt>示例</dt><dd><code>swob folder create &quot;swob&quot;</code></dd></dl></article>
-<article class="command" id="folder-1632647392"><h3><code>swob folder rename &lt;id&gt; &lt;name&gt;</code></h3><p>重命名文件夹</p><dl><dt>输出</dt><dd>JSON 结果</dd><dt>示例</dt><dd><code>swob folder rename work &quot;工作&quot;</code></dd></dl></article>
-<article class="command" id="folder-1851413142"><h3><code>swob folder delete &lt;id&gt;</code></h3><p>删除空的受管文件夹</p><dl><dt>输出</dt><dd>JSON 结果</dd><dt>示例</dt><dd><code>swob folder delete archive</code></dd></dl></article>
-<article class="command" id="move-129017567"><h3><code>swob move &lt;sessionId&gt; &lt;folderId&gt;</code></h3><p>事务式移动一个会话</p><dl><dt>输出</dt><dd>JSON 结果</dd><dt>示例</dt><dd><code>swob move &lt;id&gt; work</code></dd></dl></article>
-<article class="command" id="move-1969634407"><h3><code>swob move --stdin</code></h3><p>从 stdin 读取 JSONL 或 JSON 数组，原子提交批量移动</p><dl><dt>输出</dt><dd>JSON 事务结果</dd><dt>示例</dt><dd><code>printf &#39;{&quot;sessionId&quot;:&quot;&lt;id&gt;&quot;,&quot;folderId&quot;:&quot;work&quot;}\n&#39; | swob move --stdin</code></dd></dl></article>
-<article class="command" id="rename-284837783"><h3><code>swob rename &lt;sessionId&gt; &lt;title&gt;</code></h3><p>事务式重命名一个会话</p><dl><dt>输出</dt><dd>JSON 结果</dd><dt>示例</dt><dd><code>swob rename &lt;id&gt; &quot;CLI 设计&quot;</code></dd></dl></article>
-<article class="command" id="rename-2052455930"><h3><code>swob rename --stdin</code></h3><p>从 stdin 读取 JSONL 或 JSON 数组，原子提交批量重命名</p><dl><dt>输出</dt><dd>JSON 事务结果</dd><dt>示例</dt><dd><code>printf &#39;{&quot;sessionId&quot;:&quot;&lt;id&gt;&quot;,&quot;title&quot;:&quot;CLI 设计&quot;}\n&#39; | swob rename --stdin</code></dd></dl></article>
-<article class="command" id="undo-3594468"><h3><code>swob undo</code></h3><p>撤销最近一次 move/rename 组织事务</p><dl><dt>输出</dt><dd>JSON 事务结果</dd><dt>示例</dt><dd><code>swob undo</code></dd></dl></article>
-<article class="command" id="insights-132330449"><h3><code>swob insights [--json] [--summary]</code></h3><p>查看会话统计；token 汇总明确标注 input_plus_output</p><dl><dt>输出</dt><dd>JSON 统计</dd><dt>示例</dt><dd><code>swob insights --summary</code></dd></dl></article>
-<article class="command" id="config-1214394351"><h3><code>swob config get [key]</code></h3><p>读取设置</p><dl><dt>输出</dt><dd>JSON</dd><dt>示例</dt><dd><code>swob config get terminalApp</code></dd></dl></article>
-<article class="command" id="config-1613330536"><h3><code>swob config set &lt;key&gt; &lt;value&gt;</code></h3><p>修改设置</p><dl><dt>输出</dt><dd>JSON</dd><dt>示例</dt><dd><code>swob config set terminalApp iTerm2</code></dd></dl></article>
-<article class="command" id="active-1422950650"><h3><code>swob active</code></h3><p>列出活跃会话</p><dl><dt>输出</dt><dd>JSON</dd><dt>示例</dt><dd><code>swob active</code></dd></dl></article>
-<article class="command" id="transcript-796751342"><h3><code>swob transcript rebuild --all [--dry-run] [--missing-only]</code></h3><p>重建 Library transcript</p><dl><dt>输出</dt><dd>JSON</dd><dt>示例</dt><dd><code>swob transcript rebuild --all --missing-only</code></dd></dl></article>
-<article class="command" id="redact-917257456"><h3><code>swob redact [--dry-run]</code></h3><p>对派生 transcript 回填脱敏</p><dl><dt>输出</dt><dd>JSON</dd><dt>示例</dt><dd><code>swob redact --dry-run</code></dd></dl></article>
-<article class="command" id="install-1957569947"><h3><code>swob install</code></h3><p>安装或更新 CLI wrapper 和本 Skill</p><dl><dt>输出</dt><dd>JSON 安装结果</dd><dt>示例</dt><dd><code>swob install</code></dd></dl></article></div></section></main>
+    <main class="docs-content" id="content"><header class="doc-hero">
+<p>SWOB CLI</p>
+<h1>用命令查找、继续或整理会话。</h1>
+<p>CLI 适合重复操作和 Agent 工作流。第一次使用 Swob 不需要安装 CLI；需要脚本化时，再从下面的任务选择命令。</p>
+<div class="hero-badges">
+<p><span>按任务选择</span><span>支持 JSON / JSONL</span><span>完整参考在页尾</span></p>
+</div>
+</header>
+<div class="docs-figure">
+<p><img src="/docs/assets/media/cli-workflows.svg" loading="eager" alt="Swob CLI 的四类工作流：找回并继续、读取并交接、安全整理、诊断修复"></p>
+</div>
+<section>
+<h2>先确认 CLI 可用</h2>
+<p>桌面端进入“设置 → CLI &amp; Agent”查看 CLI 文件、<code>swob</code> 命令和 Agent Skill 三项状态。缺少时点击安装；若系统不允许自动创建命令入口，设置页会给出需要人工执行的最小命令。</p>
+<p>安装后在终端验证：</p>
+<pre><code>swob --version
+swob --help
+swob doctor library --json</code></pre>
+<p><strong>成功状态：</strong> 三条命令均返回；带 <code>--json</code> 的命令在 stdout 只输出合法 JSON。若终端提示 <code>command not found</code>，先重新打开终端并检查设置页给出的 CLI 路径，不要复制或编辑 Library 文件来绕过安装问题。</p>
+<p>本页按当前 v1.4 源码编写。若本机 <code>swob --help</code> 没有某条命令，以安装版本为准。</p>
+</section>
+<nav class="concept-index">
+<p><a href="#cli-task-picker">按任务选命令</a><a href="#cli-find-resume">找回并继续</a><a href="#cli-agent-handoff">交给 Agent</a><a href="#cli-organize">安全整理</a><a href="#cli-rebuild">诊断重建</a><a href="#cli-reference">完整命令参考</a></p>
+</nav>
+<section id="cli-task-picker">
+<h2>按任务选择命令</h2>
+<table class="compact">
+<thead>
+<tr>
+<th style="text-align: left;">你要完成的任务</th>
+<th style="text-align: left;">首选命令</th>
+<th style="text-align: left;">得到什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">用一句原文找回会话</td>
+<td style="text-align: left;"><code>grep</code> → <code>show</code></td>
+<td style="text-align: left;">命中上下文与完整会话</td>
+</tr>
+<tr>
+<td style="text-align: left;">按项目或来源列出会话</td>
+<td style="text-align: left;"><code>list</code> / <code>search</code></td>
+<td style="text-align: left;">会话摘要数组</td>
+</tr>
+<tr>
+<td style="text-align: left;">定位真实文件与新鲜度</td>
+<td style="text-align: left;"><code>resolve</code> → <code>where</code> / <code>transcript status</code></td>
+<td style="text-align: left;">路径、可用性与更新时间</td>
+</tr>
+<tr>
+<td style="text-align: left;">继续一条会话</td>
+<td style="text-align: left;"><code>resume</code> / <code>resume-audit</code></td>
+<td style="text-align: left;">经来源校验的恢复命令或审计</td>
+</tr>
+<tr>
+<td style="text-align: left;">给脚本或 Agent 读取</td>
+<td style="text-align: left;"><code>show --full --format=jsonl</code></td>
+<td style="text-align: left;">稳定的逐事件 JSONL</td>
+</tr>
+<tr>
+<td style="text-align: left;">安全批量整理</td>
+<td style="text-align: left;"><code>folders</code> → <code>move/rename --stdin</code> → <code>undo</code></td>
+<td style="text-align: left;">原子事务与可撤销结果</td>
+</tr>
+<tr>
+<td style="text-align: left;">查看本地用量</td>
+<td style="text-align: left;"><code>insights</code> / <code>active</code></td>
+<td style="text-align: left;">聚合统计或活跃会话</td>
+</tr>
+<tr>
+<td style="text-align: left;">诊断 Library</td>
+<td style="text-align: left;"><code>doctor</code> → <code>transcript status</code></td>
+<td style="text-align: left;">只读健康证据</td>
+</tr>
+<tr>
+<td style="text-align: left;">重建派生 transcript</td>
+<td style="text-align: left;"><code>transcript rebuild --dry-run</code> → <code>rebuild</code></td>
+<td style="text-align: left;">单会话或受控批量重建结果</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cli-find-resume">
+<h2>从一句原文找回并继续</h2>
+<p>先搜正文，再核对完整内容，最后才生成 Resume 命令：</p>
+<pre><code>swob grep "permission denied" --project swob --limit 10
+swob show &lt;session-id&gt; --full
+swob resume &lt;session-id&gt;</code></pre>
+<ol type="1">
+<li>从 <code>grep</code> 结果取得精确 session ID，不要仅凭标题判断。</li>
+<li>用 <code>show --full</code> 核对来源、项目、消息和工具调用。</li>
+<li><code>resume</code> 返回 <code>{ "command": "..." }</code>；它生成命令，不把“命令已生成”当成“目标会话已恢复”。</li>
+<li>执行返回的命令后，在目标工具中核对上一轮内容。</li>
+</ol>
+</section>
+<section id="cli-agent-handoff">
+<h2>把完整会话交给 Agent</h2>
+<p>Agent 应通过 CLI 读取受控、结构化输出，不直接遍历或修改 Library：</p>
+<pre><code>swob install
+swob grep "writer-blocked" --project swob --limit 5
+swob show &lt;session-id&gt; --full --format=jsonl</code></pre>
+<p><code>show --format=jsonl</code> 每行是一个独立事件，适合流式处理；<code>--full</code> 会包含正文、thinking、工具参数和结果，可能带有敏感内容。只把完成任务所需的最小结果交给下游工具。</p>
+</section>
+<section id="cli-organize">
+<h2>批量整理，并保留撤销入口</h2>
+<p>先读取文件夹 ID，再把整批计划通过 stdin 一次提交：</p>
+<pre><code>swob folders
+printf '{"sessionId":"&lt;id&gt;","folderId":"work"}\n' | swob move --stdin
+swob undo</code></pre>
+<ul>
+<li><code>move --stdin</code> 和 <code>rename --stdin</code> 先验证整批输入，再提交事务。</li>
+<li>不要把界面显示名称猜成 folder ID；先运行 <code>folders</code>。</li>
+<li><code>undo</code> 只撤销最近一次组织事务，不能代替备份，也不会覆盖后来占据原位置的内容。</li>
+</ul>
+</section>
+<section id="cli-rebuild">
+<h2>先诊断，再重建一条 transcript</h2>
+<pre><code>swob doctor library --json
+swob transcript status &lt;session-id&gt; --json
+swob transcript rebuild &lt;session-id&gt; --dry-run
+swob transcript rebuild &lt;session-id&gt;</code></pre>
+<p>只有 <code>doctor</code> 和 <code>status</code> 证明问题在派生 transcript 时才进入重建。优先修一条，不要直接运行全库重建；不要手动删除 writer 锁或编辑 transcript。</p>
+</section>
+<section>
+<h2>写脚本前再看这些约定</h2>
+<ul class="checks">
+<li><code>--json</code> 时 stdout 只包含合法 JSON，诊断写 stderr。</li>
+<li><code>show --format=jsonl</code> 每行一个独立 JSON 事件。</li>
+<li>批量 move/rename 整批先校验再提交；<code>undo</code> 只撤销最近一次组织事务。</li>
+<li>token 汇总的 <code>input_plus_output</code> 不包含 cache creation/read。</li>
+<li><code>where</code>、<code>doctor</code> 和 <code>transcript status</code> 是只读控制面，不依赖读取会话正文。</li>
+</ul>
+<table class="compact">
+<thead>
+<tr>
+<th style="text-align: left;">退出码</th>
+<th style="text-align: left;">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>0</code></td>
+<td style="text-align: left;">成功</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>1</code></td>
+<td style="text-align: left;">参数、输入或执行错误</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>2</code></td>
+<td style="text-align: left;">标识符歧义</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>3</code></td>
+<td style="text-align: left;">目标不存在</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cli-reference">
+<h2>完整命令参考（29 条）</h2>
+<div class="command-list">
+<article id="search-571779753" class="command">
+<h3><code>swob search &lt;query&gt; [--limit N]</code></h3>
+<p>按标题、项目、文件夹等元数据搜索会话</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 会话数组
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob search "认证失败" --limit 10</code>
+</dd>
+</dl>
+</article>
+<article id="list-167067685" class="command">
+<h3><code>swob list [--folder ID|NAME] [--source SOURCE] [--project TEXT] [--limit N]</code></h3>
+<p>列出并筛选会话</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 会话数组
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob list --project swob --source codex</code>
+</dd>
+</dl>
+</article>
+<article id="show-43525079" class="command">
+<h3><code>swob show &lt;sessionId&gt; [--full] [--format=jsonl]</code></h3>
+<p>查看会话；--full 保留全文、thinking、工具参数和结果</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 对象；jsonl 模式每行一个 session/message 事件
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob show &lt;id&gt; --full</code><br>
+<code>swob show &lt;id&gt; --full --format=jsonl</code>
+</dd>
+</dl>
+</article>
+<article id="grep-1486152364" class="command">
+<h3><code>swob grep &lt;query&gt; [--source SOURCE] [--folder ID|NAME] [--after DATE] [--before DATE] [--project TEXT] [--limit N]</code></h3>
+<p>用 SQLite FTS 搜索完整 transcript，并返回命中消息上下文 ±1</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 搜索结果
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob grep "permission denied" --project swob --after 2026-07-01</code>
+</dd>
+</dl>
+</article>
+<article id="resume-395086901" class="command">
+<h3><code>swob resume &lt;sessionId&gt; [--cwd PATH] [--skip-permissions]</code></h3>
+<p>生成恢复会话的命令</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON { command }
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob resume &lt;id&gt;</code>
+</dd>
+</dl>
+</article>
+<article id="resume-audit-873827745" class="command">
+<h3><code>swob resume-audit [--json]</code></h3>
+<p>只读审计全部会话的恢复可信度</p>
+<dl>
+<dt>输出</dt>
+<dd>
+文本报告；--json 时为 JSON
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob resume-audit --json</code>
+</dd>
+</dl>
+</article>
+<article id="resolve-720843579" class="command">
+<h3><code>swob resolve &lt;id-or-prefix&gt; [--json]</code></h3>
+<p>用 manifest + lineage 把完整或短 ID 解析为最新完整 ID</p>
+<dl>
+<dt>输出</dt>
+<dd>
+默认一行 ID；--json 时含稳定错误码与最小候选摘要
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob resolve &lt;short-id&gt; --json</code>
+</dd>
+</dl>
+</article>
+<article id="where" class="command">
+<h3><code>swob where &lt;id-or-prefix&gt; [--json]</code></h3>
+<p>定位会话包、manifest、transcript、backup 与 source</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 路径、可用性与 freshness；不读取会话正文
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob where &lt;id&gt; --json</code>
+</dd>
+</dl>
+</article>
+<article id="lineage-379027910" class="command">
+<h3><code>swob lineage [--dry-run]</code></h3>
+<p>重建会话血统注册表</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 注册表
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob lineage --dry-run</code>
+</dd>
+</dl>
+</article>
+<article id="folders-683249211" class="command">
+<h3><code>swob folders</code></h3>
+<p>列出 Vault 文件夹树</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 文件夹树
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob folders</code>
+</dd>
+</dl>
+</article>
+<article id="folder-303300720" class="command">
+<h3><code>swob folder create &lt;name&gt; [--parent ID]</code></h3>
+<p>创建文件夹</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 结果
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob folder create "swob"</code>
+</dd>
+</dl>
+</article>
+<article id="folder-1632647392" class="command">
+<h3><code>swob folder rename &lt;id&gt; &lt;name&gt;</code></h3>
+<p>重命名文件夹</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 结果
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob folder rename work "工作"</code>
+</dd>
+</dl>
+</article>
+<article id="folder-1851413142" class="command">
+<h3><code>swob folder delete &lt;id&gt;</code></h3>
+<p>删除空的受管文件夹</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 结果
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob folder delete archive</code>
+</dd>
+</dl>
+</article>
+<article id="move-129017567" class="command">
+<h3><code>swob move &lt;sessionId&gt; &lt;folderId&gt;</code></h3>
+<p>事务式移动一个会话</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 结果
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob move &lt;id&gt; work</code>
+</dd>
+</dl>
+</article>
+<article id="move-1969634407" class="command">
+<h3><code>swob move --stdin</code></h3>
+<p>从 stdin 读取 JSONL 或 JSON 数组，原子提交批量移动</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 事务结果
+</dd>
+<dt>示例</dt>
+<dd>
+<code>printf '{"sessionId":"&lt;id&gt;","folderId":"work"}\n' | swob move --stdin</code>
+</dd>
+</dl>
+</article>
+<article id="rename-284837783" class="command">
+<h3><code>swob rename &lt;sessionId&gt; &lt;title&gt;</code></h3>
+<p>事务式重命名一个会话</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 结果
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob rename &lt;id&gt; "CLI 设计"</code>
+</dd>
+</dl>
+</article>
+<article id="rename-2052455930" class="command">
+<h3><code>swob rename --stdin</code></h3>
+<p>从 stdin 读取 JSONL 或 JSON 数组，原子提交批量重命名</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 事务结果
+</dd>
+<dt>示例</dt>
+<dd>
+<code>printf '{"sessionId":"&lt;id&gt;","title":"CLI 设计"}\n' | swob rename --stdin</code>
+</dd>
+</dl>
+</article>
+<article id="undo-3594468" class="command">
+<h3><code>swob undo</code></h3>
+<p>撤销最近一次 move/rename 组织事务</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 事务结果
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob undo</code>
+</dd>
+</dl>
+</article>
+<article id="insights-132330449" class="command">
+<h3><code>swob insights [--json] [--summary]</code></h3>
+<p>查看会话统计；token 汇总明确标注 input_plus_output</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 统计
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob insights --summary</code>
+</dd>
+</dl>
+</article>
+<article id="config-1214394351" class="command">
+<h3><code>swob config get [key]</code></h3>
+<p>读取设置</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob config get terminalApp</code>
+</dd>
+</dl>
+</article>
+<article id="config-1613330536" class="command">
+<h3><code>swob config set &lt;key&gt; &lt;value&gt;</code></h3>
+<p>修改设置</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob config set terminalApp iTerm2</code>
+</dd>
+</dl>
+</article>
+<article id="active-1422950650" class="command">
+<h3><code>swob active</code></h3>
+<p>列出活跃会话</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob active</code>
+</dd>
+</dl>
+</article>
+<article id="transcript-status" class="command">
+<h3><code>swob transcript status &lt;id-or-prefix&gt; [--json]</code></h3>
+<p>查看 source/transcript/backup/manifest 四时间戳、lag 与阻塞原因</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON freshness 状态
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob transcript status &lt;id&gt; --json</code>
+</dd>
+</dl>
+</article>
+<article id="transcript-rebuild-one" class="command">
+<h3><code>swob transcript rebuild &lt;id-or-prefix&gt; [--dry-run]</code></h3>
+<p>只重建一个会话包的 transcript</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 单会话重建结果
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob transcript rebuild &lt;id&gt; --dry-run</code>
+</dd>
+</dl>
+</article>
+<article id="transcript-796751342" class="command">
+<h3><code>swob transcript rebuild --all [--dry-run] [--missing-only]</code></h3>
+<p>重建全部 Library transcript（高成本）</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob transcript rebuild --all --missing-only</code>
+</dd>
+</dl>
+</article>
+<article id="doctor-locks" class="command">
+<h3><code>swob doctor locks [--json]</code></h3>
+<p>只读检查 writer 锁、owner 存活性与显式恢复可用性</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 锁诊断与证据哈希；不输出设备标识
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob doctor locks --json</code>
+</dd>
+</dl>
+</article>
+<article id="doctor-library" class="command">
+<h3><code>swob doctor library [--json]</code></h3>
+<p>只读检查 Library 写状态、identity issue 与 stale 数量</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON Library 健康摘要
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob doctor library --json</code>
+</dd>
+</dl>
+</article>
+<article id="redact-917257456" class="command">
+<h3><code>swob redact [--dry-run]</code></h3>
+<p>对派生 transcript 回填脱敏</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob redact --dry-run</code>
+</dd>
+</dl>
+</article>
+<article id="install-1957569947" class="command">
+<h3><code>swob install</code></h3>
+<p>安装或更新 CLI wrapper 和本 Skill</p>
+<dl>
+<dt>输出</dt>
+<dd>
+JSON 安装结果
+</dd>
+<dt>示例</dt>
+<dd>
+<code>swob install</code>
+</dd>
+</dl>
+</article>
+</div>
+</section></main>
   </div>
   <footer><span>Swob Docs · 口径先于结论</span><span>本地优先 · 证据可追溯 · 局限明示</span></footer>
 </body>

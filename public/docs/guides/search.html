@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>搜索与 Spotlight · Swob Docs</title><meta name="description" content="在 Swob 中按元数据和 transcript 正文查找历史 AI 会话。">
+  <meta name="theme-color" content="#efebe2"><link rel="icon" href="/icons/swob-512.png" type="image/png">
+  <link rel="stylesheet" href="/docs/assets/docs.css"><script defer src="/docs/assets/docs.js"></script>
+<!-- docs-seo:start -->
+<link rel="canonical" href="https://swob.app/docs/guides/search.html">
+<!-- docs-seo:end -->
+</head>
+<body data-section="read"><a class="skip-link" href="#content">跳到正文</a>
+  <header class="docs-header"><a class="docs-brand" href="/zh/"><img src="/icons/swob-512.png" width="28" height="28" alt=""><span>swob</span><em>docs</em></a><nav aria-label="文档工具"><a href="/zh/">官网</a><a href="/docs/en/" lang="en">English guides</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav></header>
+  <details class="mobile-chapters"><summary>文档目录</summary></details>
+  <div class="docs-layout"><aside class="docs-sidebar"></aside><main class="docs-content" id="content"><header class="doc-hero">
+<p>FIND</p>
+<h1>记得内容，就应该找得到会话。</h1>
+<p>Swob 把“找一条记录”拆成两件事：按标题、项目、来源等元数据定位；按 transcript 正文找回那句你真正记得的话。</p>
+<div class="hero-badges">
+<p><span>全局搜索</span><span>Spotlight</span><span>SQLite FTS</span></p>
+</div>
+</header>
+<figure class="doc-shot">
+<p><img src="/docs/assets/media/spotlight-search.png" loading="eager" alt="Swob Spotlight：搜索会话后可直接 Resume 或在 Swob 中打开"></p>
+<figcaption>
+<p>E2E 模拟数据 · 结果同时显示来源、项目和轮次</p>
+</figcaption>
+</figure>
+<section>
+<h2>选择正确的入口</h2>
+<div class="card-grid three">
+<article>
+<p><span class="card-index">TOOLBAR</span></p>
+<h3>顶部搜索</h3>
+<p>在当前 Library 中搜索全部会话，并结合来源、项目、模型和日期筛选。</p>
+</article>
+<article>
+<p><span class="card-index">⌘⇧K</span></p>
+<h3>Spotlight</h3>
+<p>从桌面快速唤起会话选择器，键盘选择后 Resume 或在 Swob 中打开。</p>
+</article>
+<article>
+<p><span class="card-index">CLI</span></p>
+<h3>脚本搜索</h3>
+<p><code>swob search</code> 查元数据；<code>swob grep</code> 用 FTS 查完整 transcript。</p>
+</article>
+</div>
+</section>
+<section>
+<h2>搜索与 grep 的区别</h2>
+<div class="table-scroll">
+<table class="compact">
+<thead>
+<tr>
+<th style="text-align: left;">入口</th>
+<th style="text-align: left;">查什么</th>
+<th style="text-align: left;">适合</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>swob search</code></td>
+<td style="text-align: left;">标题、项目、文件夹等元数据</td>
+<td style="text-align: left;">已知会话大概身份</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>swob grep</code></td>
+<td style="text-align: left;">已索引 transcript 正文，返回命中上下文</td>
+<td style="text-align: left;">只记得对话里的一句话</td>
+</tr>
+<tr>
+<td style="text-align: left;">界面全局搜索</td>
+<td style="text-align: left;">会话与正文入口，结合筛选器</td>
+<td style="text-align: left;">交互式缩小范围</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section>
+<h2>更快找到目标</h2>
+<ol type="1" class="steps">
+<li><p><strong>先输入最有辨识度的片段</strong></p>
+<p>错误文本、函数名和完整短语通常比“那个设计讨论”更有效。</p></li>
+<li><p><strong>再按来源或项目收窄</strong></p>
+<p>来源能力不同；只在支持正文索引的来源上期待 transcript 命中。</p></li>
+<li><p><strong>打开命中上下文</strong></p>
+<p>搜索结果是入口，不是结论。回到前后轮次确认说话者、时间和工具证据。</p></li>
+</ol>
+</section>
+<section>
+<h2>当前边界</h2>
+<ul class="checks">
+<li>当前是关键词/全文检索，不是语义向量搜索；改写后的同义表达可能不会命中。</li>
+<li>来源矩阵标为实验的搜索能力可能受来源格式和版本影响。</li>
+<li>未生成、损坏或尚未更新的 transcript 不会出现在完整正文索引中。</li>
+<li>搜索结果不会绕过已排除来源或 Library 数据边界。</li>
+</ul>
+</section>
+<nav class="next-links">
+<p><a href="./context-execution.html">检查 Context 与执行 →</a><a href="./cli.html">查看 CLI 参考 →</a></p>
+</nav></main></div><footer><span>Swob Docs · 搜索是回到上下文的入口</span><span>命中不是结论</span></footer>
+</body></html>

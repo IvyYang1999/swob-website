@@ -1,0 +1,184 @@
+[
+  {
+    "lang": "zh",
+    "title": "证据、推断与可信状态",
+    "description": "理解 Swob 如何区分来源事实、重建结果、启发式推断和产品方向。",
+    "section": "洞察与证据",
+    "href": "concepts/evidence.html",
+    "keywords": "evidence available experimental unavailable heuristic provenance"
+  },
+  {
+    "lang": "zh",
+    "title": "镜头 vs 文件夹",
+    "description": "镜头改变“怎么看”，文件夹改变“放在哪”。只有后者会移动 Vault 内的会话包。",
+    "section": "整理和复用",
+    "href": "concepts/lenses-folders.html",
+    "keywords": "lens folder 视图 移动 整理"
+  },
+  {
+    "lang": "zh",
+    "title": "血统图谱",
+    "description": "Resume、Fork 与 compact 会产生关系，不只是“又多了一行”。血统图谱把强证据和相似性邻近分开。",
+    "section": "查找和阅读",
+    "href": "concepts/lineage.html",
+    "keywords": "lineage graph galaxy fork compact 关系"
+  },
+  {
+    "lang": "zh",
+    "title": "复活与备份",
+    "description": "备份回答“内容还在吗”，复活回答“能否安全写回原客户端并继续”。两者不是同一件事。",
+    "section": "继续与恢复",
+    "href": "concepts/recovery.html",
+    "keywords": "恢复 recovery restore backup resume"
+  },
+  {
+    "lang": "zh",
+    "title": "Vault：会话是你的文件",
+    "description": "Vault 是 Swob 的本地资料库边界。它不是某个云账号，也不是把源客户端目录据为己有。",
+    "section": "隐私与支持",
+    "href": "concepts/vault.html",
+    "keywords": "Vault Library 本地 资料库 文件 所有权 备份"
+  },
+  {
+    "lang": "en",
+    "title": "Resume Claude Code, Codex and other AI conversations",
+    "description": "Resume old AI coding conversations from Swob. Check Claude Code, Codex, Cursor and OpenCode support, desktop limits and missing-source recovery.",
+    "section": "Guides",
+    "href": "en/guides/resume.html"
+  },
+  {
+    "lang": "en",
+    "title": "Find old Claude Code and Codex conversations",
+    "description": "Find old AI coding conversations across projects with Swob local search. Check matching messages, source and project before resuming in the original client.",
+    "section": "Guides",
+    "href": "en/index.html"
+  },
+  {
+    "lang": "zh",
+    "title": "5 分钟快速入门",
+    "description": "安装 Swob，并完成第一次扫描、阅读和搜索。",
+    "section": "开始使用",
+    "href": "getting-started/install.html",
+    "keywords": "macOS Windows Beta 安装 Library 首次扫描 快速入门 搜索 Resume"
+  },
+  {
+    "lang": "zh",
+    "title": "用 Swob CLI 自动化常用任务",
+    "description": "用 Swob CLI 查找、读取、继续和整理本地 AI 会话；需要时再查完整命令参考。",
+    "section": "配置与自动化",
+    "href": "guides/cli.html",
+    "keywords": "command line search grep show resume where transcript doctor library Agent JSON 批量整理"
+  },
+  {
+    "lang": "zh",
+    "title": "Context 与执行树",
+    "description": "理解会话使用的文件、配置、工具调用、子会话和执行关系。",
+    "section": "查找和阅读",
+    "href": "guides/context-execution.html",
+    "keywords": "Files Context Audit execution tree subagent tool"
+  },
+  {
+    "lang": "zh",
+    "title": "Library Health 与诊断",
+    "description": "检查 Swob Library 的写入、索引、身份冲突与安全恢复状态。",
+    "section": "配置与自动化",
+    "href": "guides/diagnostics.html",
+    "keywords": "health diagnostics lock freshness duplicate quarantine stale"
+  },
+  {
+    "lang": "zh",
+    "title": "用 Insights 回答问题",
+    "description": "用筛选、下钻和数据可用性检查理解会话、token、成本与工作流。",
+    "section": "洞察与证据",
+    "href": "guides/insights.html",
+    "keywords": "dashboard token cache cost workflow data quality audit"
+  },
+  {
+    "lang": "zh",
+    "title": "整理、重命名与撤销",
+    "description": "用文件夹和标题整理 Library，并在批量修改前预览、完成后撤销。",
+    "section": "使用 Swob",
+    "href": "guides/organize.html",
+    "keywords": "文件夹 整理 移动 重命名 undo 撤销 AI Profile"
+  },
+  {
+    "lang": "zh",
+    "title": "AI 与全局 Agent",
+    "description": "了解 Swob 的智能重命名、AI 报告和全局 Agent，并按需完成最短配置。",
+    "section": "设置与支持",
+    "href": "guides/profiles.html",
+    "keywords": "设置 快捷键 AI Profile Agent Claude Code CLI 智能重命名"
+  },
+  {
+    "lang": "zh",
+    "title": "阅读会话",
+    "description": "使用精简、完整和 Markdown 视图阅读长 AI 会话。",
+    "section": "查找和阅读",
+    "href": "guides/reading.html",
+    "keywords": "Compact Full Markdown transcript 目录 工具调用"
+  },
+  {
+    "lang": "zh",
+    "title": "继续一条历史会话",
+    "description": "按来源选择终端或 App，Resume 一条历史会话并核对是否进入目标内容。",
+    "section": "继续与恢复",
+    "href": "guides/resume.html",
+    "keywords": "Claude Code Codex Cursor OpenCode ZCode 继续"
+  },
+  {
+    "lang": "zh",
+    "title": "搜索与 Spotlight",
+    "description": "在 Swob 中按元数据和 transcript 正文查找历史 AI 会话。",
+    "section": "查找和阅读",
+    "href": "guides/search.html",
+    "keywords": "搜索 Spotlight FTS grep metadata 正文"
+  },
+  {
+    "lang": "zh",
+    "title": "SSH 远程 Resume",
+    "description": "从已有 SSH 登录能力出发，配置、验证并安全续接远端 Claude Code 会话。",
+    "section": "继续与恢复",
+    "href": "guides/ssh.html",
+    "keywords": "remote host key 私钥 远程 SSH config agent Claude Code cwd Resume permission denied command not found"
+  },
+  {
+    "lang": "zh",
+    "title": "开始使用 Swob",
+    "description": "安装 Swob，找到一条历史 AI 会话，并在需要时继续工作。",
+    "section": "开始使用",
+    "href": "index.html",
+    "keywords": "本地 会话 搜索 Library Resume"
+  },
+  {
+    "lang": "zh",
+    "title": "统计口径字典",
+    "description": "Swob 所有用户可见统计数字的定义、来源、算法、局限与界面位置。",
+    "section": "洞察与证据",
+    "href": "metrics.html",
+    "keywords": "Token API 等价值 指标 审计 数据质量"
+  },
+  {
+    "lang": "zh",
+    "title": "隐私、网络与脱敏",
+    "description": "了解 Swob 会读取、写入和联网处理哪些数据。",
+    "section": "隐私与支持",
+    "href": "privacy.html",
+    "keywords": "privacy local network telemetry redaction iCloud Plausible"
+  },
+  {
+    "lang": "zh",
+    "title": "我的工具支持什么",
+    "description": "快速查看 Claude Code、Codex、Cursor 等来源能否读取、搜索、统计和 Resume。",
+    "section": "开始使用",
+    "href": "sources.html",
+    "keywords": "Claude Code Codex Cursor OpenCode ZCode Gemini harness matrix"
+  },
+  {
+    "lang": "zh",
+    "title": "FAQ 与故障排查",
+    "description": "按症状排查安装、扫描、正文、搜索、Insights、Profile、CLI、Resume、更新与 Library 异常。",
+    "section": "隐私与支持",
+    "href": "troubleshooting.html",
+    "keywords": "错误 故障 排查 install scan no sessions transcript search index insights profile keychain CLI PATH resume update migration performance recovery Windows Beta"
+  }
+]

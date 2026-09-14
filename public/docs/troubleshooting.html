@@ -4,20 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FAQ 与故障排查 · Swob Docs</title>
-  <meta name="description" content="会话消失、复活失败原因与 Windows Native Alpha 能力边界。">
+  <meta name="description" content="按症状排查安装、扫描、正文、搜索、Insights、Profile、CLI、Resume、更新与 Library 异常。">
   <meta name="theme-color" content="#efebe2">
-  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./assets/docs.css">
+  <link rel="icon" href="/icons/swob-512.png" type="image/png">
+  <link rel="stylesheet" href="/docs/assets/docs.css">
+  <script defer src="/docs/assets/docs.js"></script>
 <!-- docs-seo:start -->
 <link rel="canonical" href="https://swob.app/docs/troubleshooting.html">
 <!-- docs-seo:end -->
 </head>
 <body data-section="troubleshooting">
   <a class="skip-link" href="#content">跳到正文</a>
-  <header class="docs-header">
-    <a class="docs-brand" href="../zh/"><img src="../assets/favicon.svg" width="28" height="28" alt=""><span>swob</span><em>docs</em></a>
-    <nav aria-label="文档工具"><a href="../zh/">官网</a><a href="./en/index.html" lang="en">EN structure</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav>
-  </header>
+  <header class="docs-header"><a class="docs-brand" href="/zh/"><img src="/icons/swob-512.png" width="28" height="28" alt=""><span>swob</span><em>docs</em></a><nav aria-label="文档工具"><a href="/zh/">官网</a><a href="/docs/en/" lang="en">English guides</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav></header>
   <details class="mobile-chapters"><summary>浏览五章</summary><nav class="chapter-nav" aria-label="文档章节">
     <a href="./index.html"><span>01</span>快速上手</a>
     <a href="./concepts/vault.html"><span>02</span>核心概念</a>
@@ -36,32 +34,416 @@
       <div class="side-group"><strong>核心概念</strong><a href="./concepts/vault.html">Vault</a><a href="./concepts/lenses-folders.html">镜头 vs 文件夹</a><a href="./concepts/recovery.html">复活与备份</a><a href="./concepts/lineage.html">血统图谱</a></div>
       <div class="side-group"><strong>功能手册</strong><a href="./guides/resume.html">多客户端 Resume</a><a href="./guides/organize.html">整理与撤销</a><a href="./guides/profiles.html">Profile 与智能重命名</a><a href="./guides/cli.html">CLI 全命令</a><a href="./guides/ssh.html">SSH 远程</a></div>
     </aside>
-    <main class="docs-content" id="content"><!-- generated recovery table: src/main/recovery-failure-message.ts --><header class="doc-hero"><p class="doc-kicker">05 · TROUBLESHOOTING</p><h1>先定位失败层，再决定下一步。</h1><p class="doc-lead">会话“看不见”、备份“还在”和目标客户端“能 Resume”属于三层问题。不要用一次重试掩盖证据缺口。</p></header>
-      <section id="missing-session"><h2>为什么会话突然消失？</h2><p>先确认它是从 Swob 视图消失，还是原客户端源文件真的被清理。Claude Code 的本地保留策略可能删除旧源文件：一次真实审计中，1,621 个会话里有 253 个原路径已缺失，但 Vault 备份仍在。这个比例只描述该审计语料，不是每个人的预言。</p><ol class="steps"><li><strong>检查来源排除</strong><p>首启动或设置里排除的来源既不显示也不备份。</p></li><li><strong>搜索 Vault</strong><p>用标题、项目或 transcript 全文确认 Swob 副本是否存在。</p></li><li><strong>检查保留期</strong><p>对 Claude Code 延长本地会话保留期；它只能降低未来风险，不能凭空恢复已删除文件。</p></li><li><strong>需要续接时再复活</strong><p>只有点击 Resume 才进入受控写回；先核对目标实例和冲突。</p></li></ol></section>
-      <section id="recovery-failures"><h2>复活失败原因（当前 23 类）</h2><p class="section-lead">本表直接从代码消息表生成。任务设计稿曾写“24 类”，当前主干真相源实际是 23 类；以后代码增删而文档未更新，生成检查会失败。</p><div class="table-scroll"><table><thead><tr><th>reason</th><th>用户可见说明</th></tr></thead><tbody><tr id="recovery-session-id-mismatch"><td><code>session-id-mismatch</code></td><td>备份中的会话 ID 与当前会话不一致，已停止以避免导入错误记录</td></tr>
-<tr id="recovery-missing-source-path"><td><code>missing-source-path</code></td><td>会话没有可定位的 Claude 源路径</td></tr>
-<tr id="recovery-invalid-source-path"><td><code>invalid-source-path</code></td><td>Claude 源路径格式无效，无法安全确定复活位置</td></tr>
-<tr id="recovery-missing-backup"><td><code>missing-backup</code></td><td>找不到可用于复活的备份</td></tr>
-<tr id="recovery-invalid-backup"><td><code>invalid-backup</code></td><td>备份未通过严格 JSONL 校验，未写入 Claude 源目录</td></tr>
-<tr id="recovery-remote-source-requires-explicit-target"><td><code>remote-source-requires-explicit-target</code></td><td>这是其他安装的会话，需要先选择要导入的 Claude 实例</td></tr>
-<tr id="recovery-non-standard-source-requires-explicit-target"><td><code>non-standard-source-requires-explicit-target</code></td><td>源路径不是标准 Claude 目录，需要先明确选择导入目标</td></tr>
-<tr id="recovery-target-instance-not-found"><td><code>target-instance-not-found</code></td><td>找不到所选的 Claude 实例，请重新选择可用实例</td></tr>
-<tr id="recovery-target-instance-unavailable"><td><code>target-instance-unavailable</code></td><td>目标 Claude 实例当前不可用，请确认该实例已安装且目录可访问</td></tr>
-<tr id="recovery-target-instance-untrusted"><td><code>target-instance-untrusted</code></td><td>目标 Claude 实例未通过路径安全检查，已停止写入</td></tr>
-<tr id="recovery-missing-target-inventory"><td><code>missing-target-inventory</code></td><td>缺少目标实例的文件清单，无法排除覆盖风险</td></tr>
-<tr id="recovery-target-inventory-incomplete"><td><code>target-inventory-incomplete</code></td><td>目标实例文件清单不完整，无法安全复活</td></tr>
-<tr id="recovery-target-instance-missing-config-dir"><td><code>target-instance-missing-config-dir</code></td><td>目标 Claude 实例缺少配置目录，无法确定安全写入边界</td></tr>
-<tr id="recovery-missing-local-device-id"><td><code>missing-local-device-id</code></td><td>本机缺少设备标识，无法判断会话是否来自其他安装</td></tr>
-<tr id="recovery-missing-local-username"><td><code>missing-local-username</code></td><td>本机缺少用户名信息，无法安全判断旧版会话来源</td></tr>
-<tr id="recovery-non-standard-target-refused"><td><code>non-standard-target-refused</code></td><td>所选目标不是受支持的 Claude 实例，已拒绝写入</td></tr>
-<tr id="recovery-target-conflict"><td><code>target-conflict</code></td><td>目标 Claude 实例已有同名或同 ID 会话，已停止以避免覆盖</td></tr>
-<tr id="recovery-source-not-claude"><td><code>source-not-claude</code></td><td>此会话没有可复活到 Claude 的源记录</td></tr>
-<tr id="recovery-unverified-backup"><td><code>unverified-backup</code></td><td>备份缺少 SHA-256/大小证据，需要明确确认后才能复活</td></tr>
-<tr id="recovery-materialization-failed"><td><code>materialization-failed</code></td><td>iCloud 备份尚未完整下载或完整性证据不匹配</td></tr>
-<tr id="recovery-recovery-locked"><td><code>recovery-locked</code></td><td>另一 Swob 进程正在复活该会话，请稍后重试</td></tr>
-<tr id="recovery-post-publish-verification-failed"><td><code>post-publish-verification-failed</code></td><td>目标已发布但最终校验失败，已保留现场且未自动删除</td></tr>
-<tr id="recovery-io-error"><td><code>io-error</code></td><td>读取备份或写入目标时发生本地 I/O 错误，请检查磁盘和目录权限</td></tr></tbody></table></div></section>
-      <section id="windows-alpha"><h2>Windows Native Alpha 边界</h2><p>Alpha 只验证 Windows x64 上 Claude Code 与 Codex 的本地浏览、搜索、备份、Resume 和 Library 最小闭环，不是 macOS 功能对等版。</p><div class="card-grid"><article><h3>支持</h3><p>Windows Native x64；Claude Code、Codex；Windows Terminal / PowerShell / cmd Resume。</p></article><article><h3>不支持 / 不在本阶段</h3><p>其他九类 harness、WSL、OneDrive 占位文件、Windows CLI 安装、ARM64、自动更新、签名、SSH 和手机连接。</p></article></div><p>本站只保留用户能力边界；构建、CI 证据与真机验收清单见仓库的 <a href="https://github.com/IvyYang1999/swob/blob/master/docs/windows-alpha.md">Windows Alpha 工程文档</a>，不把 CI 证据包装成已经交付的功能承诺。</p></section></main>
+    <main class="docs-content" id="content"><header class="doc-hero">
+<p>05 · TROUBLESHOOTING</p>
+<h1>遇到问题，先找你看到的症状。</h1>
+<p>从下表选择最接近的现象，按顺序检查。不要先清空 Library、手改 transcript 或运行全库重建。</p>
+</header>
+<div class="docs-figure">
+<p><img src="/docs/assets/media/troubleshooting-path.svg" loading="eager" alt="Swob 故障定位路径：来源、Library、索引、界面和行动"></p>
+</div>
+<section id="symptom-index">
+<h2>你遇到了什么？</h2>
+<div class="table-scroll">
+<table class="compact">
+<thead>
+<tr>
+<th style="text-align: left;">症状</th>
+<th style="text-align: left;">先检查</th>
+<th style="text-align: left;">去哪里</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">macOS 阻止打开或提示安装包异常</td>
+<td style="text-align: left;">下载来源、版本、芯片和签名状态</td>
+<td style="text-align: left;"><a href="#install-blocked">安装问题</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">首次启动后一个会话都没有</td>
+<td style="text-align: left;">来源是否排除、原客户端是否有本地历史</td>
+<td style="text-align: left;"><a href="#scan-empty">扫描不到会话</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">有标题但正文为空或明显不全</td>
+<td style="text-align: left;">来源 transcript 能力与详情可用性</td>
+<td style="text-align: left;"><a href="#body-missing">正文不可用</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">标题能搜到，正文关键词搜不到</td>
+<td style="text-align: left;">元数据搜索 / FTS 与索引新鲜度</td>
+<td style="text-align: left;"><a href="#search-missing">搜索问题</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Insights 没有 token、成本或图表</td>
+<td style="text-align: left;">筛选母集和来源证据可用性</td>
+<td style="text-align: left;"><a href="#insights-empty">统计问题</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">智能重命名或 AI 报告失败</td>
+<td style="text-align: left;">Profile 绑定、Keychain、模型与 Base URL</td>
+<td style="text-align: left;"><a href="#profile-failure">Profile 问题</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">终端提示 <code>swob: command not found</code></td>
+<td style="text-align: left;">CLI &amp; Agent 三项安装状态与新终端</td>
+<td style="text-align: left;"><a href="#cli-not-found">CLI 问题</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Resume 只打开客户端或进入错误会话</td>
+<td style="text-align: left;">来源能力、surface、cwd 与 session ID</td>
+<td style="text-align: left;"><a href="#resume-wrong-target">Resume 问题</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">更新后异常或想移动 Library</td>
+<td style="text-align: left;">版本、更新频道、迁移完成状态</td>
+<td style="text-align: left;"><a href="#update-migration">更新与迁移</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">首扫慢、搜索或 Insights 一直落后</td>
+<td style="text-align: left;">Library Health、磁盘与索引新鲜度</td>
+<td style="text-align: left;"><a href="#performance">性能问题</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="install-blocked">
+<h2>macOS 阻止打开或提示安装包异常</h2>
+<p>当前公开 macOS v1.3.1 安装包使用 Developer ID 签名并完成公证。遇到阻止时，先核对是否从官网或 GitHub Release 下载、是否选择了正确芯片、是否仍在运行旧下载副本。</p>
+<ul class="checks">
+<li>从“应用程序”目录启动，不要长期直接运行 DMG 或下载目录中的副本。</li>
+<li>历史版本、本地自构建包和第三方镜像不继承当前公开包的签名结论。</li>
+<li>系统提示“已损坏”或来源不明时，重新从官方发行页下载并核对版本；不要全局关闭 Gatekeeper。</li>
+<li>Windows 是否存在安装资产、签名和自动更新，以当前 Release Notes 为准。</li>
+</ul>
+</section>
+<section id="scan-empty">
+<h2>首次扫描不到任何会话</h2>
+<ol type="1" class="steps">
+<li><p><strong>确认原客户端确实有本地历史</strong></p>
+<p>Swob 读取本机来源保存的记录；云端存在但本机从未落盘的会话不会凭空出现。</p></li>
+<li><p><strong>检查来源是否在首次启动时被关闭</strong></p>
+<p>排除来源意味着不扫描、不显示、也不生成 Library 副本，不是临时筛选器。</p></li>
+<li><p><strong>确认当前安装版本支持该来源</strong></p>
+<p>当前源码登记 14 个来源，但公开稳定包、Windows Beta 和 current main 可能不同。</p></li>
+<li><p><strong>查看 Library Health / Diagnostics</strong></p>
+<p>先看扫描、writer、索引和错误状态；旧版本没有该入口时运行 <code>swob doctor library --json</code>。</p></li>
+</ol>
+<p>不要通过手动复制原始 JSONL 到 Library 来“补会话”。Library 包含 manifest、派生 transcript、索引和来源证据，单个文件不构成完整会话包。</p>
+</section>
+<section id="body-missing">
+<h2>有会话标题，但正文不可用或不完整</h2>
+<p>先到来源矩阵核对 transcript、tools、thinking 能力，再看详情中的可用性状态。来源未保存 thinking、附件或工具结果时，空缺是证据边界；若来源支持正文但详情降级为 transcript-only 或 unavailable，再检查备份、来源路径和 Diagnostics。</p>
+<ul class="checks">
+<li>切到 Full，确认不是 Compact 折叠了早期段落或工具结果。</li>
+<li>检查会话是否只有 Library transcript，原始 source 已被客户端清理。</li>
+<li>如果新会话持续出现正文缺失，优先解决解析或写入健康问题，不要对旧副本做全库重建。</li>
+<li>只在 <code>transcript status</code> 证明派生 transcript 异常时，对单条会话先跑 <code>rebuild --dry-run</code>。</li>
+</ul>
+</section>
+<section id="search-missing">
+<h2>搜索不到预期内容</h2>
+<p>顶部会话搜索和 Spotlight 更适合标题、项目、来源与文件夹；transcript 正文由全文索引搜索。先用同一句原文分别测试元数据搜索和正文搜索，判断是哪一层缺失。</p>
+<ol type="1" class="steps">
+<li>清除来源、项目、日期和文件夹筛选。</li>
+<li>使用原文中连续、少见的 2–5 个词，避免只搜常见停用词。</li>
+<li>在目标会话内用 <code>⌘F</code> / <code>Ctrl+F</code> 验证文本确实存在。</li>
+<li>运行 <code>swob grep "原文" --limit 10</code>；CLI 也无结果时检查索引新鲜度。</li>
+<li>只有健康状态指向索引问题时才执行对应修复，不要改标题来掩盖正文索引缺口。</li>
+</ol>
+</section>
+<section id="insights-empty">
+<h2>Insights 没有 token、成本或部分图表</h2>
+<p>没有数字不一定是故障。会话可以被读取和计数，但来源没有权威 usage 时，token 与成本必须保持 unavailable；没有匹配价格规则时应是 unpriced，而不是 0。</p>
+<ul class="checks">
+<li>先清除日期、来源、模型和项目筛选，确认统计母集不是空集。</li>
+<li>查看来源矩阵中的 usage 能力；不同来源不能默认横向同质。</li>
+<li>API 等价值是估算，不是订阅账单；缺少模型、时间或可信用量时不会强行计价。</li>
+<li>新会话未进入图表时，检查 Usage / Insights 新鲜度和 Library Health，而不是反复切换页签。</li>
+</ul>
+</section>
+<section id="profile-failure">
+<h2>AI Profile、Keychain 或智能功能失败</h2>
+<p>依次检查“功能是否已绑定 Profile → Profile 是否存在 → 凭据是否在系统 Keychain → 模型和 Base URL 是否有效”。Base URL 不能内嵌用户名、密码、查询参数或片段。</p>
+<ul class="checks">
+<li><code>PROFILE_NOT_BOUND</code>：为对应智能功能选择 Profile。</li>
+<li><code>PROFILE_NOT_FOUND</code>：绑定指向已删除或不可用的 Profile，重新选择。</li>
+<li><code>PROFILE_KEY_MISSING</code> / <code>KEYCHAIN_UNAVAILABLE</code>：在设置中重新保存凭据或修复系统凭据访问；不要在终端打印 API Key。</li>
+<li><code>LLM_REQUEST_FAILED</code>：检查提供商、模型和明确授权的网络环境；问题报告只带错误类别，不带请求正文或凭据。</li>
+<li><code>LLM_RESPONSE_INVALID</code>：模型没有返回规定 JSON；先用更稳定模型和小样本，不要手改 Library 元数据伪造成功。</li>
+</ul>
+</section>
+<section id="cli-not-found">
+<h2>CLI 提示 command not found 或输出不适合脚本</h2>
+<p>打开“设置 → CLI &amp; Agent”，分别检查 CLI 文件、<code>swob</code> 命令入口和 Agent Skill。安装或修复后新开一个终端，再运行：</p>
+<pre><code>swob --version
+swob --help
+swob doctor library --json</code></pre>
+<p>仍找不到命令时，使用设置页显示的实际 CLI 路径核对安装，不要自己猜写系统目录。脚本消费时使用 <code>--json</code> 或 <code>show --format=jsonl</code>；stdout 应只含机器数据，诊断信息在 stderr。</p>
+</section>
+<section id="resume-wrong-target">
+<h2>Resume 只打开客户端、进入错误会话或没有反应</h2>
+<p>“启动客户端”“打开工作区”和“进入指定历史会话”是三个等级。先到来源矩阵核对 terminal-resume / native-resume，再检查当前来源的默认 surface、工作目录和 session ID。</p>
+<ol type="1" class="steps">
+<li>用 <code>swob show &lt;id&gt; --full</code> 核对目标会话来源和内容。</li>
+<li>用 <code>swob resume &lt;id&gt;</code> 生成命令，确认它没有因为来源边界退化为只打开应用。</li>
+<li>执行后在目标工具中核对上一轮消息或标题；只出现工作区不算成功。</li>
+<li>远端会话同时核对 SSH 目标、远端 cwd 和目标机上的 CLI；SSH 设置不会扫描远端磁盘。</li>
+<li>Library 只有备份而源文件已缺失时，先进入安全复活流程，不要直接覆盖目标目录。</li>
+</ol>
+</section>
+<section id="update-migration">
+<h2>更新、版本或 Library 迁移问题</h2>
+<p>在“设置 → 更新”核对当前版本、稳定/预览频道和手动检查结果。Windows Beta 的分发和更新能力可能不同。更新后先打开一条熟悉会话并检查 Library 路径，不要立即删除旧安装或旧 Library。</p>
+<p>移动 Library 应使用产品内迁移入口并等待完成状态；迁移成功后核对会话数量、一个正文样本和 Diagnostics。同步盘状态不等于独立备份，迁移前保留可恢复副本。卸载应用和删除 Library 是两件事：想保留历史时先记录并备份 Library；想完全删除时分别确认应用、配置与 Library 的范围。</p>
+</section>
+<section id="performance">
+<h2>首次扫描很慢、搜索或 Insights 持续落后</h2>
+<p>首次扫描需要读取来源、生成 Library 包并建立派生索引，耗时会随历史规模和可用字段增加。判断异常不要只看转圈时间：观察 Library Health 中扫描是否仍推进、writer 是否阻塞、搜索/usage lag 是否收敛。</p>
+<ul class="checks">
+<li>先保留应用运行并等待当前单轮扫描完成，避免频繁退出造成重复启动成本。</li>
+<li>不要同时启动多个 Swob 进程写同一 Library。</li>
+<li>只对被证明确实陈旧的单条 transcript 做重建；全库重建不是常规性能优化。</li>
+<li>writer 长时间阻塞或 lag 不再变化时，保存错误类别和版本后再重启一次；可稳定复现则附最小诊断，不附 transcript 正文。</li>
+</ul>
+</section>
+<section id="missing-session">
+<h2>为什么会话突然消失？</h2>
+<p>先确认它是从 Swob 视图消失，还是原客户端源文件真的被清理。Claude Code 的本地保留策略可能删除旧源文件：一次真实审计中，1,621 个会话里有 253 个原路径已缺失，但 Vault 备份仍在。这个比例只描述该审计语料，不是每个人的预言。</p>
+<ol type="1" class="steps">
+<li><p><strong>检查来源排除</strong></p>
+<p>首启动或设置里排除的来源既不显示也不备份。</p></li>
+<li><p><strong>搜索 Vault</strong></p>
+<p>用标题、项目或 transcript 全文确认 Swob 副本是否存在。</p></li>
+<li><p><strong>检查保留期</strong></p>
+<p>对 Claude Code 延长本地会话保留期；它只能降低未来风险，不能凭空恢复已删除文件。</p></li>
+<li><p><strong>需要续接时再复活</strong></p>
+<p>只有点击 Resume 才进入受控写回；先核对目标实例和冲突。</p></li>
+</ol>
+</section>
+<section id="recovery-failures">
+<h2>参考：复活错误代码（当前 23 类）</h2>
+<p>只有界面或日志给出明确错误代码时才需要查本表。普通 Resume 失败先回到<a href="#resume-wrong-target">上面的 Resume 症状</a>。</p>
+<div class="table-scroll">
+<table>
+<thead>
+<tr>
+<th>
+reason
+</th>
+<th>
+用户可见说明
+</th>
+</tr>
+</thead>
+<tbody>
+<tr id="recovery-session-id-mismatch">
+<td>
+<code>session-id-mismatch</code>
+</td>
+<td>
+备份中的会话 ID 与当前会话不一致，已停止以避免导入错误记录
+</td>
+</tr>
+<tr id="recovery-missing-source-path">
+<td>
+<code>missing-source-path</code>
+</td>
+<td>
+会话没有可定位的 Claude 源路径
+</td>
+</tr>
+<tr id="recovery-invalid-source-path">
+<td>
+<code>invalid-source-path</code>
+</td>
+<td>
+Claude 源路径格式无效，无法安全确定复活位置
+</td>
+</tr>
+<tr id="recovery-missing-backup">
+<td>
+<code>missing-backup</code>
+</td>
+<td>
+找不到可用于复活的备份
+</td>
+</tr>
+<tr id="recovery-invalid-backup">
+<td>
+<code>invalid-backup</code>
+</td>
+<td>
+备份未通过严格 JSONL 校验，未写入 Claude 源目录
+</td>
+</tr>
+<tr id="recovery-remote-source-requires-explicit-target">
+<td>
+<code>remote-source-requires-explicit-target</code>
+</td>
+<td>
+这是其他安装的会话，需要先选择要导入的 Claude 实例
+</td>
+</tr>
+<tr id="recovery-non-standard-source-requires-explicit-target">
+<td>
+<code>non-standard-source-requires-explicit-target</code>
+</td>
+<td>
+源路径不是标准 Claude 目录，需要先明确选择导入目标
+</td>
+</tr>
+<tr id="recovery-target-instance-not-found">
+<td>
+<code>target-instance-not-found</code>
+</td>
+<td>
+找不到所选的 Claude 实例，请重新选择可用实例
+</td>
+</tr>
+<tr id="recovery-target-instance-unavailable">
+<td>
+<code>target-instance-unavailable</code>
+</td>
+<td>
+目标 Claude 实例当前不可用，请确认该实例已安装且目录可访问
+</td>
+</tr>
+<tr id="recovery-target-instance-untrusted">
+<td>
+<code>target-instance-untrusted</code>
+</td>
+<td>
+目标 Claude 实例未通过路径安全检查，已停止写入
+</td>
+</tr>
+<tr id="recovery-missing-target-inventory">
+<td>
+<code>missing-target-inventory</code>
+</td>
+<td>
+缺少目标实例的文件清单，无法排除覆盖风险
+</td>
+</tr>
+<tr id="recovery-target-inventory-incomplete">
+<td>
+<code>target-inventory-incomplete</code>
+</td>
+<td>
+目标实例文件清单不完整，无法安全复活
+</td>
+</tr>
+<tr id="recovery-target-instance-missing-config-dir">
+<td>
+<code>target-instance-missing-config-dir</code>
+</td>
+<td>
+目标 Claude 实例缺少配置目录，无法确定安全写入边界
+</td>
+</tr>
+<tr id="recovery-missing-local-device-id">
+<td>
+<code>missing-local-device-id</code>
+</td>
+<td>
+本机缺少设备标识，无法判断会话是否来自其他安装
+</td>
+</tr>
+<tr id="recovery-missing-local-username">
+<td>
+<code>missing-local-username</code>
+</td>
+<td>
+本机缺少用户名信息，无法安全判断旧版会话来源
+</td>
+</tr>
+<tr id="recovery-non-standard-target-refused">
+<td>
+<code>non-standard-target-refused</code>
+</td>
+<td>
+所选目标不是受支持的 Claude 实例，已拒绝写入
+</td>
+</tr>
+<tr id="recovery-target-conflict">
+<td>
+<code>target-conflict</code>
+</td>
+<td>
+目标 Claude 实例已有同名或同 ID 会话，已停止以避免覆盖
+</td>
+</tr>
+<tr id="recovery-source-not-claude">
+<td>
+<code>source-not-claude</code>
+</td>
+<td>
+此会话没有可复活到 Claude 的源记录
+</td>
+</tr>
+<tr id="recovery-unverified-backup">
+<td>
+<code>unverified-backup</code>
+</td>
+<td>
+备份缺少 SHA-256/大小证据，需要明确确认后才能复活
+</td>
+</tr>
+<tr id="recovery-materialization-failed">
+<td>
+<code>materialization-failed</code>
+</td>
+<td>
+iCloud 备份尚未完整下载或完整性证据不匹配
+</td>
+</tr>
+<tr id="recovery-recovery-locked">
+<td>
+<code>recovery-locked</code>
+</td>
+<td>
+另一 Swob 进程正在复活该会话，请稍后重试
+</td>
+</tr>
+<tr id="recovery-post-publish-verification-failed">
+<td>
+<code>post-publish-verification-failed</code>
+</td>
+<td>
+目标已发布但最终校验失败，已保留现场且未自动删除
+</td>
+</tr>
+<tr id="recovery-io-error">
+<td>
+<code>io-error</code>
+</td>
+<td>
+读取备份或写入目标时发生本地 I/O 错误，请检查磁盘和目录权限
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="windows-beta">
+<h2>Windows x64 Beta 边界</h2>
+<p>Beta 当前聚焦 Windows x64 上 Claude Code 与 Codex 的本地发现、阅读、搜索、Library 和 Resume 最小闭环，不是 macOS 功能对等版。</p>
+<div class="card-grid">
+<article>
+<h3>当前重点支持</h3>
+<p>Windows Native x64；Claude Code、Codex；可用的终端 Resume 入口以安装版本和设置页为准。</p>
+</article>
+<article>
+<h3>不要默认可用</h3>
+<p>其他来源、WSL、OneDrive 占位文件、ARM64、SSH、签名、自动更新与移动端能力都需要逐项核对 Release Notes。</p>
+</article>
+</div>
+<p>网站只陈述用户能力边界；是否已公开交付以当前 GitHub Release 中是否存在 Windows 安装资产为准，不能把 CI 或源码存在包装成下载承诺。</p>
+</section>
+<nav class="next-links">
+<p><a href="./getting-started/install.html">回到十分钟快速入门 →</a><a href="./guides/diagnostics.html">查看 Library Health →</a><a href="./guides/cli.html">CLI 诊断工作流 →</a><a href="./concepts/recovery.html">安全复活边界 →</a></p>
+</nav></main>
   </div>
   <footer><span>Swob Docs · 口径先于结论</span><span>本地优先 · 证据可追溯 · 局限明示</span></footer>
 </body>

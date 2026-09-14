@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>用 Insights 回答问题 · Swob Docs</title><meta name="description" content="用筛选、下钻和数据可用性检查理解会话、token、成本与工作流。">
+  <meta name="theme-color" content="#efebe2"><link rel="icon" href="/icons/swob-512.png" type="image/png">
+  <link rel="stylesheet" href="/docs/assets/docs.css"><script defer src="/docs/assets/docs.js"></script>
+<!-- docs-seo:start -->
+<link rel="canonical" href="https://swob.app/docs/guides/insights.html">
+<!-- docs-seo:end -->
+</head>
+<body data-section="insights"><a class="skip-link" href="#content">跳到正文</a>
+  <header class="docs-header"><a class="docs-brand" href="/zh/"><img src="/icons/swob-512.png" width="28" height="28" alt=""><span>swob</span><em>docs</em></a><nav aria-label="文档工具"><a href="/zh/">官网</a><a href="/docs/en/" lang="en">English guides</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav></header>
+  <details class="mobile-chapters"><summary>文档目录</summary></details>
+  <div class="docs-layout"><aside class="docs-sidebar"></aside><main class="docs-content" id="content"><header class="doc-hero">
+<p>INSIGHTS</p>
+<h1>从一个问题开始看 Insights。</h1>
+<p>先选择时间、来源、模型或项目，再看图表并下钻到具体会话。不要从最大的数字开始猜原因。</p>
+<div class="hero-badges">
+<p><span>六个分析页签</span><span>来源可用性</span><span>可追溯口径</span></p>
+</div>
+</header>
+<div class="docs-figure">
+<p><img src="/docs/assets/media/token-insights.png" loading="eager" alt="Swob Insights 总览：筛选统计母集并查看 token、会话、轮次和活跃度"></p>
+</div>
+<section>
+<h2>先按问题选择页签</h2>
+<div class="table-scroll">
+<table class="compact">
+<thead>
+<tr>
+<th style="text-align: left;">你想知道什么</th>
+<th>去哪里 重</th>
+<th style="text-align: left;">点看什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">最近主要使用哪些来源和模型</td>
+<td>总览</td>
+<td style="text-align: left;">会话、token、轮次和活跃天数</td>
+</tr>
+<tr>
+<td style="text-align: left;">哪些 token 可计量、缓存如何使用</td>
+<td>成本与缓存</td>
+<td style="text-align: left;">可用性、缓存结构和 API 等价值</td>
+</tr>
+<tr>
+<td style="text-align: left;">哪类会话更长或工具调用更多</td>
+<td>会话与效率</td>
+<td style="text-align: left;">时长、轮次、消息和工具分布</td>
+</tr>
+<tr>
+<td style="text-align: left;">工作主要集中在哪些项目</td>
+<td>工作流</td>
+<td style="text-align: left;">项目、来源和时间分布</td>
+</tr>
+<tr>
+<td style="text-align: left;">为什么某些图表为空</td>
+<td>数据质量</td>
+<td style="text-align: left;">来源覆盖、不可用量和索引状态</td>
+</tr>
+<tr>
+<td style="text-align: left;">哪些会话值得回看</td>
+<td>审计报告</td>
+<td style="text-align: left;">错误、摩擦信号和具体会话</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section>
+<h2>第一步：先设定范围</h2>
+<p>日期、来源、模型和项目筛选共同决定当前统计账本。不同卡片若有额外排除条件，页面应显式说明，不能把“没有数据”伪装成 0。</p>
+<div class="callout">
+<p><strong>先看可用性，再看排名</strong></p>
+<p>某个来源不提供权威用量时，它可能仍计入会话数，却不能进入 token 或成本比较。这是证据差异，不是使用量为零。</p>
+</div>
+</section>
+<section>
+<h2>第二步：确认数字能否比较</h2>
+<ul class="checks">
+<li>“API 等价值”是对可验证 token 按匹配价格规则计算的价值口径，不代表订阅账单或实际支付金额。</li>
+<li>精确计价需要模型、计费路线、事件时间和可信用量记录；缺少条件时只允许估计或不可用。</li>
+<li>缓存创建、缓存读取、可见输出和 reasoning 应分别保留，不能混成一个模糊总数。</li>
+<li>价格规则和来源证据可能随版本变化；需要决策时查看统计口径页。</li>
+</ul>
+</section>
+<figure class="doc-shot">
+<p><img src="/docs/assets/media/cost-cache.png" loading="lazy" alt="Swob 成本与缓存：区分 API 等价价值、缓存命中、未计价 token 和财务覆盖"></p>
+<figcaption>
+<p>E2E 模拟数据 · 等价价值不是实际账单</p>
+</figcaption>
+</figure>
+<section>
+<h2>Quick Report 与 AI 洞察</h2>
+<p>本地统计可以直接生成结构化报告。可选 AI 洞察默认关闭：只有你配置提供商并明确确认后，样本才会发送到该提供商。过滤可降低风险，但不能保证文本中没有秘密。</p>
+</section>
+<section>
+<h2>第三步：从图表回到会话</h2>
+<ol type="1" class="steps">
+<li><p><strong>写下问题和时间范围</strong></p>
+<p>例如“最近 30 天哪个项目最消耗 context”，不要先看最大的卡片再找故事。</p></li>
+<li><p><strong>检查来源可用性</strong></p>
+<p>确认比较双方是否都有相同的用量与关系证据。</p></li>
+<li><p><strong>从聚合下钻到会话</strong></p>
+<p>图表指出异常后，回到具体 transcript 和 Audit 验证原因。</p></li>
+</ol>
+</section>
+<section>
+<h2>图表为空时先做三件事</h2>
+<ol type="1" class="steps">
+<li>清除日期、来源、模型和项目筛选，确认当前统计母集不是空集。</li>
+<li>查看来源矩阵中的 usage / relationships 能力；字段不可用时图表应留空，而不是显示 0。</li>
+<li>检查 Library Health 的 usage 与索引新鲜度；只有持续落后才进入故障排查。</li>
+</ol>
+</section>
+<nav class="next-links">
+<p><a href="../metrics.html">查看统计口径 →</a><a href="../concepts/evidence.html">理解证据等级 →</a></p>
+</nav></main></div><footer><span>Swob Docs · 统计帮助提问</span><span>数字必须带母集与证据</span></footer>
+</body></html>

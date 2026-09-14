@@ -42,5 +42,15 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   for (const page of pages) await writeFile(new URL(page.file, root), page.html);
   const routes = pages.filter(page => page.indexable).map(page => page.route).sort();
   await writeFile(new URL('../app/docs-routes.json', import.meta.url), JSON.stringify(routes, null, 2) + '\n');
+  // Derive search visibility and current titles from the same publication decision.
+  const searchFile = new URL('search-index.json', root);
+  const priorIndex = JSON.parse(await readFile(searchFile, 'utf8').catch(() => '[]'));
+  const searchIndex = pages.filter(page => page.indexable).map(page => {
+    const prior = priorIndex.find(item => item.href === page.file);
+    const title = page.clean.match(/<title>([\s\S]*?)<\/title>/i)?.[1].replace(/\s*· Swob Docs$/, '') || page.file;
+    const description = page.clean.match(/<meta name="description" content="([^"]*)"/i)?.[1] || '';
+    return { ...prior, lang: page.file.startsWith('en/') ? 'en' : 'zh', title, description, section: prior?.section || (page.file.startsWith('en/') ? 'Guides' : '文档'), href: page.file };
+  });
+  await writeFile(searchFile, JSON.stringify(searchIndex, null, 2) + '\n');
   console.log(`Docs SEO: ${routes.length} indexable, ${pages.length - routes.length} excluded; language links require both translations.`);
 }

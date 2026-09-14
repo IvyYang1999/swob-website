@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>我的工具支持什么 · Swob Docs</title>
+  <meta name="description" content="快速查看 Claude Code、Codex、Cursor 等来源能否读取、搜索、统计和 Resume。">
+  <meta name="theme-color" content="#efebe2"><link rel="icon" href="/icons/swob-512.png" type="image/png">
+  <link rel="stylesheet" href="/docs/assets/docs.css"><script defer src="/docs/assets/docs.js"></script>
+<!-- docs-seo:start -->
+<link rel="canonical" href="https://swob.app/docs/sources.html">
+<!-- docs-seo:end -->
+</head>
+<body data-section="start">
+  <a class="skip-link" href="#content">跳到正文</a>
+  <header class="docs-header"><a class="docs-brand" href="/zh/"><img src="/icons/swob-512.png" width="28" height="28" alt=""><span>swob</span><em>docs</em></a><nav aria-label="文档工具"><a href="/zh/">官网</a><a href="/docs/en/" lang="en">English guides</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav></header>
+  <details class="mobile-chapters"><summary>文档目录</summary></details>
+  <div class="docs-layout"><aside class="docs-sidebar"></aside><main class="docs-content" id="content"><header class="doc-hero">
+<p>SUPPORTED TOOLS</p>
+<h1>先确认你的工具能做什么。</h1>
+<p>选择你使用的来源，先看最常用的四件事：能否读取、搜索正文、统计用量，以及 Resume 到目标会话。</p>
+<div class="hero-badges">
+<p><span>14 个来源</span><span>按任务查看</span><span>版本可能有差异</span></p>
+</div>
+</header>
+<section>
+<h2>常用来源速查</h2>
+<div class="table-scroll">
+<table class="compact">
+<thead>
+<tr>
+<th style="text-align: left;">来源</th>
+<th style="text-align: left;">读取会话</th>
+<th style="text-align: left;">搜索正文</th>
+<th style="text-align: left;">用量</th>
+<th style="text-align: left;">会话级 Resume</th>
+<th style="text-align: left;">先知道的限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Claude Code</td>
+<td style="text-align: left;">可用</td>
+<td style="text-align: left;">可用</td>
+<td style="text-align: left;">可用</td>
+<td style="text-align: left;"><strong>稳定</strong></td>
+<td style="text-align: left;">Claude Desktop 入口仍是实验能力</td>
+</tr>
+<tr>
+<td style="text-align: left;">Codex</td>
+<td style="text-align: left;">可用</td>
+<td style="text-align: left;">可用</td>
+<td style="text-align: left;">可用</td>
+<td style="text-align: left;"><strong>稳定</strong></td>
+<td style="text-align: left;">打开后仍要核对是否进入目标 thread</td>
+</tr>
+<tr>
+<td style="text-align: left;">Cursor Agent</td>
+<td style="text-align: left;">可用</td>
+<td style="text-align: left;">有条件</td>
+<td style="text-align: left;">不可用</td>
+<td style="text-align: left;"><strong>稳定</strong></td>
+<td style="text-align: left;">当前主要通过终端继续</td>
+</tr>
+<tr>
+<td style="text-align: left;">OpenCode</td>
+<td style="text-align: left;">可用</td>
+<td style="text-align: left;">有条件</td>
+<td style="text-align: left;">可用</td>
+<td style="text-align: left;"><strong>稳定</strong></td>
+<td style="text-align: left;">当前没有已验证 App 入口</td>
+</tr>
+<tr>
+<td style="text-align: left;">Gemini CLI</td>
+<td style="text-align: left;">可用</td>
+<td style="text-align: left;">可用</td>
+<td style="text-align: left;">可用</td>
+<td style="text-align: left;">实验</td>
+<td style="text-align: left;">Resume 入口仍需核对目标会话</td>
+</tr>
+<tr>
+<td style="text-align: left;">ZCode</td>
+<td style="text-align: left;">可用</td>
+<td style="text-align: left;">有条件</td>
+<td style="text-align: left;">可用</td>
+<td style="text-align: left;">实验</td>
+<td style="text-align: left;">App 入口只保证打开工作区</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>怎么选：</strong> 只想查找和阅读，先看“读取会话”和“搜索正文”；想继续工作，再看“会话级 Resume”；想比较 token 或成本，必须确认“用量”可用。</p>
+</section>
+<section>
+<h2>其他来源</h2>
+<div class="table-scroll">
+<table class="compact">
+<thead>
+<tr>
+<th style="text-align: left;">来源</th>
+<th style="text-align: left;">适合做什么</th>
+<th style="text-align: left;">主要限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">CC-Mirror</td>
+<td style="text-align: left;">阅读、搜索和查看用量</td>
+<td style="text-align: left;">Resume 与关系能力仍有条件</td>
+</tr>
+<tr>
+<td style="text-align: left;">Antigravity</td>
+<td style="text-align: left;">阅读、搜索和归档</td>
+<td style="text-align: left;">用量、关系和 Resume 仍有条件</td>
+</tr>
+<tr>
+<td style="text-align: left;">Grok Build</td>
+<td style="text-align: left;">阅读、搜索、用量和关系</td>
+<td style="text-align: left;">当前不能 Resume</td>
+</tr>
+<tr>
+<td style="text-align: left;">Pi</td>
+<td style="text-align: left;">阅读、搜索、用量和关系</td>
+<td style="text-align: left;">Resume 仍是实验能力</td>
+</tr>
+<tr>
+<td style="text-align: left;">Kimi Code</td>
+<td style="text-align: left;">阅读、搜索、用量、关系和子 Agent</td>
+<td style="text-align: left;">Resume 仍是实验能力</td>
+</tr>
+<tr>
+<td style="text-align: left;">Hermes</td>
+<td style="text-align: left;">阅读、搜索和归档</td>
+<td style="text-align: left;">用量、关系和 Resume 仍有条件</td>
+</tr>
+<tr>
+<td style="text-align: left;">Qoder</td>
+<td style="text-align: left;">阅读、搜索、关系和子 Agent</td>
+<td style="text-align: left;">thinking、用量和 Resume 仍有条件</td>
+</tr>
+<tr>
+<td style="text-align: left;">Trae</td>
+<td style="text-align: left;">识别格式来源</td>
+<td style="text-align: left;">暂不适合作为主要阅读或 Resume 路径</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<div class="docs-figure">
+<p><img src="/docs/assets/media/source-choice.svg" loading="lazy" alt="按任务判断 Swob 数据源能力：发现、阅读、理解和续接"></p>
+</div>
+<section>
+<h2>看懂“可用”“有条件”和“不可用”</h2>
+<ul class="checks">
+<li><strong>可用：</strong> 已有实现与稳定证据，可以作为正常路径使用。</li>
+<li><strong>有条件 / 实验：</strong> 依赖版本、来源格式或尚未完全验证的入口，使用后要核对结果。</li>
+<li><strong>不可用：</strong> Swob 不会用猜测值或只打开 App 来冒充成功。</li>
+</ul>
+</section>
+<section>
+<h2>完整能力矩阵（参考）</h2>
+<p>需要核对 tools、thinking、关系、子 Agent、监听、归档或格式来源时，再使用下面的完整矩阵。</p>
+<div class="source-legend" aria-label="能力状态图例">
+<p><span><b class="capability-status available">●</b> 可用</span><span><b class="capability-status experimental">◐</b> 实验或有条件</span><span><b class="capability-status unavailable">—</b> 不可用或不适用</span></p>
+</div>
+<div class="table-scroll" data-source-matrix="">
+<p>正在读取来源矩阵…</p>
+</div>
+<div class="callout">
+<p><strong>版本可能不同</strong></p>
+<p>矩阵来自当前 v1.4 源码快照。你的安装包、Windows x64 Beta 和 current main 可能不同；最终以本机版本、设置中实际入口和 Release Notes 为准。</p>
+</div>
+</section>
+<nav class="next-links">
+<p><a href="./getting-started/install.html">开始快速入门 →</a><a href="./guides/resume.html">继续一条会话 →</a><a href="./concepts/evidence.html">查看完整证据说明 →</a></p>
+</nav></main></div><footer><span>Swob Docs · 来源支持按能力拆开</span><span>能读取，不等于能恢复</span></footer>
+</body></html>

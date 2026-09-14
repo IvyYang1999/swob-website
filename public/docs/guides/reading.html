@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>阅读会话 · Swob Docs</title><meta name="description" content="使用精简、完整和 Markdown 视图阅读长 AI 会话。">
+  <meta name="theme-color" content="#efebe2"><link rel="icon" href="/icons/swob-512.png" type="image/png">
+  <link rel="stylesheet" href="/docs/assets/docs.css"><script defer src="/docs/assets/docs.js"></script>
+<!-- docs-seo:start -->
+<link rel="canonical" href="https://swob.app/docs/guides/reading.html">
+<!-- docs-seo:end -->
+</head>
+<body data-section="read"><a class="skip-link" href="#content">跳到正文</a>
+  <header class="docs-header"><a class="docs-brand" href="/zh/"><img src="/icons/swob-512.png" width="28" height="28" alt=""><span>swob</span><em>docs</em></a><nav aria-label="文档工具"><a href="/zh/">官网</a><a href="/docs/en/" lang="en">English guides</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav></header>
+  <details class="mobile-chapters"><summary>文档目录</summary></details>
+  <div class="docs-layout"><aside class="docs-sidebar"></aside><main class="docs-content" id="content"><header class="doc-hero">
+<p>READ</p>
+<h1>先选阅读粒度，再进入细节。</h1>
+<p>同一条会话可以是干净的叙事、完整的证据链，或便于复制复用的 Markdown。Swob 不强迫你一直面对原始 JSONL。</p>
+<div class="hero-badges">
+<p><span>Compact</span><span>Full</span><span>Markdown</span></p>
+</div>
+</header>
+<figure class="doc-shot">
+<p><img src="/docs/assets/media/session-reading.png" loading="eager" alt="Swob 会话阅读界面：会话列表、Compact 正文与思考内容"></p>
+<figcaption>
+<p>E2E 模拟数据 · 未包含真实会话或本机路径</p>
+</figcaption>
+</figure>
+<section>
+<h2>三种视图</h2>
+<div class="card-grid three">
+<article>
+<p><span class="card-index">COMPACT</span></p>
+<h3>精简</h3>
+<p>保留对话主线，折叠冗长工具细节和中间事件。适合回顾“发生了什么”。</p>
+</article>
+<article>
+<p><span class="card-index">FULL</span></p>
+<h3>完整</h3>
+<p>展开 thinking、工具参数、工具结果和来源保留的事件。适合审计与排障。</p>
+</article>
+<article>
+<p><span class="card-index">MD</span></p>
+<h3>Markdown</h3>
+<p>以清洁 transcript 查看和复制正文，减少原始结构噪音。它是派生表示，不替代真相源。</p>
+</article>
+</div>
+</section>
+<section>
+<h2>长会话的阅读顺序</h2>
+<ol type="1" class="steps">
+<li><p><strong>从标题、来源和项目确认身份</strong></p>
+<p>标题可能被重命名；来源 ID、时间和项目路径更适合核对是否是目标会话。</p></li>
+<li><p><strong>用目录跳到关键轮次</strong></p>
+<p>目录按消息与 compact 边界帮助定位，不必拖动一条数万行的原始日志。</p></li>
+<li><p><strong>先读 Compact，再按需展开</strong></p>
+<p>遇到结论缺少依据时，切到 Full 查看工具调用、附件和中间事件。</p></li>
+<li><p><strong>在 Context / Audit 中交叉核对</strong></p>
+<p>正文说明“说了什么”；右侧面板说明“用了什么上下文、如何执行、证据是否完整”。</p></li>
+</ol>
+</section>
+<section>
+<h2>Compact 边界是什么意思</h2>
+<p>部分 harness 会压缩早期上下文并继续同一条逻辑会话。Swob 用边界提示区分压缩前历史、压缩摘要和当前对话，避免把不同阶段拼成一段没有时间感的文本。</p>
+<div class="callout">
+<p><strong>派生 transcript 不等于原始记录</strong></p>
+<p>Markdown 会移除格式噪音、统一消息结构，并可能折叠细节。需要取证或定位解析问题时，回到 Full 和来源证据。</p>
+</div>
+</section>
+<section>
+<h2>高亮一段重要内容</h2>
+<p>在 Compact 或 Full 视图中选中一段正文，浮动按钮会把它保存为会话高亮。单次选择最多 2,000 个字符；高亮保存在 Swob 的会话元数据中，不写回原客户端 transcript。</p>
+<ol type="1" class="steps">
+<li><p><strong>选中一段完整语义</strong></p>
+<p>尽量包含结论和必要上下文，不要只划一个模糊代词。</p></li>
+<li><p><strong>点击高亮按钮</strong></p>
+<p>右侧 Outcomes / Details 中会出现高亮条目，目录也会显示相应标记。</p></li>
+<li><p><strong>从右侧跳回、复制或删除</strong></p>
+<p>点击条目回到原轮次；复制只复制高亮文本，删除只移除 Swob 标注。</p></li>
+</ol>
+<p>如果来源内容后来变化，Swob 会先按原文精确匹配，再尝试短前缀定位；定位不到时，高亮记录仍可能存在，但不会伪造新的正文位置。</p>
+</section>
+<section>
+<h2>复制、下载或导出选中的问答</h2>
+<p>顶部“多选”允许分别选择问题和回答。选中后可复制为 Markdown、下载 <code>.md</code>，或在启用 Share Templates Lens 时生成分享图。整条会话也可以直接复制或下载 Markdown。</p>
+<div class="docs-figure">
+<p><img src="/docs/assets/media/share-privacy-flow.svg" loading="lazy" alt="从选中问答到隐私检查，再复制或保存分享 PNG"></p>
+</div>
+<ul class="checks">
+<li>分享预览支持 Light、Dark、Minimal 主题和 <code>via Swob</code> 水印开关。</li>
+<li>Session ID 与路径默认不包含在图片中；只有你显式打开才加入。</li>
+<li>长内容会自动分页，保存或复制前要逐页检查。</li>
+<li>内置秘密模式检测只提供警告，不能证明没有 API Key、内网地址、客户信息或私有路径。</li>
+<li>Library Health 陈旧时，分享预览会显示提示；陈旧副本不应被包装成当前事实。</li>
+</ul>
+<div class="callout">
+<p><strong>分享图不是证据脱敏器</strong></p>
+<p>默认隐藏字段和模式检测只能降低风险。真正的门禁仍是：只选择必要问答，并在导出前人工阅读每一页。</p>
+</div>
+</section>
+<section>
+<h2>缺少内容时怎么判断</h2>
+<ul class="checks">
+<li>来源本身可能没有保存 thinking、附件或完整工具结果。</li>
+<li>旧会话可能已被原客户端清理，只剩 Library 中的派生副本。</li>
+<li>“不可用”应显示为空缺或状态，而不是由 Swob 猜测补齐。</li>
+<li>解析异常优先去 Library Health / Diagnostics；旧版本没有该入口时使用故障排查。</li>
+</ul>
+</section>
+<nav class="next-links">
+<p><a href="./search.html">搜索与 Spotlight →</a><a href="./context-execution.html">理解 Context 与执行树 →</a><a href="./organize.html">整理与撤销 →</a></p>
+</nav></main></div><footer><span>Swob Docs · 阅读层与证据层分开</span><span>先看主线，再按需展开</span></footer>
+</body></html>

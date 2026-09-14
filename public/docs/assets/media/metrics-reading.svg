@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" role="img" aria-labelledby="title desc">
+  <title id="title">阅读 Swob 指标的四步顺序</title>
+  <desc id="desc">先定义问题和母集，再检查可用性，下钻具体会话，最后解释指标。</desc>
+  <rect width="1200" height="460" rx="32" fill="#faf8ff"/>
+  <text x="70" y="76" fill="#211a2c" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="34" font-weight="700">一个数字只有连同母集和证据才有意义</text>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+    <g transform="translate(70 150)"><circle cx="105" cy="105" r="102" fill="#ede9fe"/><text x="88" y="72" fill="#6d28d9" font-size="18" font-weight="700">01</text><text x="52" y="112" fill="#3b1d6b" font-size="22" font-weight="700">定义问题</text><text x="45" y="148" fill="#5b3d82" font-size="16">时间 / 来源 / 项目</text></g>
+    <path d="M290 255h78" stroke="#9b8bb4" stroke-width="3"/><path d="m360 247 12 8-12 8" fill="none" stroke="#9b8bb4" stroke-width="3"/>
+    <g transform="translate(385 150)"><circle cx="105" cy="105" r="102" fill="#fff" stroke="#ded8e8"/><text x="88" y="72" fill="#6d28d9" font-size="18" font-weight="700">02</text><text x="43" y="112" fill="#211a2c" font-size="22" font-weight="700">检查可用性</text><text x="48" y="148" fill="#6d6478" font-size="16">unavailable ≠ 0</text></g>
+    <path d="M605 255h78" stroke="#9b8bb4" stroke-width="3"/><path d="m675 247 12 8-12 8" fill="none" stroke="#9b8bb4" stroke-width="3"/>
+    <g transform="translate(700 150)"><circle cx="105" cy="105" r="102" fill="#fff" stroke="#ded8e8"/><text x="88" y="72" fill="#6d28d9" font-size="18" font-weight="700">03</text><text x="42" y="112" fill="#211a2c" font-size="22" font-weight="700">下钻到会话</text><text x="43" y="148" fill="#6d6478" font-size="16">正文 / Audit / Context</text></g>
+    <path d="M920 255h78" stroke="#9b8bb4" stroke-width="3"/><path d="m990 247 12 8-12 8" fill="none" stroke="#9b8bb4" stroke-width="3"/>
+    <g transform="translate(1015 150)"><circle cx="70" cy="105" r="70" fill="#dcfce7" stroke="#86efac"/><text x="54" y="82" fill="#15803d" font-size="18" font-weight="700">04</text><text x="38" y="118" fill="#166534" font-size="20" font-weight="700">解释</text><text x="34" y="148" fill="#15803d" font-size="14">不讲故事</text></g>
+  </g>
+</svg>

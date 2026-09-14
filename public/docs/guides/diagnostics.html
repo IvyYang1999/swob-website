@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Library Health 与诊断 · Swob Docs</title><meta name="description" content="检查 Swob Library 的写入、索引、身份冲突与安全恢复状态。">
+  <meta name="theme-color" content="#efebe2"><link rel="icon" href="/icons/swob-512.png" type="image/png">
+  <link rel="stylesheet" href="/docs/assets/docs.css"><script defer src="/docs/assets/docs.js"></script>
+<!-- docs-seo:start -->
+<link rel="canonical" href="https://swob.app/docs/guides/diagnostics.html">
+<!-- docs-seo:end -->
+</head>
+<body data-section="configure"><a class="skip-link" href="#content">跳到正文</a>
+  <header class="docs-header"><a class="docs-brand" href="/zh/"><img src="/icons/swob-512.png" width="28" height="28" alt=""><span>swob</span><em>docs</em></a><nav aria-label="文档工具"><a href="/zh/">官网</a><a href="/docs/en/" lang="en">English guides</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav></header>
+  <details class="mobile-chapters"><summary>文档目录</summary></details>
+  <div class="docs-layout"><aside class="docs-sidebar"></aside><main class="docs-content" id="content"><header class="doc-hero">
+<p>CURRENT SOURCE · v1.4</p>
+<h1>先证明 Library 健康，再相信派生结果。</h1>
+<p>Library Health 检查写入状态、索引新鲜度和会话身份冲突；Diagnostics 把可以安全自动处理的重复项与必须人工判断的问题分开。</p>
+<div class="hero-badges">
+<p><span>本地只读检测</span><span>安全隔离</span><span>源码快照能力</span></p>
+</div>
+</header>
+<div class="callout warning">
+<p><strong>版本边界</strong></p>
+<p>本页记录当前 v1.4 源码中的诊断能力。若你的设置里没有 Diagnostics，已安装版本尚未包含它，请使用 FAQ 与故障排查；不要据此判断 Library 已通过检查。</p>
+</div>
+<section>
+<h2>健康状态</h2>
+<div class="table-scroll">
+<table class="compact">
+<thead>
+<tr>
+<th style="text-align: left;">状态</th>
+<th style="text-align: left;">意味着什么</th>
+<th style="text-align: left;">动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Healthy</td>
+<td style="text-align: left;">当前没有阻断写入或已知结构问题</td>
+<td style="text-align: left;">继续使用，必要时查看 freshness</td>
+</tr>
+<tr>
+<td style="text-align: left;">writer-blocked</td>
+<td style="text-align: left;">写入器被锁、冲突或环境阻断</td>
+<td style="text-align: left;">查看锁与进程证据，不要强行删锁</td>
+</tr>
+<tr>
+<td style="text-align: left;">read-only</td>
+<td style="text-align: left;">Library 只能读取，无法安全更新</td>
+<td style="text-align: left;">检查权限、同步状态和存储可用性</td>
+</tr>
+<tr>
+<td style="text-align: left;">corrupt</td>
+<td style="text-align: left;">检测到结构或内容一致性问题</td>
+<td style="text-align: left;">停止自动写入，先备份并查看诊断详情</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section>
+<h2>身份冲突如何处理</h2>
+<p>诊断在本地用内容哈希和元数据比较疑似重复会话。只有被证明是安全重复的副本才允许进入隔离区；隔离不是删除，可用于复核和恢复。</p>
+<ul class="checks">
+<li>唯一内容不会被自动移动。</li>
+<li>不确定的冲突保持原位并要求人工判断。</li>
+<li>隔离操作应保留来源、原因和恢复线索。</li>
+<li>同步盘或 File Provider 上的文件不能被当成可随意删除的缓存。</li>
+</ul>
+</section>
+<section>
+<h2>新鲜度与自动恢复</h2>
+<p>Health 会区分扫描、派生 transcript、索引和来源记录是否落后。后台重试只处理明确安全且幂等的工作；连续失败应显示状态，而不是无限静默重试。</p>
+</section>
+<section>
+<h2>CLI 检查</h2>
+<div class="table-scroll">
+<table class="compact">
+<thead>
+<tr>
+<th style="text-align: left;">命令</th>
+<th style="text-align: left;">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>swob doctor locks [--json]</code></td>
+<td style="text-align: left;">只读检查 Library 锁与写入阻断证据</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>swob doctor library [--json]</code></td>
+<td style="text-align: left;">检查 Library 结构、身份与派生状态</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>swob transcript status &lt;id-or-prefix&gt; [--json]</code></td>
+<td style="text-align: left;">查看单条会话的 transcript 状态</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>swob transcript rebuild &lt;id-or-prefix&gt; [--dry-run]</code></td>
+<td style="text-align: left;">重建单条派生 transcript；先 dry-run</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section>
+<h2>不要用这些“修复”</h2>
+<ul class="checks">
+<li>不要在没有诊断证据时手动删除锁文件。</li>
+<li>不要直接编辑原始 JSONL、transcript 或来源数据库来消除冲突。</li>
+<li>不要把同步服务的占位文件当成已经丢失或可删除的文件。</li>
+<li>不要在没有独立备份时清空 Library 重新扫描。</li>
+</ul>
+</section>
+<nav class="next-links">
+<p><a href="../troubleshooting.html">故障排查 →</a><a href="./cli.html">CLI 参考 →</a></p>
+</nav></main></div><footer><span>Swob Docs · 诊断先于修复</span><span>自动化只处理被证明安全的情况</span></footer>
+</body></html>

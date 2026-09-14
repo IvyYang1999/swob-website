@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Context 与执行树 · Swob Docs</title><meta name="description" content="理解会话使用的文件、配置、工具调用、子会话和执行关系。">
+  <meta name="theme-color" content="#efebe2"><link rel="icon" href="/icons/swob-512.png" type="image/png">
+  <link rel="stylesheet" href="/docs/assets/docs.css"><script defer src="/docs/assets/docs.js"></script>
+<!-- docs-seo:start -->
+<link rel="canonical" href="https://swob.app/docs/guides/context-execution.html">
+<!-- docs-seo:end -->
+</head>
+<body data-section="read"><a class="skip-link" href="#content">跳到正文</a>
+  <header class="docs-header"><a class="docs-brand" href="/zh/"><img src="/icons/swob-512.png" width="28" height="28" alt=""><span>swob</span><em>docs</em></a><nav aria-label="文档工具"><a href="/zh/">官网</a><a href="/docs/en/" lang="en">English guides</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav></header>
+  <details class="mobile-chapters"><summary>文档目录</summary></details>
+  <div class="docs-layout"><aside class="docs-sidebar"></aside><main class="docs-content" id="content"><header class="doc-hero">
+<p>CONTEXT &amp; EXECUTION</p>
+<h1>对话正文只回答了一半的问题。</h1>
+<p>“说了什么”之外，还要知道模型看过哪些文件、调用了哪些工具、产生了哪些错误、是否分派了子会话。右侧面板把这些证据放回同一条时间线。</p>
+<div class="hero-badges">
+<p><span>Files</span><span>Context</span><span>Audit</span></p>
+</div>
+</header>
+<div class="docs-figure">
+<p><img src="/docs/assets/media/context-inspector.png" loading="eager" alt="Swob 会话正文与右侧 Inspector：核对模型、token、工作目录和产出文件"></p>
+</div>
+<section>
+<h2>三个面板分别回答什么</h2>
+<div class="card-grid three">
+<article>
+<p><span class="card-index">FILES</span></p>
+<h3>使用了哪些材料</h3>
+<p>聚合会话中的文件与图片引用，帮助你从结论返回输入材料。</p>
+</article>
+<article>
+<p><span class="card-index">CONTEXT</span></p>
+<h3>带入了哪些上下文</h3>
+<p>显示配置文件、context 指令、compact 边界和来源可证实的上下文对象。</p>
+</article>
+<article>
+<p><span class="card-index">AUDIT</span></p>
+<h3>执行过程是否可靠</h3>
+<p>按工具类型、错误、耗时与调用关系检查执行路径；结论是解释性信号，不是客观质量分。</p>
+</article>
+</div>
+</section>
+<section>
+<h2>执行树怎么读</h2>
+<ol type="1" class="steps">
+<li><p><strong>从顶层轮次开始</strong></p>
+<p>顶层节点表示用户/助手轮次或来源保存的执行单元。</p></li>
+<li><p><strong>展开工具调用</strong></p>
+<p>查看 Bash、Read、Edit、Write 等调用及其结果；错误需要结合原始输出判断。</p></li>
+<li><p><strong>追踪子会话</strong></p>
+<p>若来源保存了 agent/subagent 关系，树会显示分派与返回；缺失关系不会被假装补齐。</p></li>
+<li><p><strong>回到正文核对影响</strong></p>
+<p>执行成功不等于结论正确。检查工具结果是否真的支持助手的最终回答。</p></li>
+</ol>
+</section>
+<section>
+<h2>执行树、Lineage 和 Galaxy 不一样</h2>
+<div class="table-scroll">
+<table class="compact">
+<thead>
+<tr>
+<th style="text-align: left;">视图</th>
+<th style="text-align: left;">范围</th>
+<th style="text-align: left;">问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">执行树</td>
+<td style="text-align: left;">一条会话内部</td>
+<td style="text-align: left;">这次执行调用了什么、哪里出错？</td>
+</tr>
+<tr>
+<td style="text-align: left;">Lineage</td>
+<td style="text-align: left;">有继承/续接关系的会话</td>
+<td style="text-align: left;">这条会话从哪里来，后来分成了什么？</td>
+</tr>
+<tr>
+<td style="text-align: left;">会话图谱 / Galaxy</td>
+<td style="text-align: left;">整个 Library</td>
+<td style="text-align: left;">来源、项目和会话群之间形成了什么结构？</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section>
+<h2>可信边界</h2>
+<ul class="checks">
+<li>来源显式保存的字段优先于文件结构重建，重建优先于启发式匹配。</li>
+<li>并非每个来源都保存 thinking、子会话、工具参数或完整结果。</li>
+<li>路径、附件名和终端输出可能包含敏感信息，分享截图前仍需检查。</li>
+<li>Audit 中的反模式或摩擦提示用于定位复查点，不是对人或模型的最终评价。</li>
+</ul>
+</section>
+<div class="docs-figure">
+<p><img src="/docs/assets/media/session-audit.png" loading="lazy" alt="Swob Session Audit：会话健康、估值、血统和执行概览"></p>
+</div>
+<nav class="next-links">
+<p><a href="../concepts/lineage.html">查看 Lineage →</a><a href="./insights.html">进入 Insights →</a></p>
+</nav></main></div><footer><span>Swob Docs · 正文与执行证据并读</span><span>解释信号，不制造确定性</span></footer>
+</body></html>

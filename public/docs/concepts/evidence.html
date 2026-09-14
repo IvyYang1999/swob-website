@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>证据、推断与可信状态 · Swob Docs</title><meta name="description" content="理解 Swob 如何区分来源事实、重建结果、启发式推断和产品方向。">
+  <meta name="theme-color" content="#efebe2"><link rel="icon" href="/icons/swob-512.png" type="image/png">
+  <link rel="stylesheet" href="/docs/assets/docs.css"><script defer src="/docs/assets/docs.js"></script>
+<!-- docs-seo:start -->
+<link rel="canonical" href="https://swob.app/docs/concepts/evidence.html">
+<!-- docs-seo:end -->
+</head>
+<body data-section="insights"><a class="skip-link" href="#content">跳到正文</a>
+  <header class="docs-header"><a class="docs-brand" href="/zh/"><img src="/icons/swob-512.png" width="28" height="28" alt=""><span>swob</span><em>docs</em></a><nav aria-label="文档工具"><a href="/zh/">官网</a><a href="/docs/en/" lang="en">English guides</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav></header>
+  <details class="mobile-chapters"><summary>文档目录</summary></details>
+  <div class="docs-layout"><aside class="docs-sidebar"></aside><main class="docs-content" id="content"><header class="doc-hero">
+<p>EVIDENCE</p>
+<h1>知道什么，和推断什么，必须分开。</h1>
+<p>AI 工具保存的数据格式、完整度和语义不同。Swob 的可信度来自保留差异，而不是把所有来源压成看似一致的答案。</p>
+<div class="hero-badges">
+<p><span>来源事实</span><span>可解释重建</span><span>启发式信号</span></p>
+</div>
+</header>
+<section>
+<h2>三层证据</h2>
+<div class="status-layers">
+<div class="status-layer" data-tone="available">
+<p><strong>来源报告</strong></p>
+<p>由 harness 明确保存的 ID、时间、模型、用量、父子关系或工具事件。仍需确认字段语义和版本。</p>
+</div>
+<div class="status-layer" data-tone="experimental">
+<p><strong>确定性重建</strong></p>
+<p>从多个累积计数取 delta、从已知路径恢复关系等；规则应可复现并保留输入证据。</p>
+</div>
+<div class="status-layer" data-tone="future">
+<p><strong>启发式推断</strong></p>
+<p>反模式、摩擦、相似关系等解释性信号。它们指出复查点，不应被表述成客观事实。</p>
+</div>
+</div>
+</section>
+<section>
+<h2>能力状态</h2>
+<div class="table-scroll">
+<table class="compact">
+<thead>
+<tr>
+<th style="text-align: left;">状态</th>
+<th style="text-align: left;">含义</th>
+<th style="text-align: left;">应该怎么用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">可用</td>
+<td style="text-align: left;">当前适配器和证据覆盖该能力</td>
+<td style="text-align: left;">仍结合来源与版本说明</td>
+</tr>
+<tr>
+<td style="text-align: left;">实验</td>
+<td style="text-align: left;">依赖特定版本、反向解析或样本仍有限</td>
+<td style="text-align: left;">适合验证，不适合强承诺</td>
+</tr>
+<tr>
+<td style="text-align: left;">不可用</td>
+<td style="text-align: left;">来源没有可信字段，或当前未实现</td>
+<td style="text-align: left;">保持空缺，不用估算冒充事实</td>
+</tr>
+<tr>
+<td style="text-align: left;">不适用</td>
+<td style="text-align: left;">能力在该来源没有对应语义</td>
+<td style="text-align: left;">不要拿来做横向排名</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section>
+<h2>四条不越过的线</h2>
+<ul class="checks">
+<li>没有权威 token 时，不使用 <code>字符数 / 4</code> 伪造用量。</li>
+<li>打开 App 或工作区，不表述成恢复到了指定历史会话。</li>
+<li>派生 Markdown、索引和报告不取代只读的原始会话真相源。</li>
+<li>未来方向、current main 和公开稳定版必须分层标注。</li>
+</ul>
+</section>
+<section>
+<h2>看到异常数字时</h2>
+<ol type="1" class="steps">
+<li><p><strong>确认统计母集</strong></p>
+<p>日期、来源、项目、可用性排除是否一致。</p></li>
+<li><p><strong>确认字段来源</strong></p>
+<p>是 provider 报告、Swob delta 重建，还是估计规则。</p></li>
+<li><p><strong>下钻到单条会话</strong></p>
+<p>检查原始事件、完整 transcript 与数据质量提示。</p></li>
+<li><p><strong>保留“不知道”</strong></p>
+<p>若证据不足，正确结果是 unavailable，而不是一个好看的数字。</p></li>
+</ol>
+</section>
+<nav class="next-links">
+<p><a href="../sources.html">回到来源矩阵 →</a><a href="../metrics.html">查看详细统计口径 →</a></p>
+</nav></main></div><footer><span>Swob Docs · 可解释比看似完整更重要</span><span>证据不足时允许不知道</span></footer>
+</body></html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>隐私、网络与脱敏 · Swob Docs</title><meta name="description" content="了解 Swob 会读取、写入和联网处理哪些数据。">
+  <meta name="theme-color" content="#efebe2"><link rel="icon" href="/icons/swob-512.png" type="image/png">
+  <link rel="stylesheet" href="/docs/assets/docs.css"><script defer src="/docs/assets/docs.js"></script>
+<!-- docs-seo:start -->
+<link rel="canonical" href="https://swob.app/docs/privacy.html">
+<!-- docs-seo:end -->
+</head>
+<body data-section="privacy"><a class="skip-link" href="#content">跳到正文</a>
+  <header class="docs-header"><a class="docs-brand" href="/zh/"><img src="/icons/swob-512.png" width="28" height="28" alt=""><span>swob</span><em>docs</em></a><nav aria-label="文档工具"><a href="/zh/">官网</a><a href="/docs/en/" lang="en">English guides</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav></header>
+  <details class="mobile-chapters"><summary>文档目录</summary></details>
+  <div class="docs-layout"><aside class="docs-sidebar"></aside><main class="docs-content" id="content"><header class="doc-hero">
+<p>PRIVACY</p>
+<h1>本地优先，不等于永不联网。</h1>
+<p>Swob 的会话读取、Library、索引和主要分析在本机完成。网络动作应当有明确目的和触发条件；可选 AI 洞察会把样本发送给你配置的提供商。</p>
+<div class="hero-badges">
+<p><span>源目录只读</span><span>Library 由你选择</span><span>显式网络边界</span></p>
+</div>
+</header>
+<section>
+<h2>Swob 读取什么</h2>
+<ul class="checks">
+<li>你启用的 AI 工具在本机保存的会话目录、数据库或配置元数据。</li>
+<li>读取用于发现、解析、建立关系和判断 Resume 能力；原始真相源保持只读。</li>
+<li>排除来源意味着不扫描该来源，也不为其生成 Library 派生副本。</li>
+</ul>
+</section>
+<section>
+<h2>Swob 写入什么</h2>
+<div class="card-grid three">
+<article>
+<p><span class="card-index">LIBRARY</span></p>
+<h3>会话包与 transcript</h3>
+<p>保留可读 Markdown、派生元数据和恢复所需的本地记录。</p>
+</article>
+<article>
+<p><span class="card-index">INDEX</span></p>
+<h3>搜索与统计索引</h3>
+<p>支持正文检索、来源/项目筛选和本地聚合分析。</p>
+</article>
+<article>
+<p><span class="card-index">ORGANIZATION</span></p>
+<h3>组织状态</h3>
+<p>文件夹、Lens、标题、Profile、设置与可撤销事务记录。</p>
+</article>
+</div>
+<div class="callout warning">
+<p><strong>Library 放在同步盘时</strong></p>
+<p>iCloud 或其他同步服务会按其自己的规则把 Library 复制到云端和其他设备。那仍是“你选择的存储”，但不再是仅存在单机的副本。</p>
+</div>
+</section>
+<section>
+<h2>什么时候会联网</h2>
+<div class="table-scroll">
+<table class="compact">
+<thead>
+<tr>
+<th style="text-align: left;">动作</th>
+<th style="text-align: left;">触发</th>
+<th style="text-align: left;">发送什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">更新检查 / 下载</td>
+<td style="text-align: left;">应用启动、设置或下载操作</td>
+<td style="text-align: left;">版本与发行请求；不需要上传 transcript</td>
+</tr>
+<tr>
+<td style="text-align: left;">查询 SSH 公网地址</td>
+<td style="text-align: left;">你显式点击查询</td>
+<td style="text-align: left;">向公网 IP 服务发出普通网络请求</td>
+</tr>
+<tr>
+<td style="text-align: left;">可选 AI Insights</td>
+<td style="text-align: left;">配置提供商并明确确认</td>
+<td style="text-align: left;">报告样本或会话片段发送给所选 AI 提供商</td>
+</tr>
+<tr>
+<td style="text-align: left;">Resume / SSH / 外部打开</td>
+<td style="text-align: left;">你点击或执行命令</td>
+<td style="text-align: left;">按目标工具或主机协议发起连接</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section>
+<h2>分析与遥测</h2>
+<p>在已审阅的桌面源码口径中，Swob 不上传产品使用分析、广告标识符或整条会话遥测。官网使用 Plausible 统计页面访问和下载点击；这与桌面应用的本地会话数据是两条边界。</p>
+</section>
+<section>
+<h2>脱敏能做什么，不能做什么</h2>
+<ul class="checks">
+<li>派生 transcript 可以按规则隐藏常见凭据形态，分享前也应继续人工检查。</li>
+<li>自由文本、截图、路径、附件和工具输出仍可能包含姓名、项目名、token 或业务秘密。</li>
+<li>过滤不能保证所有秘密都被识别；AI Insights 前的确认不是形式按钮。</li>
+<li>不要把原始会话、<code>.env</code>、cookie、私钥或完整日志直接用于公开演示。</li>
+</ul>
+</section>
+<section>
+<h2>删除与保留</h2>
+<p>删除 Swob 派生数据、删除原客户端会话和从同步盘移除文件是不同操作。先确认目标、备份和同步影响；“重建索引”不应该删除唯一 transcript，“隔离重复项”也不等于永久删除。</p>
+</section>
+<nav class="next-links">
+<p><a href="./concepts/vault.html">理解 Library / Vault →</a><a href="./troubleshooting.html">遇到问题 →</a></p>
+</nav></main></div><footer><span>Swob Docs · 本地优先要靠边界证明</span><span>联网动作必须有目的与触发</span></footer>
+</body></html>
