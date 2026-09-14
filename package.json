@@ -2,7 +2,7 @@
   "name": "swob-website",
   "version": "0.1.0",
   "private": true,
-  "scripts": { "dev": "next dev", "build": "next build", "start": "next start", "lint": "next lint" },
+  "scripts": { "dev": "next dev", "prebuild": "node --test scripts/docs-seo.test.mjs && node scripts/docs-seo.mjs", "build": "next build", "start": "next start", "lint": "next lint", "docs:seo": "node scripts/docs-seo.mjs" },
   "dependencies": { "next": "^15.3.0", "react": "^19.0.0", "react-dom": "^19.0.0" },
   "devDependencies": { "@types/node": "^20", "@types/react": "^19", "@types/react-dom": "^19", "typescript": "^5" },
   "engines": { "node": ">=20" }
