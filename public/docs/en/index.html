@@ -3,42 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Swob Docs · index.html · Swob Docs</title>
-  <meta name="description" content="Reserved English documentation route.">
+  <title>Find old Claude Code and Codex conversations · Swob Docs</title>
+  <meta name="description" content="Find old AI coding conversations across projects with Swob local search. Check matching messages, source and project before resuming in the original client.">
   <meta name="theme-color" content="#efebe2">
-  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../assets/docs.css">
+  <link rel="icon" href="/icons/swob-512.png" type="image/png">
+  <link rel="stylesheet" href="/docs/assets/docs.css">
 <!-- docs-seo:start -->
 <link rel="canonical" href="https://swob.app/docs/en/">
-<meta name="robots" content="noindex, follow">
+<link rel="alternate" hreflang="en" href="https://swob.app/docs/en/">
+<link rel="alternate" hreflang="zh-CN" href="https://swob.app/docs/">
 <!-- docs-seo:end -->
 </head>
 <body data-section="english">
-  <a class="skip-link" href="#content">跳到正文</a>
-  <header class="docs-header">
-    <a class="docs-brand" href="../../zh/"><img src="../../assets/favicon.svg" width="28" height="28" alt=""><span>swob</span><em>docs</em></a>
-    <nav aria-label="文档工具"><a href="../../zh/">官网</a><a href="../en/index.html" lang="en">EN structure</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav>
-  </header>
-  <details class="mobile-chapters"><summary>浏览五章</summary><nav class="chapter-nav" aria-label="文档章节">
-    <a href="../index.html"><span>01</span>快速上手</a>
-    <a href="../concepts/vault.html"><span>02</span>核心概念</a>
-    <a href="../metrics.html"><span>03</span>统计口径</a>
-    <a href="../guides/resume.html"><span>04</span>功能手册</a>
-    <a href="../troubleshooting.html"><span>05</span>FAQ 与排障</a>
-  </nav></details>
-  <div class="docs-layout">
-    <aside class="docs-sidebar"><nav class="chapter-nav" aria-label="文档章节">
-    <a href="../index.html"><span>01</span>快速上手</a>
-    <a href="../concepts/vault.html"><span>02</span>核心概念</a>
-    <a href="../metrics.html"><span>03</span>统计口径</a>
-    <a href="../guides/resume.html"><span>04</span>功能手册</a>
-    <a href="../troubleshooting.html"><span>05</span>FAQ 与排障</a>
-  </nav>
-      <div class="side-group"><strong>核心概念</strong><a href="../concepts/vault.html">Vault</a><a href="../concepts/lenses-folders.html">镜头 vs 文件夹</a><a href="../concepts/recovery.html">复活与备份</a><a href="../concepts/lineage.html">血统图谱</a></div>
-      <div class="side-group"><strong>功能手册</strong><a href="../guides/resume.html">多客户端 Resume</a><a href="../guides/organize.html">整理与撤销</a><a href="../guides/profiles.html">Profile 与智能重命名</a><a href="../guides/cli.html">CLI 全命令</a><a href="../guides/ssh.html">SSH 远程</a></div>
-    </aside>
-    <main class="docs-content" id="content"><header class="doc-hero"><p class="doc-kicker">ENGLISH STRUCTURE · RESERVED</p><h1>Swob Docs · index.html</h1><p class="doc-lead">The Chinese documentation is the current source of truth. This route is reserved so the future English site can mirror the same information architecture without changing URLs.</p></header><section><h2>Not translated yet</h2><p>Use the <a href="../index.html">current Chinese page</a>. Do not rely on this placeholder for product behavior.</p></section></main>
-  </div>
-  <footer><span>Swob Docs · 口径先于结论</span><span>本地优先 · 证据可追溯 · 局限明示</span></footer>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="docs-header"><a class="docs-brand" href="/"><img src="/icons/swob-512.png" width="28" height="28" alt=""><span>swob</span><em>docs</em></a><nav aria-label="Documentation tools"><a href="/">Website</a><a href="/docs/" lang="zh-CN">中文</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav></header>
+  <details class="mobile-chapters"><summary>Browse guides</summary><nav class="chapter-nav" aria-label="English guides"><a href="/docs/en/" aria-current="page"><span>01</span>Find old conversations</a><a href="/docs/en/guides/resume.html"><span>02</span>Resume a conversation</a><a href="/sources"><span>↗</span>Current source matrix</a><a href="/docs/" lang="zh-CN"><span>中</span>More docs (中文)</a><a href="/#download"><span>↓</span>Download for macOS</a></nav></details>
+  <div class="docs-layout"><aside class="docs-sidebar"><nav class="chapter-nav" aria-label="English guides"><a href="/docs/en/" aria-current="page"><span>01</span>Find old conversations</a><a href="/docs/en/guides/resume.html"><span>02</span>Resume a conversation</a><a href="/sources"><span>↗</span>Current source matrix</a><a href="/docs/" lang="zh-CN"><span>中</span>More docs (中文)</a><a href="/#download"><span>↓</span>Download for macOS</a></nav></aside><main class="docs-content" id="content"><header class="doc-hero"><p class="doc-kicker">01 · QUICK START</p><h1>Find old AI conversations.</h1><p class="doc-lead">Remember the fix, but not the project or agent? Search the local history that Swob can read, check the conversation, then return to the client that created it.</p><div class="hero-badges"><span>macOS · v1.3.1</span><span>Local search</span></div></header>
+<section id="install"><h2>Start with your local history</h2><ol class="steps"><li><strong>Install Swob for your Mac</strong><p>Choose Apple Silicon or Intel in the <a href="/#download">download section</a>. The public installer is v1.3.1. Use the <a href="https://github.com/IvyYang1999/swob/releases/tag/v1.3.1">official release</a> for its assets and release notes.</p></li><li><strong>Choose your Vault and sources</strong><p>During setup, choose where Swob keeps its local library. Review the source selection before completing setup: excluded sources are outside that library’s browsing and backup scope. Keep a separate backup of data you need.</p></li><li><strong>Let the first scan finish</strong><p>Swob reads supported histories already on your Mac. It cannot search a conversation that was never saved locally, or content that its source adapter cannot parse.</p></li></ol></section>
+<section id="find"><h2>Search across conversations</h2><ol class="steps"><li><strong>Use the search box in the main window</strong><p>Press <kbd>⌘K</kbd> to focus it. Enter a distinctive word from the conversation, such as <code>redirect</code>. This searches indexed message content across supported sessions; you do not need the original session ID.</p></li><li><strong>Read the matching excerpts</strong><p>Results show matching text and timestamps. Open a result to read the conversation in Swob. Check the source, project and time before treating it as the session you wanted.</p></li><li><strong>Continue only after checking the context</strong><p>Reading a result does not require launching the original agent. When you are ready to work, use the session’s Resume action and follow the <a href="/docs/en/guides/resume.html">source and client support guide</a>.</p></li></ol><div class="callout"><strong>Example: the redirect fix</strong><p>Imagine you discussed a redirect loop in a project called <code>sample-shop</code>, but also mentioned redirects in another project. Search <code>redirect</code>, compare the excerpts, then confirm the project and read the surrounding exchange. These names are invented to illustrate the workflow; they are not real user data or a promise about your search results.</p></div></section>
+<section id="spotlight"><h2>Use Spotlight when you remember the project</h2><p>Swob also has a separate Spotlight window. Its matching uses session information such as custom titles, available user messages and project paths, with source aliases like <code>codex</code>. For the example above, <code>codex sample-shop</code> can narrow the candidates when both source and project match. It is different from the main window’s full-text index; neither is a general semantic search engine.</p><p>In Spotlight, use the arrow keys to select a result and <kbd>⌘Enter</kbd> to open it in Swob for review. <strong>Enter or clicking a result starts Resume where available.</strong> Use the open-in-Swob arrow when you only want to read.</p></section>
+<section id="missing"><h2>If the conversation is missing</h2><ul class="checks"><li>Try a shorter, distinctive word that actually appeared in a message. A description of the topic may not match its wording.</li><li>Wait for an active scan or search to finish. A displayed search error is different from a completed search with no matches.</li><li>Check that the source is included and its original history or a usable local archive is present. A metadata-only entry does not mean the transcript is searchable.</li><li>Check your installed version. In v1.3.1, Claude Code and Codex have available search support; Cursor, OpenCode and ZCode search are experimental. Detection-only sources do not provide searchable message bodies.</li></ul><p>The <a href="/sources">current source matrix</a> describes newer source code and can be ahead of the installer. The <a href="https://github.com/IvyYang1999/swob/blob/v1.3.1/src/shared/provider-capabilities.ts">v1.3.1 capability definitions</a> document the release boundary. No search result does not, by itself, prove that a conversation was deleted.</p></section>
+<nav class="next-links" aria-label="Next steps"><a href="/docs/en/guides/resume.html">Resume an old conversation →</a><a href="/#download">Download Swob for macOS</a></nav></main></div>
+  <footer><span>Swob Docs · Local history, usable context</span><span>Guide baseline: v1.3.1 · Reviewed 14 September 2026</span></footer>
 </body>
 </html>

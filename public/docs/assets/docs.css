@@ -88,3 +88,5 @@ footer{display:flex;justify-content:space-between;gap:1rem;padding:1.2rem clamp(
   footer{display:grid}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+body[data-section="english"] .chapter-nav a[aria-current="page"]{background:var(--ink);color:var(--paper)}

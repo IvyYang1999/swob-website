@@ -3,42 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Swob Docs · guides/resume.html · Swob Docs</title>
-  <meta name="description" content="Reserved English documentation route.">
+  <title>Resume Claude Code, Codex and other AI conversations · Swob Docs</title>
+  <meta name="description" content="Resume old AI coding conversations from Swob. Check Claude Code, Codex, Cursor and OpenCode support, desktop limits and missing-source recovery.">
   <meta name="theme-color" content="#efebe2">
-  <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../../assets/docs.css">
+  <link rel="icon" href="/icons/swob-512.png" type="image/png">
+  <link rel="stylesheet" href="/docs/assets/docs.css">
 <!-- docs-seo:start -->
 <link rel="canonical" href="https://swob.app/docs/en/guides/resume.html">
-<meta name="robots" content="noindex, follow">
+<link rel="alternate" hreflang="en" href="https://swob.app/docs/en/guides/resume.html">
+<link rel="alternate" hreflang="zh-CN" href="https://swob.app/docs/guides/resume.html">
 <!-- docs-seo:end -->
 </head>
 <body data-section="english">
-  <a class="skip-link" href="#content">跳到正文</a>
-  <header class="docs-header">
-    <a class="docs-brand" href="../../../zh/"><img src="../../../assets/favicon.svg" width="28" height="28" alt=""><span>swob</span><em>docs</em></a>
-    <nav aria-label="文档工具"><a href="../../../zh/">官网</a><a href="../../en/index.html" lang="en">EN structure</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav>
-  </header>
-  <details class="mobile-chapters"><summary>浏览五章</summary><nav class="chapter-nav" aria-label="文档章节">
-    <a href="../../index.html"><span>01</span>快速上手</a>
-    <a href="../../concepts/vault.html"><span>02</span>核心概念</a>
-    <a href="../../metrics.html"><span>03</span>统计口径</a>
-    <a href="../../guides/resume.html"><span>04</span>功能手册</a>
-    <a href="../../troubleshooting.html"><span>05</span>FAQ 与排障</a>
-  </nav></details>
-  <div class="docs-layout">
-    <aside class="docs-sidebar"><nav class="chapter-nav" aria-label="文档章节">
-    <a href="../../index.html"><span>01</span>快速上手</a>
-    <a href="../../concepts/vault.html"><span>02</span>核心概念</a>
-    <a href="../../metrics.html"><span>03</span>统计口径</a>
-    <a href="../../guides/resume.html"><span>04</span>功能手册</a>
-    <a href="../../troubleshooting.html"><span>05</span>FAQ 与排障</a>
-  </nav>
-      <div class="side-group"><strong>核心概念</strong><a href="../../concepts/vault.html">Vault</a><a href="../../concepts/lenses-folders.html">镜头 vs 文件夹</a><a href="../../concepts/recovery.html">复活与备份</a><a href="../../concepts/lineage.html">血统图谱</a></div>
-      <div class="side-group"><strong>功能手册</strong><a href="../../guides/resume.html">多客户端 Resume</a><a href="../../guides/organize.html">整理与撤销</a><a href="../../guides/profiles.html">Profile 与智能重命名</a><a href="../../guides/cli.html">CLI 全命令</a><a href="../../guides/ssh.html">SSH 远程</a></div>
-    </aside>
-    <main class="docs-content" id="content"><header class="doc-hero"><p class="doc-kicker">ENGLISH STRUCTURE · RESERVED</p><h1>Swob Docs · guides/resume.html</h1><p class="doc-lead">The Chinese documentation is the current source of truth. This route is reserved so the future English site can mirror the same information architecture without changing URLs.</p></header><section><h2>Not translated yet</h2><p>Use the <a href="../../guides/resume.html">current Chinese page</a>. Do not rely on this placeholder for product behavior.</p></section></main>
-  </div>
-  <footer><span>Swob Docs · 口径先于结论</span><span>本地优先 · 证据可追溯 · 局限明示</span></footer>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="docs-header"><a class="docs-brand" href="/"><img src="/icons/swob-512.png" width="28" height="28" alt=""><span>swob</span><em>docs</em></a><nav aria-label="Documentation tools"><a href="/">Website</a><a href="/docs/guides/resume.html" lang="zh-CN">中文</a><a class="github-link" href="https://github.com/IvyYang1999/swob">GitHub</a></nav></header>
+  <details class="mobile-chapters"><summary>Browse guides</summary><nav class="chapter-nav" aria-label="English guides"><a href="/docs/en/"><span>01</span>Find old conversations</a><a href="/docs/en/guides/resume.html" aria-current="page"><span>02</span>Resume a conversation</a><a href="/sources"><span>↗</span>Current source matrix</a><a href="/docs/" lang="zh-CN"><span>中</span>More docs (中文)</a><a href="/#download"><span>↓</span>Download for macOS</a></nav></details>
+  <div class="docs-layout"><aside class="docs-sidebar"><nav class="chapter-nav" aria-label="English guides"><a href="/docs/en/"><span>01</span>Find old conversations</a><a href="/docs/en/guides/resume.html" aria-current="page"><span>02</span>Resume a conversation</a><a href="/sources"><span>↗</span>Current source matrix</a><a href="/docs/" lang="zh-CN"><span>中</span>More docs (中文)</a><a href="/#download"><span>↓</span>Download for macOS</a></nav></aside><main class="docs-content" id="content"><header class="doc-hero"><p class="doc-kicker">02 · RESUME</p><h1>Resume an old conversation.</h1><p class="doc-lead">Find the right context in Swob, then continue in a supported client. Being able to read a transcript does not guarantee that its original agent can resume it.</p><div class="hero-badges"><span>macOS · v1.3.1</span><span>Support varies by source</span></div></header>
+<section id="steps"><h2>From reading to working</h2><ol class="steps"><li><strong>Find and open the session in Swob</strong><p>Use the <a href="/docs/en/">search workflow</a> if you do not remember its ID. Read the last relevant turns and confirm the source and project. A logical conversation may include several physical continuations, so its displayed history and resume target can differ.</p></li><li><strong>Choose a supported Resume action</strong><p>The usual path returns to that source’s terminal client. Install the original client and make sure the intended project and client configuration are available. Review any target, permission or recovery information before starting.</p></li><li><strong>Confirm the conversation in the destination</strong><p>Check the project and prior messages before sending a new prompt. A terminal window opening or an App launching is not proof that the selected conversation resumed successfully.</p></li></ol></section>
+<section id="support"><h2>Which clients can resume?</h2><p>This table describes Swob’s v1.3.1 capability declarations and action code. Client installations and upstream behavior can change. “Available” describes a supported path, not a success guarantee for every stored conversation.</p><div class="table-scroll" role="region" aria-label="Resume support by source; scroll horizontally on small screens" tabindex="0"><table><thead><tr><th scope="col">Session source</th><th scope="col">Terminal path</th><th scope="col">Desktop boundary</th></tr></thead><tbody>
+<tr><th scope="row">Claude Code</th><td>Available: source-aware Claude Code resume.</td><td>Claude Desktop import is experimental and opt-in. It can rewrite a transcript; it is separate from continuing in Claude Code.</td></tr>
+<tr><th scope="row">Codex</th><td>Available: Codex resume.</td><td>Codex App can receive a Codex thread link. It requires a valid Codex target and a client that recognizes it; it does not convert another agent’s conversation.</td></tr>
+<tr><th scope="row">Cursor</th><td>Available for supported Cursor agent histories.</td><td>No verified per-session desktop deep link in this release.</td></tr>
+<tr><th scope="row">OpenCode</th><td>Available for supported OpenCode histories.</td><td>No verified per-session desktop deep link in this release.</td></tr>
+<tr><th scope="row">ZCode</th><td>Unavailable: no public CLI Resume path.</td><td>Experimental App/workspace opening only. It does not jump to the selected historical conversation.</td></tr>
+<tr><th scope="row">Pi and CC-Mirror</th><td>Experimental mappings; not independently audited as reliable source-level resume paths.</td><td>No verified source-specific desktop session entry.</td></tr>
+</tbody></table></div><p>Detection-only sources in v1.3.1 can appear as file metadata without readable message bodies. Do not treat detection or an experimental command mapping as verified resumability. For release details, see the <a href="https://github.com/IvyYang1999/swob/blob/v1.3.1/src/shared/provider-capabilities.ts">versioned capability definitions</a>. The <a href="/sources">current source matrix</a> covers newer development code and may exceed the public installer.</p></section>
+<section id="example"><h2>Example: return to a Codex fix</h2><p>Suppose you find the redirect discussion in the fictional <code>sample-shop</code> project. Open it in Swob and confirm that it came from Codex. Choose its Codex resume path, then check that the destination shows the expected project and history. If it opens an empty thread, stop there and investigate the target instead of assuming the old context was restored.</p><p>A Claude Code conversation about the same project remains a different source. Reading both conversations in one library does not make their native session formats interchangeable.</p></section>
+<section id="recovery"><h2>If the original files are gone</h2><p>A readable archive and a resumable source are different things. Swob checks whether the source can be recovered when you actually invoke Resume. Where recovery is supported and sufficient archive data exists, that action can restore source files before launching the client.</p><p><strong>Copy Resume Command and Resume Audit are read-only with respect to source recovery.</strong> Copying a command does not restore missing files, and an audit is not a repair. Keep your backups and read any recovery error before trying again.</p><div class="callout"><strong>Keep the original evidence</strong><p>Do not delete the archive, replace session IDs or move source files just to make a disabled action appear available. Use the displayed reason to identify what is missing.</p></div></section>
+<section id="troubleshooting"><h2>If Resume fails</h2><ul class="checks"><li><strong>Client unavailable:</strong> check that the intended source client is installed. Review the generated command and working directory; do not substitute a different agent’s command.</li><li><strong>Conversation unavailable:</strong> check the source, target ID and original project. A transcript visible in Swob may still be missing the files or client state needed to continue.</li><li><strong>Only the App opens:</strong> confirm whether the action promises a session or only a workspace. ZCode’s workspace-only behavior is a known boundary.</li><li><strong>Experimental action missing:</strong> use the supported terminal route where available. Claude Desktop import requires an explicit opt-in and does not support non-Claude Code histories.</li><li><strong>Recovery blocked:</strong> keep the archive and report the error category, Swob version and source. Avoid posting transcripts, credentials or private paths in a public issue.</li></ul><p>For additional details, consult <a href="/docs/troubleshooting.html" lang="zh-CN">troubleshooting (中文)</a>, or contact <a href="mailto:support@swob.app">support@swob.app</a>.</p></section>
+<nav class="next-links" aria-label="Next steps"><a href="/docs/en/">← Find old conversations</a><a href="/#download">Download Swob for macOS</a></nav></main></div>
+  <footer><span>Swob Docs · Local history, usable context</span><span>Guide baseline: v1.3.1 · Reviewed 14 September 2026</span></footer>
 </body>
 </html>
