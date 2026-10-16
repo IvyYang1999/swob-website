@@ -249,8 +249,12 @@ body{margin:0}
 .sw .mock[data-phase="search"] .m-item.hit,.sw .mock[data-phase="resume"] .m-item.hit{background:color-mix(in srgb,var(--c) 12%,transparent)}
 .sw .mock[data-phase="resume"] .m-item.hit:not(.sel){opacity:.55;background:transparent}
 .sw .mock[data-phase="resume"] .m-item.sel{background:color-mix(in srgb,var(--c) 18%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 45%,transparent)}
-.sw .m-main{padding:14px 18px;overflow:hidden;position:relative}
-.sw .m-tabs{display:flex;gap:4px;margin-bottom:12px}.sw .m-tabs span{font-size:11px;padding:3px 9px;border-radius:6px;color:var(--muted)}.sw .m-tabs span.on{background:var(--hover);color:var(--text)}
+.sw .m-main{padding:14px 18px;overflow:hidden;position:relative;display:flex;flex-direction:column;min-width:0;min-height:0}
+.sw .m-tabs{display:flex;gap:4px;margin-bottom:12px;flex-shrink:0}.sw .m-tabs button{font:inherit;font-size:11px;padding:6px 10px;border:0;background:transparent;border-radius:6px;color:var(--muted);cursor:pointer}.sw .m-tabs button[aria-selected="true"],.sw .m-tabs button:hover{background:var(--hover);color:var(--text)}
+.sw .m-tabs button:focus-visible,.sw .m-reader:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.sw .m-reader{overflow:auto;min-height:0;padding:2px 2px 54px;flex:1}
+.sw .m-markdown,.sw .m-tool-detail{white-space:pre-wrap;overflow-wrap:anywhere;font:11px/1.6 var(--mono);margin:0;color:var(--text)}
+.sw .m-tool-detail{padding:8px;margin:0 0 10px;border:1px solid var(--line2);border-radius:6px;background:var(--surface)}
 .sw .m-pill{display:flex;align-items:center;gap:10px;color:oklch(var(--cl) var(--cc) 60);font-size:11px;margin:6px 0 12px}.sw .m-pill::before,.sw .m-pill::after{content:"";flex:1;height:1px;background:color-mix(in srgb,oklch(var(--cl) var(--cc) 60) 50%,transparent)}
 .sw .m-msg{display:grid;grid-template-columns:22px 1fr;gap:10px;margin-bottom:12px}
 .sw .m-msg .av{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;font-size:10px;font-weight:600;background:var(--hover);color:var(--text)}

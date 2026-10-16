@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useId, useState, type CSSProperties } from "react";
 import { MOCK, type Lang } from "@/data/site";
 
 type Phase = "collect" | "search" | "resume";
@@ -14,6 +14,9 @@ export default function HeroMock({ lang }: { lang: Lang }) {
   const items = m.items as readonly Item[];
   const [phase, setPhase] = useState<Phase>("collect");
   const [typed, setTyped] = useState("");
+  const [mode, setMode] = useState(0);
+  const readerId = useId();
+  const markdown = `## ${m.user}\n\n${m.u1a}${m.u1b}${m.u1c}\n\n## ${m.assistant}\n\n${m.a1a}${m.a1b}${m.a1c}`;
 
   useEffect(() => {
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -35,7 +38,7 @@ export default function HeroMock({ lang }: { lang: Lang }) {
 
   return (
     <div className="stage">
-      <div className="mock" data-phase={phase} aria-label={m.aria} role="img">
+      <div className="mock" data-phase={phase} aria-label={m.aria} role="group">
         <div className="m-top">
           <div className="m-lights"><i /><i /><i /></div>
           <div className="m-search">
@@ -54,15 +57,30 @@ export default function HeroMock({ lang }: { lang: Lang }) {
               </div>
             ))}
           </aside>
-          <main className="m-main">
-            <div className="m-tabs"><span className="on">{m.tabs[0]}</span><span>{m.tabs[1]}</span><span>{m.tabs[2]}</span></div>
+          <div className="m-main">
+            <div className="m-tabs" role="tablist" aria-label={lang === "zh" ? "阅读模式" : "Reader mode"}>
+              {m.tabs.map((label, index) => <button key={label} type="button" role="tab"
+                id={`${readerId}-tab-${index}`} aria-controls={`${readerId}-panel`} aria-selected={mode === index}
+                tabIndex={mode === index ? 0 : -1} onClick={() => setMode(index)}
+                onKeyDown={(event) => {
+                  const next = event.key === "ArrowRight" ? (index + 1) % 3 : event.key === "ArrowLeft" ? (index + 2) % 3 : event.key === "Home" ? 0 : event.key === "End" ? 2 : undefined;
+                  if (next === undefined) return;
+                  event.preventDefault(); setMode(next);
+                  event.currentTarget.parentElement?.querySelectorAll("button")[next]?.focus();
+                }}>{label}</button>)}
+            </div>
+            <div className="m-reader" id={`${readerId}-panel`} role="tabpanel" aria-labelledby={`${readerId}-tab-${mode}`} tabIndex={0} data-mode={mode}>
+            {mode === 2 ? <pre className="m-markdown">{markdown}</pre> : <>
             <div className="m-pill">{m.compact}</div>
             <div className="m-msg u"><span className="av">U</span><div><div className="who">{m.user}</div><p>{m.u1a}<mark>{m.u1b}</mark>{m.u1c}</p></div></div>
             <div className="m-msg a"><span className="av">A</span><div><div className="who">{m.assistant}</div>
               <div className="m-chips"><span>Read ×3</span><span>Grep</span><span>Edit</span></div>
+              {mode === 1 && <pre className="m-tool-detail">{`Read  config.ts, auth.ts, routes.ts\nGrep  /oauth/cb\nEdit  callbackUrl → app.example.com/oauth/cb`}</pre>}
               <p>{m.a1a}<mark>{m.a1b}</mark>{m.a1c}</p></div></div>
+            </>}
+            </div>
             <div className="m-term"><span className="ok">$</span> {m.term}</div>
-          </main>
+          </div>
           <aside className="m-info">
             <p className="m-h">{m.info}</p>
             {m.rows.map((r, k) => <div className="row" key={k}><span className="lb">{r[0]}</span><b>{r[1]}{r[2] && <span className="tag">{r[2]}</span>}</b></div>)}

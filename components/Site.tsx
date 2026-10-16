@@ -58,6 +58,7 @@ function Shot({ src, alt, cap }: { src: string; alt: string; cap?: string }) {
 export default function Site({ lang }: { lang: Lang }) {
   const t = COPY[lang];
   const zh = lang === "zh";
+  const docs = zh ? "/docs/" : "/docs/en/";
   const p = (path: string) => (zh ? `/zh${path}` : path);
   return (
     <div className={`sw${zh ? " zh" : ""}`} lang={t.htmlLang}>
@@ -72,7 +73,7 @@ export default function Site({ lang }: { lang: Lang }) {
             <a href="#engine">{t.nav.engine}</a>
             <a href="#company">{t.nav.company}</a>
             <a href={p("/sources")}>{t.nav.sources}</a>
-            <a href="/docs/">{t.nav.docs}</a>
+            <a href={docs}>{t.nav.docs}</a>
           </div>
           <div className="nav-r">
             <a className="lang" href={t.switch.href} hrefLang={zh ? "en" : "zh"}>{t.switch.label}</a>
@@ -198,7 +199,7 @@ export default function Site({ lang }: { lang: Lang }) {
           <div className="cta">
             <a className="btn solid" href={DL.arm64}>{t.end.cta1}</a>
             <a className="btn" href={DL.x64}>{t.end.cta1x}</a>
-            <a className="btn" href="/docs/">{t.end.cta2}</a>
+            <a className="btn" href={docs}>{t.end.cta2}</a>
           </div>
           <p className="note">v{VERSION} · macOS 13+ · <a href={DL.releases} target="_blank" rel="noopener">{t.footer.releases}</a></p>
         </div>
@@ -208,7 +209,7 @@ export default function Site({ lang }: { lang: Lang }) {
         <div className="wrap">
           <span>© {new Date().getFullYear()} {t.footer.rights} · Apache 2.0</span>
           <div className="fl">
-            <a href="/docs/">{t.footer.docs}</a>
+            <a href={docs}>{t.footer.docs}</a>
             <a href={p("/sources")}>{t.footer.sources}</a>
             <a href="https://github.com/IvyYang1999/swob/blob/master/PRIVACY.md" target="_blank" rel="noopener">{t.footer.privacy}</a>
             <a href={DL.github} target="_blank" rel="noopener">{t.footer.github}</a>
